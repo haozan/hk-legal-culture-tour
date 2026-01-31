@@ -1,0 +1,316 @@
+<div class="min-h-screen">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary to-primary-dark overflow-hidden">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4wNSIvPjwvZz48L3N2Zz4=')] opacity-20"></div>
+    
+    <div class="container mx-auto px-4 py-20 lg:py-32 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Hero Text -->
+        <div class="text-white">
+          <h1 class="font-serif text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            香港法律文化之旅
+          </h1>
+          <p class="text-xl lg:text-2xl mb-8 text-primary-light opacity-90">
+            深度体验香港法律文化，感受东西方法治精神的交融
+          </p>
+          <p class="text-lg mb-8 leading-relaxed">
+            由熟悉香港制度的新港人发起，为内地法律专业人士提供法院旁听、监狱参观、文化打卡等深度体验服务。
+          </p>
+          <div class="flex flex-wrap gap-4 mb-12">
+            <%= link_to "探索打卡地", check_in_spots_path, class: "btn-primary inline-flex items-center gap-2" %>
+            <%= link_to "查看路线", routes_path, class: "btn-secondary inline-flex items-center gap-2" %>
+          </div>
+          
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/20">
+            <div>
+              <div class="text-3xl font-bold mb-1"><%= CheckInSpot.count %>+</div>
+              <div class="text-sm text-primary-light">精选打卡地</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold mb-1"><%= Route.count %>+</div>
+              <div class="text-sm text-primary-light">主题路线</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold mb-1">100%</div>
+              <div class="text-sm text-primary-light">本地专家</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hero Image -->
+        <div class="relative">
+          <div class="aspect-[4/3] overflow-hidden shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=800&h=600&fit=crop" 
+                 alt="Hong Kong Legal Culture" 
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-secondary text-white p-6 shadow-xl">
+            <div class="text-sm font-medium mb-1">专业法律向导</div>
+            <div class="text-2xl font-bold">镐赞 & 杨佩枝</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Check-in Spots -->
+  <section class="py-20 bg-surface">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="font-serif text-4xl font-bold text-text mb-4">热门打卡地</h2>
+        <p class="text-xl text-text-muted max-w-2xl mx-auto">
+          探索香港法律与文化的地标性场所，深入了解香港独特的法律体系
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <% CheckInSpot.published.includes(:tags).limit(6).each do |spot| %>
+          <%= link_to check_in_spot_path(spot), class: "card-base group hover:shadow-xl transition-all duration-300" do %>
+            <div class="aspect-[16/10] bg-surface-dark overflow-hidden">
+              <% if spot.cover_image.present? %>
+                <img src="<%= spot.cover_image %>" alt="<%= spot.title %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <% end %>
+            </div>
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2 mb-3">
+                <% spot.tags.limit(2).each do |tag| %>
+                  <span class="badge-primary text-xs"><%= tag.name %></span>
+                <% end %>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-text mb-2 group-hover:text-primary transition-colors">
+                <%= spot.title %>
+              </h3>
+              <p class="text-text-muted text-sm line-clamp-2">
+                <%= spot.subtitle %>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="text-center">
+        <%= link_to "查看所有打卡地 #{lucide_icon 'arrow-right', class: 'w-4 h-4 inline'}".html_safe, 
+                    check_in_spots_path, 
+                    class: "btn-outline inline-flex items-center gap-2" %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Models - Z Pattern -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="font-serif text-4xl font-bold text-text mb-4">三大服务模式</h2>
+        <p class="text-xl text-text-muted max-w-2xl mx-auto">
+          根据您的需求选择最适合的服务方案
+        </p>
+      </div>
+
+      <!-- Guide Subscription -->
+      <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+        <div>
+          <div class="inline-block px-4 py-1 bg-secondary/10 text-secondary text-sm font-medium mb-4">
+            自助深度游
+          </div>
+          <h3 class="font-serif text-3xl font-bold text-text mb-4">导览订阅服务</h3>
+          <p class="text-lg text-text-muted mb-6 leading-relaxed">
+            一次性付费，解锁全部打卡地的详细导览内容。90天内无限次查看景点介绍、参观攻略、拍照指南等专业内容。适合自由行和深度探索的法律人。
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'check-circle', class: 'w-5 h-5 text-secondary flex-shrink-0 mt-1' %>
+              <span class="text-text">90天无限访问所有导览内容</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'check-circle', class: 'w-5 h-5 text-secondary flex-shrink-0 mt-1' %>
+              <span class="text-text">详细的参观攻略和注意事项</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'check-circle', class: 'w-5 h-5 text-secondary flex-shrink-0 mt-1' %>
+              <span class="text-text">专业拍照建议和文化背景介绍</span>
+            </li>
+          </ul>
+          <%= link_to "立即订阅", new_subscription_path, class: "btn-primary inline-flex items-center gap-2" %>
+        </div>
+        <div class="aspect-[4/3] overflow-hidden shadow-xl">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop" 
+               alt="Guide Subscription" 
+               class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Standard Tours -->
+      <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+        <div class="order-2 lg:order-1 aspect-[4/3] overflow-hidden shadow-xl">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=600&fit=crop" 
+               alt="Standard Tours" 
+               class="w-full h-full object-cover">
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="inline-block px-4 py-1 bg-primary/10 text-primary text-sm font-medium mb-4">
+            精品小团
+          </div>
+          <h3 class="font-serif text-3xl font-bold text-text mb-4">标准路线服务</h3>
+          <p class="text-lg text-text-muted mb-6 leading-relaxed">
+            由镐赞和杨佩枝亲自带队，最多7人的精品小团。提供预设的主题路线，涵盖法律专业参访、文化体验和香港生活方式探索。
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'users', class: 'w-5 h-5 text-primary flex-shrink-0 mt-1' %>
+              <span class="text-text">7人精品小团，深度互动交流</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'map', class: 'w-5 h-5 text-primary flex-shrink-0 mt-1' %>
+              <span class="text-text">精心设计的主题路线</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'star', class: 'w-5 h-5 text-primary flex-shrink-0 mt-1' %>
+              <span class="text-text">创始人亲自讲解和陪同</span>
+            </li>
+          </ul>
+          <%= link_to "查看路线", routes_path, class: "btn-primary inline-flex items-center gap-2" %>
+        </div>
+      </div>
+
+      <!-- Custom Tours -->
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-block px-4 py-1 bg-accent/10 text-accent text-sm font-medium mb-4">
+            定制专属
+          </div>
+          <h3 class="font-serif text-3xl font-bold text-text mb-4">定制路线服务</h3>
+          <p class="text-lg text-text-muted mb-6 leading-relaxed">
+            根据您的兴趣和需求，量身定制专属行程。无论是专注法律专业考察，还是结合文化娱乐体验，我们都能为您打造独一无二的香港之旅。
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'sparkles', class: 'w-5 h-5 text-accent flex-shrink-0 mt-1' %>
+              <span class="text-text">完全个性化的行程设计</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'calendar', class: 'w-5 h-5 text-accent flex-shrink-0 mt-1' %>
+              <span class="text-text">灵活的时间和地点安排</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'message-circle', class: 'w-5 h-5 text-accent flex-shrink-0 mt-1' %>
+              <span class="text-text">一对一咨询和方案沟通</span>
+            </li>
+          </ul>
+          <%= link_to "联系定制", contacts_path, class: "btn-primary inline-flex items-center gap-2" %>
+        </div>
+        <div class="aspect-[4/3] overflow-hidden shadow-xl">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=600&fit=crop" 
+               alt="Custom Tours" 
+               class="w-full h-full object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Routes -->
+  <section class="py-20 bg-surface">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="font-serif text-4xl font-bold text-text mb-4">精选主题路线</h2>
+        <p class="text-xl text-text-muted max-w-2xl mx-auto">
+          专业设计的法律文化探索路线，让您的香港之旅更有深度
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <% Route.published.includes(:tags).limit(4).each do |route| %>
+          <%= link_to route_path(route), class: "card-base group hover:shadow-xl transition-all duration-300" do %>
+            <div class="p-8">
+              <div class="flex flex-wrap gap-2 mb-4">
+                <% route.tags.limit(3).each do |tag| %>
+                  <span class="badge-outline text-xs"><%= tag.name %></span>
+                <% end %>
+              </div>
+              <h3 class="font-serif text-2xl font-semibold text-text mb-3 group-hover:text-primary transition-colors">
+                <%= route.title %>
+              </h3>
+              <p class="text-text-muted mb-6 line-clamp-2">
+                <%= route.description %>
+              </p>
+              <div class="flex items-center justify-between pt-4 border-t border-border">
+                <div class="flex items-center gap-2 text-sm text-text-muted">
+                  <%= lucide_icon 'map-pin', class: 'w-4 h-4' %>
+                  <span><%= route.check_in_spots.count %> 个打卡地</span>
+                </div>
+                <div class="text-primary font-medium flex items-center gap-1">
+                  查看详情
+                  <%= lucide_icon 'arrow-right', class: 'w-4 h-4 group-hover:translate-x-1 transition-transform' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="text-center">
+        <%= link_to "探索更多路线 #{lucide_icon 'arrow-right', class: 'w-4 h-4 inline'}".html_safe, 
+                    routes_path, 
+                    class: "btn-outline inline-flex items-center gap-2" %>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="font-serif text-4xl font-bold text-text mb-4">如何开始您的旅程</h2>
+        <p class="text-xl text-text-muted max-w-2xl mx-auto">
+          简单三步，开启您的香港法律文化探索之旅
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary/10 text-primary flex items-center justify-center text-2xl font-bold mb-6 mx-auto">
+            1
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-text mb-3">选择服务模式</h3>
+          <p class="text-text-muted">
+            根据您的需求选择导览订阅、标准路线或定制服务
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-secondary/10 text-secondary flex items-center justify-center text-2xl font-bold mb-6 mx-auto">
+            2
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-text mb-3">规划行程</h3>
+          <p class="text-text-muted">
+            浏览打卡地和路线，制定您的专属香港法律文化之旅
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-accent/10 text-accent flex items-center justify-center text-2xl font-bold mb-6 mx-auto">
+            3
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-text mb-3">开始探索</h3>
+          <p class="text-text-muted">
+            跟随专业导览，深度体验香港独特的法律文化魅力
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-br from-primary to-primary-dark text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-6">
+        准备好探索香港法律文化了吗？
+      </h2>
+      <p class="text-xl mb-8 text-primary-light max-w-2xl mx-auto">
+        立即订阅导览服务或联系我们定制专属行程
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <%= link_to "开始探索", check_in_spots_path, class: "btn-secondary inline-flex items-center gap-2" %>
+        <%= link_to "联系我们", contacts_path, class: "btn-outline border-white text-white hover:bg-white hover:text-primary inline-flex items-center gap-2" %>
+      </div>
+    </div>
+  </section>
+</div>

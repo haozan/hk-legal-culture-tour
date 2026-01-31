@@ -1,0 +1,82 @@
+<div class="min-h-screen py-20">
+  <div class="container mx-auto px-4">
+    <div class="max-w-2xl mx-auto">
+      <!-- Success Icon -->
+      <div class="text-center mb-8">
+        <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <%= lucide_icon 'check-circle', class: 'w-16 h-16 text-green-600' %>
+        </div>
+        <h1 class="font-serif text-4xl font-bold text-text mb-4">支付成功！</h1>
+        <p class="text-xl text-text-muted">
+          感谢您订阅"香港法律文化之旅"导览服务
+        </p>
+      </div>
+
+      <!-- Success Details Card -->
+      <div class="card-base p-8 mb-8">
+        <h2 class="font-serif text-2xl font-bold text-text mb-6 text-center">订阅已激活</h2>
+        
+        <div class="space-y-4 mb-8">
+          <div class="flex items-center justify-between py-3 border-b border-border">
+            <span class="text-text-muted">订阅类型</span>
+            <span class="font-semibold text-text">90天导览订阅</span>
+          </div>
+          <div class="flex items-center justify-between py-3 border-b border-border">
+            <span class="text-text-muted">有效期</span>
+            <span class="font-semibold text-text">90天</span>
+          </div>
+          <div class="flex items-center justify-between py-3 border-b border-border">
+            <span class="text-text-muted">订阅状态</span>
+            <span class="inline-flex items-center gap-2">
+              <span class="badge-success">已激活</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="bg-surface rounded-lg p-6 mb-6">
+          <h3 class="font-semibold text-text mb-4">您现在可以：</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'check', class: 'w-5 h-5 text-secondary flex-shrink-0 mt-0.5' %>
+              <span class="text-text-muted">查看所有打卡地的详细导览内容</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'check', class: 'w-5 h-5 text-secondary flex-shrink-0 mt-0.5' %>
+              <span class="text-text-muted">获取专业参观攻略和注意事项</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'check', class: 'w-5 h-5 text-secondary flex-shrink-0 mt-0.5' %>
+              <span class="text-text-muted">了解最佳拍照角度和文化背景</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <%= lucide_icon 'check', class: 'w-5 h-5 text-secondary flex-shrink-0 mt-0.5' %>
+              <span class="text-text-muted">下载离线导览地图（即将推出）</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <%= link_to check_in_spots_path, class: "btn-primary flex-1 text-center" do %>
+            <%= lucide_icon 'map', class: 'w-5 h-5 inline mr-2' %>
+            开始探索打卡地
+          <% end %>
+          <%= link_to routes_path, class: "btn-outline flex-1 text-center" do %>
+            <%= lucide_icon 'route', class: 'w-5 h-5 inline mr-2' %>
+            查看推荐路线
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div class="text-center text-sm text-text-muted">
+        <p class="mb-2">订阅确认邮件已发送至您的邮箱</p>
+        <p>
+          如有任何问题，请 
+          <%= link_to "联系我们", contacts_path, class: "text-primary hover:underline" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

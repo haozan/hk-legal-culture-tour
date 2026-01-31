@@ -1,0 +1,157 @@
+<div class="min-h-screen py-20">
+  <div class="container mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h1 class="font-serif text-4xl lg:text-5xl font-bold text-text mb-6">联系我们</h1>
+      <p class="text-xl text-text-muted max-w-2xl mx-auto">
+        无论是订阅服务、预约路线还是定制行程，我们都期待为您服务
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+      <!-- Contact Form -->
+      <div class="card-base p-8">
+        <h2 class="font-serif text-2xl font-bold text-text mb-6">发送咨询</h2>
+        <form class="space-y-6">
+          <div>
+            <label class="form-label">姓名</label>
+            <input type="text" class="form-input" placeholder="请输入您的姓名">
+          </div>
+          <div>
+            <label class="form-label">邮箱</label>
+            <input type="email" class="form-input" placeholder="your@email.com">
+          </div>
+          <div>
+            <label class="form-label">电话（可选）</label>
+            <input type="tel" class="form-input" placeholder="+86 138 0000 0000">
+          </div>
+          <div>
+            <label class="form-label">服务类型</label>
+            <select class="form-select">
+              <option>导览订阅服务</option>
+              <option>标准路线预约</option>
+              <option>定制路线咨询</option>
+              <option>其他咨询</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">留言内容</label>
+            <textarea class="form-textarea" rows="5" placeholder="请描述您的需求或问题"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full">
+            发送咨询
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="space-y-6">
+        <!-- Guide Info -->
+        <div class="card-base p-8">
+          <h3 class="font-serif text-2xl font-bold text-text mb-4">专业向导团队</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-2xl font-bold text-secondary">镐</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-text mb-1">镐赞</h4>
+                <p class="text-sm text-text-muted">熟悉香港法律制度、保险、房产领域</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-2xl font-bold text-primary">杨</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-text mb-1">杨佩枝</h4>
+                <p class="text-sm text-text-muted">资深香港文化向导，擅长美食、娱乐推荐</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Methods -->
+        <div class="card-base p-8">
+          <h3 class="font-serif text-2xl font-bold text-text mb-6">联系方式</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <%= lucide_icon 'mail', class: 'w-5 h-5 text-primary flex-shrink-0 mt-1' %>
+              <div>
+                <div class="font-medium text-text mb-1">邮箱</div>
+                <a href="mailto:info@hklegal-tour.com" class="text-primary hover:underline">
+                  info@hklegal-tour.com
+                </a>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <%= lucide_icon 'phone', class: 'w-5 h-5 text-primary flex-shrink-0 mt-1' %>
+              <div>
+                <div class="font-medium text-text mb-1">电话</div>
+                <a href="tel:+85298765432" class="text-primary hover:underline">
+                  +852 9876 5432
+                </a>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <%= lucide_icon 'message-circle', class: 'w-5 h-5 text-primary flex-shrink-0 mt-1' %>
+              <div>
+                <div class="font-medium text-text mb-1">微信</div>
+                <span class="text-text-muted">HKLegalTour2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service Hours -->
+        <div class="card-base p-8">
+          <h3 class="font-serif text-2xl font-bold text-text mb-6">服务时间</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span class="text-text-muted">周一至周五</span>
+              <span class="font-medium text-text">9:00 - 18:00</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-text-muted">周末及节假日</span>
+              <span class="font-medium text-text">10:00 - 17:00</span>
+            </div>
+            <div class="pt-3 border-t border-border text-sm text-text-muted">
+              我们通常在24小时内回复咨询
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="max-w-4xl mx-auto mt-20">
+      <h2 class="font-serif text-3xl font-bold text-text mb-8 text-center">常见问题</h2>
+      <div class="space-y-4">
+        <div class="card-base p-6">
+          <h3 class="font-semibold text-text mb-2">如何预约标准路线服务？</h3>
+          <p class="text-text-muted">
+            您可以通过上方表单提交预约申请，或直接联系我们的微信/电话。我们会在24小时内与您确认可用的时间和行程细节。
+          </p>
+        </div>
+        <div class="card-base p-6">
+          <h3 class="font-semibold text-text mb-2">定制路线需要提前多久预约？</h3>
+          <p class="text-text-muted">
+            建议至少提前7天预约定制路线，以便我们有充足的时间根据您的需求设计专属行程。
+          </p>
+        </div>
+        <div class="card-base p-6">
+          <h3 class="font-semibold text-text mb-2">导览订阅服务如何使用？</h3>
+          <p class="text-text-muted">
+            订阅后，您将获得90天的全站内容访问权限，可以随时查看所有打卡地的详细导览信息、参观攻略和拍照建议。
+          </p>
+        </div>
+        <div class="card-base p-6">
+          <h3 class="font-semibold text-text mb-2">是否提供团体优惠？</h3>
+          <p class="text-text-muted">
+            5人及以上的团体预约可享受优惠价格。具体折扣请联系我们咨询。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="min-h-screen bg-surface">
+  <!-- Header Section -->
+  <section class="bg-gradient-to-br from-primary via-primary-dark to-primary-dark py-16">
+    <div class="container-xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-surface mb-4">探索香港法律文化打卡地</h1>
+        <p class="text-xl text-surface-elevated/90">精选20+专业景点，深入了解普通法系的独特魅力</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="bg-surface-elevated py-8 border-b border-border">
+    <div class="container-xl mx-auto px-6">
+      <div class="flex items-center gap-4 overflow-x-auto pb-2">
+        <span class="text-sm font-medium text-secondary whitespace-nowrap">筛选标签:</span>
+        <%= link_to check_in_spots_path, class: "px-4 py-2 text-sm font-medium transition-colors #{params[:tag].blank? ? 'bg-primary text-surface' : 'bg-surface text-secondary hover:bg-primary/10'}" do %>
+          全部
+        <% end %>
+        <% @tags.each do |tag| %>
+          <%= link_to check_in_spots_path(tag: tag.slug), class: "px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap #{params[:tag] == tag.slug ? 'text-surface' : 'bg-surface text-secondary hover:bg-primary/10'}", style: params[:tag] == tag.slug ? "background-color: #{tag.color};" : "" do %>
+            <%= tag.name %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spots Grid -->
+  <section class="py-16">
+    <div class="container-xl mx-auto px-6">
+      <% if @check_in_spots.any? %>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <% @check_in_spots.each do |spot| %>
+            <%= link_to check_in_spot_path(spot), class: "group" do %>
+              <div class="card card-elevated overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative h-64 overflow-hidden">
+                  <% if spot.cover_image.present? %>
+                    <img src="<%= spot.cover_image %>" alt="<%= spot.title %>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                  <% else %>
+                    <div class="w-full h-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+                      <%= lucide_icon "map-pin", class: "w-16 h-16 text-surface opacity-50" %>
+                    </div>
+                  <% end %>
+                  <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/80 to-transparent"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                      <% spot.tags.limit(3).each do |tag| %>
+                        <span class="text-xs px-2 py-1 text-surface font-medium" style="background-color: <%= tag.color %>;">
+                          <%= tag.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-serif text-2xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
+                    <%= spot.title %>
+                  </h3>
+                  <p class="text-secondary mb-4"><%= spot.subtitle %></p>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-primary font-medium inline-flex items-center gap-2">
+                      查看详情
+                      <%= lucide_icon "arrow-right", class: "w-4 h-4 transition-transform group-hover:translate-x-1" %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center py-16">
+          <div class="inline-flex items-center justify-center w-24 h-24 bg-surface-elevated mb-6">
+            <%= lucide_icon "search-x", class: "w-12 h-12 text-muted" %>
+          </div>
+          <h3 class="font-serif text-2xl font-bold text-primary mb-2">暂无打卡地</h3>
+          <p class="text-secondary mb-6">该标签下暂时还没有打卡地，请尝试其他标签</p>
+          <%= link_to "查看全部", check_in_spots_path, class: "btn-primary btn-md" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-br from-primary via-primary-dark to-primary-dark">
+    <div class="container-xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-surface mb-4">
+          想要解锁完整攻略？
+        </h2>
+        <p class="text-xl text-surface-elevated/90 mb-8">
+          一次订阅，90天内无限查看所有打卡地的详细攻略、游玩建议和注意事项
+        </p>
+        <%= link_to "立即订阅", new_subscription_path, class: "btn-secondary btn-lg inline-flex items-center gap-2" %>
+      </div>
+    </div>
+  </section>
+</div>

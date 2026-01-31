@@ -1,0 +1,147 @@
+<div class="min-h-screen bg-surface">
+  <!-- Header Section -->
+  <section class="bg-gradient-to-br from-primary via-primary-dark to-primary-dark py-16">
+    <div class="container-xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-surface mb-4">精选文化路线</h1>
+        <p class="text-xl text-surface-elevated/90">专业设计的香港法律文化探索路线，带您深度体验普通法系</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="bg-surface-elevated py-8 border-b border-border">
+    <div class="container-xl mx-auto px-6">
+      <div class="flex items-center gap-4 overflow-x-auto pb-2">
+        <span class="text-sm font-medium text-secondary whitespace-nowrap">筛选标签:</span>
+        <%= link_to routes_path, class: "px-4 py-2 text-sm font-medium transition-colors #{params[:tag].blank? ? 'bg-primary text-surface' : 'bg-surface text-secondary hover:bg-primary/10'}" do %>
+          全部
+        <% end %>
+        <% @tags.each do |tag| %>
+          <%= link_to routes_path(tag: tag.slug), class: "px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap #{params[:tag] == tag.slug ? 'text-surface' : 'bg-surface text-secondary hover:bg-primary/10'}", style: params[:tag] == tag.slug ? "background-color: #{tag.color};" : "" do %>
+            <%= tag.name %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Routes List -->
+  <section class="py-16">
+    <div class="container-xl mx-auto px-6">
+      <% if @routes.any? %>
+        <div class="space-y-8">
+          <% @routes.each do |route| %>
+            <%= link_to route_path(route), class: "block group" do %>
+              <div class="card card-elevated p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="flex flex-col md:flex-row gap-8">
+                  <div class="flex-1">
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <% route.tags.each do |tag| %>
+                        <span class="text-xs px-3 py-1 text-surface font-medium" style="background-color: <%= tag.color %>;">
+                          <%= tag.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                    <h2 class="font-serif text-3xl font-bold text-primary mb-4 group-hover:text-secondary transition-colors">
+                      <%= route.title %>
+                    </h2>
+                    <p class="text-lg text-secondary leading-relaxed mb-6">
+                      <%= route.description.truncate(200) %>
+                    </p>
+                    <div class="flex items-center gap-6">
+                      <div class="inline-flex items-center gap-2 text-sm text-secondary">
+                        <%= lucide_icon "map-pin", class: "w-4 h-4" %>
+                        <span><%= route.check_in_spots.count %> 个打卡地</span>
+                      </div>
+                      <div class="inline-flex items-center gap-2 text-primary font-medium">
+                        <span>查看详情</span>
+                        <%= lucide_icon "arrow-right", class: "w-5 h-5 transition-transform group-hover:translate-x-1" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="md:w-80 flex-shrink-0">
+                    <% first_spot = route.check_in_spots.first %>
+                    <% if first_spot&.cover_image.present? %>
+                      <div class="relative overflow-hidden h-64 md:h-full">
+                        <img src="<%= first_spot.cover_image %>" alt="<%= route.title %>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/60 to-transparent"></div>
+                      </div>
+                    <% else %>
+                      <div class="relative overflow-hidden h-64 md:h-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+                        <%= lucide_icon "route", class: "w-16 h-16 text-surface opacity-50" %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center py-16">
+          <div class="inline-flex items-center justify-center w-24 h-24 bg-surface-elevated mb-6">
+            <%= lucide_icon "search-x", class: "w-12 h-12 text-muted" %>
+          </div>
+          <h3 class="font-serif text-2xl font-bold text-primary mb-2">暂无路线</h3>
+          <p class="text-secondary mb-6">该标签下暂时还没有路线，请尝试其他标签</p>
+          <%= link_to "查看全部", routes_path, class: "btn-primary btn-md" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- Services CTA -->
+  <section class="py-16 bg-surface-elevated">
+    <div class="container-xl mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-primary mb-4">我们的陪同服务</h2>
+          <p class="text-xl text-secondary">选择标准路线或定制专属方案，由镐赞和杨佩枝亲自陪同</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card card-elevated p-8 hover:shadow-xl transition-shadow">
+            <div class="w-16 h-16 bg-gradient-to-br from-info to-info/70 flex items-center justify-center mb-6">
+              <%= lucide_icon "users", class: "w-8 h-8 text-surface" %>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-primary mb-3">标准路线陪同</h3>
+            <p class="text-secondary mb-6 leading-relaxed">
+              选择我们精心设计的标准路线，7人以内小团队，按人数统一收费，深度体验香港法律文化精髓。
+            </p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-start gap-2 text-sm text-secondary">
+                <%= lucide_icon "check", class: "w-4 h-4 text-success flex-shrink-0 mt-0.5" %>
+                <span>专业导览讲解</span>
+              </li>
+              <li class="flex items-start gap-2 text-sm text-secondary">
+                <%= lucide_icon "check", class: "w-4 h-4 text-success flex-shrink-0 mt-0.5" %>
+                <span>法院旁听预约</span>
+              </li>
+            </ul>
+            <%= link_to "了解更多", contacts_path, class: "btn-primary btn-md w-full" %>
+          </div>
+          <div class="card card-elevated p-8 hover:shadow-xl transition-shadow">
+            <div class="w-16 h-16 bg-gradient-to-br from-warning to-warning/70 flex items-center justify-center mb-6">
+              <%= lucide_icon "sparkles", class: "w-8 h-8 text-primary-dark" %>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-primary mb-3">定制路线陪同</h3>
+            <p class="text-secondary mb-6 leading-relaxed">
+              根据您的需求定制专属路线方案，灵活安排行程，提供最贴心的陪同服务。
+            </p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-start gap-2 text-sm text-secondary">
+                <%= lucide_icon "check", class: "w-4 h-4 text-success flex-shrink-0 mt-0.5" %>
+                <span>一对一需求沟通</span>
+              </li>
+              <li class="flex items-start gap-2 text-sm text-secondary">
+                <%= lucide_icon "check", class: "w-4 h-4 text-success flex-shrink-0 mt-0.5" %>
+                <span>专属路线设计</span>
+              </li>
+            </ul>
+            <%= link_to "咨询定制", contacts_path, class: "btn-primary btn-md w-full" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

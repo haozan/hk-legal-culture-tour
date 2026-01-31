@@ -1,0 +1,151 @@
+<div class="min-h-screen bg-surface">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-dark py-24 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <% if @check_in_spot.cover_image.present? %>
+        <img src="<%= @check_in_spot.cover_image %>" alt="<%= @check_in_spot.title %>" class="w-full h-full object-cover">
+      <% end %>
+    </div>
+    <div class="container-xl mx-auto px-6 relative">
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-2 mb-6">
+          <% @check_in_spot.tags.each do |tag| %>
+            <%= link_to tag.name, check_in_spots_path(tag: tag.slug), class: "text-sm px-3 py-1 text-surface font-medium hover:opacity-80 transition-opacity", style: "background-color: #{tag.color};" %>
+          <% end %>
+        </div>
+        <h1 class="font-serif text-5xl md:text-6xl font-bold text-surface mb-4">
+          <%= @check_in_spot.title %>
+        </h1>
+        <p class="text-2xl text-surface-elevated/90 mb-8">
+          <%= @check_in_spot.subtitle %>
+        </p>
+        <% if @check_in_spot.address.present? %>
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-surface/10 backdrop-blur border border-surface-elevated/20">
+            <%= lucide_icon "map-pin", class: "w-5 h-5 text-secondary" %>
+            <span class="text-surface"><%= @check_in_spot.address %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-16">
+    <div class="container-lg mx-auto px-6">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <!-- Cover Image -->
+          <% if @check_in_spot.cover_image.present? %>
+            <div class="overflow-hidden shadow-xl mb-8">
+              <img src="<%= @check_in_spot.cover_image %>" alt="<%= @check_in_spot.title %>" class="w-full h-auto">
+            </div>
+          <% end %>
+
+          <!-- Description - Always visible -->
+          <div class="card card-elevated p-8 mb-8">
+            <div class="flex items-center gap-3 mb-6">
+              <%= lucide_icon "info", class: "w-6 h-6 text-primary" %>
+              <h2 class="font-serif text-3xl font-bold text-primary">景点介绍</h2>
+            </div>
+            <div class="prose prose-lg max-w-none">
+              <%= simple_format @check_in_spot.description %>
+            </div>
+          </div>
+
+          <!-- Detailed Tips - Content Gated -->
+          <% if @check_in_spot.tips.present? %>
+            <div class="card card-elevated p-8 relative">
+              <div class="flex items-center gap-3 mb-6">
+                <%= lucide_icon "lightbulb", class: "w-6 h-6 text-secondary" %>
+                <h2 class="font-serif text-3xl font-bold text-primary">游玩攻略</h2>
+                <% if has_active_subscription? %>
+                  <span class="badge-success text-xs ml-auto">已解锁</span>
+                <% end %>
+              </div>
+              
+              <% if has_active_subscription? %>
+                <!-- Full Content for Subscribers -->
+                <div class="prose prose-lg max-w-none">
+                  <%= simple_format @check_in_spot.tips %>
+                </div>
+              <% else %>
+                <!-- Blurred Content Preview for Non-Subscribers -->
+                <div class="relative min-h-[400px]">
+                  <div class="prose prose-lg max-w-none blur-sm select-none pointer-events-none">
+                    <%= simple_format @check_in_spot.tips %>
+                  </div>
+                  
+                  <!-- Unlock Overlay -->
+                  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface/80 to-surface flex items-center justify-center">
+                    <div class="text-center p-8 z-10">
+                      <%= lucide_icon "lock", class: "w-12 h-12 text-primary mx-auto mb-4" %>
+                      <h3 class="font-serif text-2xl font-bold text-primary mb-2">订阅解锁完整攻略</h3>
+                      <p class="text-secondary mb-6">包含详细游玩建议、注意事项等专业内容</p>
+                      <%= link_to new_subscription_path, class: "btn-primary btn-md inline-flex items-center gap-2" do %>
+                        <%= lucide_icon 'unlock', class: 'w-5 h-5' %>
+                        立即订阅 - $99
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <!-- Related Routes -->
+          <% if @related_routes.any? %>
+            <div class="card card-elevated p-6 mb-6 sticky top-6">
+              <h3 class="font-serif text-xl font-bold text-primary mb-4 flex items-center gap-2">
+                <%= lucide_icon "route", class: "w-5 h-5" %>
+                相关路线
+              </h3>
+              <div class="space-y-4">
+                <% @related_routes.each do |route| %>
+                  <%= link_to route_path(route), class: "block p-4 bg-surface-elevated hover:bg-primary/5 transition-colors group" do %>
+                    <h4 class="font-bold text-primary group-hover:text-secondary transition-colors mb-2">
+                      <%= route.title %>
+                    </h4>
+                    <p class="text-sm text-secondary line-clamp-2">
+                      <%= route.description.truncate(80) %>
+                    </p>
+                    <div class="flex items-center gap-2 mt-3 text-sm text-primary font-medium">
+                      查看路线
+                      <%= lucide_icon "arrow-right", class: "w-4 h-4 transition-transform group-hover:translate-x-1" %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <!-- CTA Card -->
+          <div class="card overflow-hidden" style="background: linear-gradient(135deg, hsl(var(--color-primary)), hsl(var(--color-primary-dark)));">
+            <div class="p-6 text-surface">
+              <div class="mb-4">
+                <%= lucide_icon "sparkles", class: "w-8 h-8 text-secondary" %>
+              </div>
+              <h3 class="font-serif text-xl font-bold mb-2">需要专业陪同？</h3>
+              <p class="text-surface-elevated/90 mb-4 text-sm">
+                我们提供标准路线和定制路线陪同服务，由镐赞和杨佩枝亲自带队
+              </p>
+              <%= link_to "咨询服务", "#", class: "btn-secondary btn-sm w-full" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back Navigation -->
+  <section class="py-8 border-t border-border">
+    <div class="container-lg mx-auto px-6">
+      <%= link_to check_in_spots_path, class: "inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors" do %>
+        <%= lucide_icon "arrow-left", class: "w-5 h-5" %>
+        <span class="font-medium">返回打卡地列表</span>
+      <% end %>
+    </div>
+  </section>
+</div>

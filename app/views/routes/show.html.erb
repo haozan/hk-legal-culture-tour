@@ -1,0 +1,162 @@
+<div class="min-h-screen bg-surface">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-dark py-24 overflow-hidden">
+    <% first_spot = @route.check_in_spots.first %>
+    <% if first_spot&.cover_image.present? %>
+      <div class="absolute inset-0 opacity-10">
+        <img src="<%= first_spot.cover_image %>" alt="<%= @route.title %>" class="w-full h-full object-cover">
+      </div>
+    <% end %>
+    <div class="container-xl mx-auto px-6 relative">
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-2 mb-6">
+          <% @route.tags.each do |tag| %>
+            <%= link_to tag.name, routes_path(tag: tag.slug), class: "text-sm px-3 py-1 text-surface font-medium hover:opacity-80 transition-opacity", style: "background-color: #{tag.color};" %>
+          <% end %>
+        </div>
+        <h1 class="font-serif text-5xl md:text-6xl font-bold text-surface mb-4">
+          <%= @route.title %>
+        </h1>
+        <p class="text-2xl text-surface-elevated/90 mb-8">
+          <%= @route.description %>
+        </p>
+        <div class="flex flex-wrap items-center gap-6">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-surface/10 backdrop-blur border border-surface-elevated/20">
+            <%= lucide_icon "map-pin", class: "w-5 h-5 text-secondary" %>
+            <span class="text-surface font-medium"><%= @route_spots.count %> 个打卡地</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Route Timeline -->
+  <section class="py-16">
+    <div class="container-xl mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-12">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-primary mb-4">行程安排</h2>
+          <p class="text-lg text-secondary">按照精心设计的顺序，深度体验每个法律文化景点</p>
+        </div>
+
+        <% if @route_spots.any? %>
+          <div class="space-y-8">
+            <% @route_spots.each_with_index do |route_spot, index| %>
+              <% spot = route_spot.check_in_spot %>
+              <div class="relative">
+                <!-- Timeline Line -->
+                <% unless index == @route_spots.count - 1 %>
+                  <div class="absolute left-8 top-24 bottom-0 w-0.5 bg-gradient-to-b from-primary to-primary/20 hidden md:block"></div>
+                <% end %>
+
+                <!-- Spot Card -->
+                <div class="flex gap-6 items-start">
+                  <!-- Step Number -->
+                  <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-surface font-bold text-xl shadow-lg z-10">
+                    <%= index + 1 %>
+                  </div>
+
+                  <!-- Content -->
+                  <%= link_to check_in_spot_path(spot), class: "flex-1 group" do %>
+                    <div class="card card-elevated p-6 md:p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                      <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Image -->
+                        <div class="md:col-span-1">
+                          <% if spot.cover_image.present? %>
+                            <div class="relative overflow-hidden h-48 md:h-full">
+                              <img src="<%= spot.cover_image %>" alt="<%= spot.title %>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                              <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/60 to-transparent"></div>
+                            </div>
+                          <% else %>
+                            <div class="relative overflow-hidden h-48 md:h-full bg-gradient-to-br from-primary/20 to-primary-dark/20 flex items-center justify-center">
+                              <%= lucide_icon "map-pin", class: "w-12 h-12 text-primary opacity-50" %>
+                            </div>
+                          <% end %>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="md:col-span-2">
+                          <div class="flex flex-wrap gap-2 mb-3">
+                            <% spot.tags.limit(3).each do |tag| %>
+                              <span class="text-xs px-2 py-1 font-medium" style="background-color: <%= tag.color %>; color: white;">
+                                <%= tag.name %>
+                              </span>
+                            <% end %>
+                          </div>
+                          <h3 class="font-serif text-2xl md:text-3xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                            <%= spot.title %>
+                          </h3>
+                          <p class="text-lg text-secondary mb-4">
+                            <%= spot.subtitle %>
+                          </p>
+                          <% if spot.address.present? %>
+                            <div class="flex items-start gap-2 text-sm text-secondary mb-4">
+                              <%= lucide_icon "map-pin", class: "w-4 h-4 flex-shrink-0 mt-0.5" %>
+                              <span><%= spot.address %></span>
+                            </div>
+                          <% end %>
+                          <div class="prose prose-sm max-w-none text-secondary mb-6">
+                            <%= simple_format spot.description.truncate(150) %>
+                          </div>
+                          <div class="inline-flex items-center gap-2 text-primary font-medium">
+                            <span>查看详细攻略</span>
+                            <%= lucide_icon "arrow-right", class: "w-5 h-5 transition-transform group-hover:translate-x-1" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-16">
+            <div class="inline-flex items-center justify-center w-24 h-24 bg-surface-elevated mb-6">
+              <%= lucide_icon "map-pin-off", class: "w-12 h-12 text-muted" %>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-primary mb-2">路线规划中</h3>
+            <p class="text-secondary">该路线的详细打卡地正在规划中，敬请期待</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service CTA -->
+  <section class="py-16 bg-gradient-to-br from-primary via-primary-dark to-primary-dark">
+    <div class="container-xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center justify-center w-20 h-20 bg-secondary/20 backdrop-blur mb-6">
+          <%= lucide_icon "users", class: "w-10 h-10 text-secondary" %>
+        </div>
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-surface mb-4">
+          想要体验这条路线？
+        </h2>
+        <p class="text-xl text-surface-elevated/90 mb-8">
+          由镐赞和杨佩枝亲自陪同，深度讲解每个景点背后的法律文化，还可以协助预约法院旁听
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <%= link_to "#", class: "btn-secondary btn-lg inline-flex items-center gap-2 justify-center" do %>
+            <%= lucide_icon "message-circle", class: "w-5 h-5" %>
+            <span>预约标准路线</span>
+          <% end %>
+          <%= link_to "#", class: "btn-outline btn-lg text-surface border-surface-elevated/30 hover:bg-surface/10 inline-flex items-center gap-2 justify-center" do %>
+            <%= lucide_icon "sparkles", class: "w-5 h-5" %>
+            <span>定制专属路线</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back Navigation -->
+  <section class="py-8 border-t border-border bg-surface">
+    <div class="container-xl mx-auto px-6">
+      <%= link_to routes_path, class: "inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors" do %>
+        <%= lucide_icon "arrow-left", class: "w-5 h-5" %>
+        <span class="font-medium">返回路线列表</span>
+      <% end %>
+    </div>
+  </section>
+</div>

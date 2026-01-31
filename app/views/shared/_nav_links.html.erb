@@ -1,0 +1,8 @@
+<%# Navigation Links - Content only, no layout wrapper %>
+<%# This partial will be rendered in different contexts (desktop horizontal / mobile vertical) %>
+<%# The parent wrapper determines the layout %>
+
+<%# Navigation links are PUBLIC (visible to ALL users) - no user-specific checks %>
+<%= link_to "打卡地", check_in_spots_path, class: "block px-3 py-2 md:p-0 hover:bg-surface md:hover:bg-transparent text-secondary hover:text-primary transition-colors #{controller_name == 'check_in_spots' ? 'font-semibold text-primary bg-surface/50 md:bg-transparent' : ''}" %>
+<%= link_to "主题路线", routes_path, class: "block px-3 py-2 md:p-0 hover:bg-surface md:hover:bg-transparent text-secondary hover:text-primary transition-colors #{controller_name == 'routes' ? 'font-semibold text-primary bg-surface/50 md:bg-transparent' : ''}" %>
+<%= link_to "联系我们", contacts_path, class: "block px-3 py-2 md:p-0 hover:bg-surface md:hover:bg-transparent text-secondary hover:text-primary transition-colors #{controller_name == 'contacts' ? 'font-semibold text-primary bg-surface/50 md:bg-transparent' : ''}" %>

@@ -1,0 +1,86 @@
+<footer class="bg-surface-elevated border-t border-border">
+  <div class="container-xl mx-auto px-6 py-12">
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <!-- Brand Section -->
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+            <%= lucide_icon "scale", class: "w-6 h-6 text-surface" %>
+          </div>
+          <span class="font-serif text-lg font-bold text-primary">
+            香港法律文化之旅
+          </span>
+        </div>
+        <p class="text-sm text-secondary leading-relaxed">
+          深度体验香港法律文化，感受东西方法治精神的交融
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-semibold text-primary mb-4">快速导航</h3>
+        <ul class="space-y-2">
+          <li>
+            <%= link_to "首页", root_path, class: "text-sm text-secondary hover:text-primary transition-colors" %>
+          </li>
+          <li>
+            <%= link_to "打卡地", check_in_spots_path, class: "text-sm text-secondary hover:text-primary transition-colors" %>
+          </li>
+          <li>
+            <%= link_to "主题路线", routes_path, class: "text-sm text-secondary hover:text-primary transition-colors" %>
+          </li>
+          <li>
+            <%= link_to "联系我们", contacts_path, class: "text-sm text-secondary hover:text-primary transition-colors" %>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="font-semibold text-primary mb-4">服务项目</h3>
+        <ul class="space-y-2">
+          <li>
+            <%= link_to "导览订阅", new_subscription_path, class: "text-sm text-secondary hover:text-primary transition-colors" %>
+          </li>
+          <li>
+            <span class="text-sm text-secondary">标准路线服务</span>
+          </li>
+          <li>
+            <span class="text-sm text-secondary">定制路线服务</span>
+          </li>
+          <li>
+            <span class="text-sm text-secondary">法院旁听预约</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <h3 class="font-semibold text-primary mb-4">联系信息</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2">
+            <%= lucide_icon "map-pin", class: "w-4 h-4 text-secondary flex-shrink-0 mt-0.5" %>
+            <span class="text-sm text-secondary">香港特别行政区</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <%= lucide_icon "mail", class: "w-4 h-4 text-secondary flex-shrink-0 mt-0.5" %>
+            <span class="text-sm text-secondary">info@hklegalculture.com</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <%= lucide_icon "clock", class: "w-4 h-4 text-secondary flex-shrink-0 mt-0.5" %>
+            <span class="text-sm text-secondary">周一至周日 9:00-18:00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="pt-8 border-t border-border">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-secondary text-center md:text-left">
+          © <%= Time.current.year %> 香港法律文化之旅. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

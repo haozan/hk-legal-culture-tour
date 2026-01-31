@@ -1,0 +1,189 @@
+<div class="min-h-screen py-20">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-serif text-4xl lg:text-5xl font-bold text-text mb-4">
+          订阅导览服务
+        </h1>
+        <p class="text-xl text-text-muted">
+          一次性付费，90天无限访问所有打卡地的详细导览内容
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Subscription Info -->
+        <div class="space-y-8">
+          <!-- Price Card -->
+          <div class="card-base p-8 text-center bg-gradient-to-br from-primary/5 to-secondary/5">
+            <div class="inline-block px-4 py-2 bg-secondary/10 text-secondary text-sm font-medium mb-4">
+              限时优惠
+            </div>
+            <div class="mb-6">
+              <span class="text-5xl font-bold text-text">$<%= @price.to_i %></span>
+              <span class="text-text-muted text-lg">.00 USD</span>
+            </div>
+            <div class="text-text-muted mb-6">
+              90天无限访问
+            </div>
+            <div class="inline-flex items-center gap-2 text-sm text-text-muted">
+              <%= lucide_icon 'shield-check', class: 'w-4 h-4 text-secondary' %>
+              <span>安全支付 • Stripe加密</span>
+            </div>
+          </div>
+
+          <!-- Features -->
+          <div class="card-base p-8">
+            <h3 class="font-serif text-2xl font-bold text-text mb-6">订阅包含</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <%= lucide_icon 'check-circle', class: 'w-6 h-6 text-secondary flex-shrink-0 mt-0.5' %>
+                <div>
+                  <div class="font-semibold text-text mb-1">全部打卡地导览</div>
+                  <div class="text-sm text-text-muted">解锁20+精选法律文化地标的详细介绍</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <%= lucide_icon 'check-circle', class: 'w-6 h-6 text-secondary flex-shrink-0 mt-0.5' %>
+                <div>
+                  <div class="font-semibold text-text mb-1">专业参观攻略</div>
+                  <div class="text-sm text-text-muted">包含开放时间、预约方式、注意事项</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <%= lucide_icon 'check-circle', class: 'w-6 h-6 text-secondary flex-shrink-0 mt-0.5' %>
+                <div>
+                  <div class="font-semibold text-text mb-1">文化背景解读</div>
+                  <div class="text-sm text-text-muted">深入了解香港法律制度和历史沿革</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <%= lucide_icon 'check-circle', class: 'w-6 h-6 text-secondary flex-shrink-0 mt-0.5' %>
+                <div>
+                  <div class="font-semibold text-text mb-1">拍照指南</div>
+                  <div class="text-sm text-text-muted">最佳角度、时段建议和构图技巧</div>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <%= lucide_icon 'check-circle', class: 'w-6 h-6 text-secondary flex-shrink-0 mt-0.5' %>
+                <div>
+                  <div class="font-semibold text-text mb-1">90天有效期</div>
+                  <div class="text-sm text-text-muted">从订阅之日起90天内无限次访问</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="grid grid-cols-3 gap-4 text-center text-sm text-text-muted">
+            <div>
+              <%= lucide_icon 'shield', class: 'w-8 h-8 mx-auto mb-2 text-primary' %>
+              <div>安全支付</div>
+            </div>
+            <div>
+              <%= lucide_icon 'lock', class: 'w-8 h-8 mx-auto mb-2 text-primary' %>
+              <div>数据加密</div>
+            </div>
+            <div>
+              <%= lucide_icon 'clock', class: 'w-8 h-8 mx-auto mb-2 text-primary' %>
+              <div>即时激活</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkout Form -->
+        <div>
+          <div class="card-base p-8">
+            <h2 class="font-serif text-2xl font-bold text-text mb-6">订单信息</h2>
+            
+            <% if flash[:error] %>
+              <div class="alert-error mb-6">
+                <%= flash[:error] %>
+              </div>
+            <% end %>
+
+            <%= form_with model: Subscription.new, url: subscriptions_path, method: :post, class: "space-y-6" do |form| %>
+              <!-- User Info Display -->
+              <div class="bg-surface p-4 border border-border">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 bg-primary flex items-center justify-center text-surface text-sm font-medium">
+                    <%= current_user.name&.first&.upcase || current_user.email&.first&.upcase || 'U' %>
+                  </div>
+                  <div>
+                    <div class="font-medium text-text"><%= current_user.name || current_user.email.split('@').first.titleize %></div>
+                    <div class="text-sm text-text-muted"><%= current_user.email %></div>
+                  </div>
+                </div>
+                <p class="text-xs text-text-muted">
+                  订阅确认将发送至此邮箱
+                </p>
+              </div>
+
+              <!-- Order Summary -->
+              <div class="bg-surface p-6 border border-border">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-text-muted">90天导览订阅</span>
+                  <span class="font-semibold text-text">$<%= @price.to_i %>.00</span>
+                </div>
+                <div class="pt-3 border-t border-border">
+                  <div class="flex items-center justify-between">
+                    <span class="font-semibold text-text">总计</span>
+                    <span class="text-2xl font-bold text-text">$<%= @price.to_i %>.00</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-primary/5 p-4 text-sm text-text-muted">
+                <div class="flex items-start gap-2">
+                  <%= lucide_icon 'info', class: 'w-5 h-5 text-primary flex-shrink-0 mt-0.5' %>
+                  <div>
+                    点击"立即订阅"后，您将跳转到Stripe安全支付页面。支持信用卡、借记卡等多种支付方式。
+                  </div>
+                </div>
+              </div>
+
+              <%= form.submit "立即订阅 - $#{@price.to_i}", 
+                  class: "btn-primary w-full text-lg py-4" %>
+            <% end %>
+
+            <div class="mt-6 text-center text-sm text-text-muted">
+              订阅即表示您同意我们的
+              <a href="#" class="text-primary hover:underline">服务条款</a>
+              和
+              <a href="#" class="text-primary hover:underline">隐私政策</a>
+            </div>
+          </div>
+
+          <!-- FAQ -->
+          <div class="mt-8 space-y-4">
+            <h3 class="font-semibold text-text mb-4">常见问题</h3>
+            <details class="card-base p-4 cursor-pointer group">
+              <summary class="font-medium text-text group-open:text-primary">
+                支付成功后多久可以使用？
+              </summary>
+              <p class="text-sm text-text-muted mt-2">
+                支付成功后立即激活，您可以马上访问所有打卡地的导览内容。
+              </p>
+            </details>
+            <details class="card-base p-4 cursor-pointer group">
+              <summary class="font-medium text-text group-open:text-primary">
+                90天后会自动续费吗？
+              </summary>
+              <p class="text-sm text-text-muted mt-2">
+                不会。这是一次性付费，90天后不会自动扣款。到期后您可以选择重新订阅。
+              </p>
+            </details>
+            <details class="card-base p-4 cursor-pointer group">
+              <summary class="font-medium text-text group-open:text-primary">
+                支持退款吗？
+              </summary>
+              <p class="text-sm text-text-muted mt-2">
+                如果您在订阅后7天内未使用服务，可以申请全额退款。请联系客服处理。
+              </p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
