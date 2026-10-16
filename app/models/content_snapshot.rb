@@ -4,10 +4,13 @@ class ContentSnapshot < ApplicationRecord
   PAPER_NAME = '保险原理及实务'.freeze
 
   def self.default_data
+    question_bank_path = Rails.root.join('db', 'content_q1_q50_questions.json')
+    question_bank = JSON.parse(File.read(question_bank_path)) if File.exist?(question_bank_path)
+
     {
       version: 'draft-2026.10.16',
       chapterNames: ['保险原理及实务', '人寿保险', '一般保险', '法规与合规', '风险管理'],
-      questions: [
+      questions: question_bank || [
         question(1, '1.1.1', '保险的最大诚信原则要求投保人如实披露重要事实。以下哪项最符合该原则？', '单选题', ['只披露对自己有利的资料', '投保时披露足以影响承保决定的所有重要事实', '签约后才披露重要事实', '由保险代理人代为决定披露范围'], ['B'], '最大诚信原则贯穿订立合约的全过程，投保人、被保险人及保险人都应披露重要事实。', ['核心概念', '卷一']),
         question(2, '1.2', '以下哪些属于厘定一般保险保费时通常考虑的因素？', '多选题', ['风险发生的概率', '潜在损失幅度', '营运费用', '投保人的幸运颜色'], ['A', 'B', 'C'], '保费通常综合风险概率、损失幅度、营运费用、资本成本及所需利润等因素。', ['多选', '卷一']),
         question(3, '2.1.1', '在合约成立时，哪一项属于有效合约的重要元素？', '单选题', ['要约与承诺', '幸运数字', '广告颜色', '代理人的个人偏好'], ['A'], '合约通常需要具备要约、承诺、代价及建立法律关系的意向等元素。', ['法律原则', '卷一']),

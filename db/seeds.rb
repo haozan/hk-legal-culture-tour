@@ -15,4 +15,4 @@ ContentSnapshot.create!(
   data: ContentSnapshot.default_data
 )
 
-puts "Created #{ContentSnapshot::PAPER_NAME} with #{ContentSnapshot.default_data['questions'].length} sample questions and #{ContentSnapshot.default_data['paperOneSyllabus'].length} chapters."
+puts "Created #{ContentSnapshot::PAPER_NAME} with #{ContentSnapshot.default_data['questions'].length} questions and #{ContentSnapshot.default_data['paperOneSyllabus'].length} chapters."
