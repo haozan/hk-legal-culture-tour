@@ -35,8 +35,6 @@ function question(id, chapterNumber, title, type, optionTexts, correctOptionIDs,
 }
 function topic(number, title, children = [], keyPoints = []) { return { id: number, number, title, keyPoints, children }; }
 function chapter(number, title, weight, topics) { return { id: number, number, title, weight, topics }; }
-function isCombinationQuestion(item) { return item?.answerMode === "组合选项" || (item?.tags || []).includes("组合选项"); }
-function usesCheckboxAnswers(item) { return item?.type === "多选题" && !isCombinationQuestion(item); }
 
 const state = {
   data: loadData(),
@@ -233,8 +231,7 @@ function renderNodeEditor(context) {
 }
 
 function renderQuestionRow(item) {
-  const format = isCombinationQuestion(item) ? "多选题 · 组合选项" : item.type;
-  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(format)}</span><span>参考章节 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="编辑">✎</button></div>`;
+  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>参考章节 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="编辑">✎</button></div>`;
 }
 
 function renderQuestionEditor(context) {
@@ -242,16 +239,13 @@ function renderQuestionEditor(context) {
   const defaultReference = context.kind === "chapter" ? (context.node.topics[0]?.number || context.node.number) : context.node.number;
   const item = existing || { id: "new", chapter: PAPER_NAME, chapterNumber: defaultReference, title: "", type: "单选题", options: [{ id: "A", text: "" }, { id: "B", text: "" }, { id: "C", text: "" }, { id: "D", text: "" }], correctOptionIDs: [], explanation: "", tags: [] };
   const options = item.options || [];
-  const combination = isCombinationQuestion(item);
-  const inputType = usesCheckboxAnswers(item) ? "checkbox" : "radio";
   return `<div class="editor-section">
     <div class="form-label">题目设置 ${existing ? `· #${item.id}` : "· 新题目"}</div>
     <div class="field-row"><label>题型</label><select class="select" id="questionType"><option ${item.type === "单选题" ? "selected" : ""}>单选题</option><option ${item.type === "多选题" ? "selected" : ""}>多选题</option></select></div>
-    <label class="check-row"><input type="checkbox" id="questionCombination" ${combination ? "checked" : ""} /> <span>组合选项题（多选题分类，但答案选择一个组合）</span></label>
     <div class="field-row"><label>参考章节</label><input class="field" id="questionChapterNumber" value="${escapeHtml(item.chapterNumber || context.node.number)}" placeholder="例如 1.1.1" /></div>
     <label class="form-label" for="questionTitle">题目正文</label><textarea class="textarea" id="questionTitle" placeholder="输入题目正文">${escapeHtml(item.title)}</textarea>
   </div>
-  <div class="editor-section"><div class="form-label">选项与答案</div><div class="options" id="questionOptions">${options.map(option => `<div class="option-row"><input type="${inputType}" name="correctOption" value="${escapeHtml(option.id)}" ${item.correctOptionIDs.includes(option.id) ? "checked" : ""} /><span class="option-id">${escapeHtml(option.id)}</span><input class="field option-text" data-option-id="${escapeHtml(option.id)}" value="${escapeHtml(option.text)}" placeholder="选项内容" /></div>`).join("")}</div><button class="add-option" data-action="add-option">＋ 添加选项</button>${combination ? `<div class="form-help">原卷形式：A/B/C/D 是组合答案，例如“i、iii、iv”，因此这里只能选一个组合。</div>` : ""}</div>
+  <div class="editor-section"><div class="form-label">选项与答案</div><div class="options" id="questionOptions">${options.map(option => `<div class="option-row"><input type="radio" name="correctOption" value="${escapeHtml(option.id)}" ${item.correctOptionIDs.includes(option.id) ? "checked" : ""} /><span class="option-id">${escapeHtml(option.id)}</span><input class="field option-text" data-option-id="${escapeHtml(option.id)}" value="${escapeHtml(option.text)}" placeholder="选项内容" /></div>`).join("")}</div><button class="add-option" data-action="add-option">＋ 添加选项</button>${item.type === "多选题" ? `<div class="form-help">多选题按原卷组合选项录入，A/B/C/D 中选择一个组合答案。</div>` : ""}</div>
   <div class="editor-section"><label class="form-label" for="questionExplanation">解析</label><textarea class="textarea" id="questionExplanation" placeholder="输入答案解析">${escapeHtml(item.explanation)}</textarea><div class="field-row" style="margin-top:12px"><label>标签</label><input class="field" id="questionTags" value="${escapeHtml((item.tags || []).join(", "))}" placeholder="例如 高频考点, 卷一" /></div></div>
   <div class="form-actions"><button class="button small" data-action="cancel-question">取消</button>${existing ? `<button class="button small danger" data-action="delete-question" data-id="${item.id}">删除题目</button>` : ""}<button class="button small primary" data-action="save-question" data-id="${item.id}">保存题目</button></div>`;
 }
@@ -301,17 +295,13 @@ function saveQuestion() {
   const context = findNode(state.selectedKey);
   if (!context) return;
   const title = document.querySelector("#questionTitle").value.trim();
-  const combination = document.querySelector("#questionCombination")?.checked === true;
-  const type = combination ? "多选题" : document.querySelector("#questionType").value;
+  const type = document.querySelector("#questionType").value;
   const chapterNumber = document.querySelector("#questionChapterNumber").value.trim();
   const options = [...document.querySelectorAll(".option-row")].map(row => ({ id: row.querySelector("[data-option-id]").dataset.optionId, text: row.querySelector("[data-option-id]").value.trim() })).filter(option => option.text);
   const correctOptionIDs = [...document.querySelectorAll("input[name='correctOption']:checked")].map(input => input.value);
   if (!title || !chapterNumber || options.length < 2 || !correctOptionIDs.length) return showToast("请填写题目、参考章节、至少两个选项和正确答案");
-  if ((type === "单选题" || combination) && correctOptionIDs.length !== 1) return showToast(combination ? "组合选项题只能选择一个组合答案" : "单选题只能选择一个答案");
-  const tags = document.querySelector("#questionTags").value.split(",").map(value => value.trim()).filter(Boolean).filter(value => value !== "组合选项");
-  if (combination) tags.push("组合选项");
-  const item = { id: state.editingQuestionId === "new" ? nextQuestionID() : Number(state.editingQuestionId), chapter: PAPER_NAME, chapterNumber, title, type, answerMode: combination ? "组合选项" : undefined, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags };
-  if (!combination) delete item.answerMode;
+  if (correctOptionIDs.length !== 1) return showToast("每题只能选择一个答案");
+  const item = { id: state.editingQuestionId === "new" ? nextQuestionID() : Number(state.editingQuestionId), chapter: PAPER_NAME, chapterNumber, title, type, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags: document.querySelector("#questionTags").value.split(",").map(value => value.trim()).filter(Boolean) };
   const index = state.data.questions.findIndex(questionItem => questionItem.id === item.id);
   if (index >= 0) state.data.questions[index] = item; else state.data.questions.push(item);
   state.editingQuestionId = null;
@@ -327,7 +317,7 @@ function addOption() {
   const id = String.fromCharCode(65 + options.length);
   const row = document.createElement("div");
   row.className = "option-row";
-  row.innerHTML = `<input type="${document.querySelector("#questionCombination")?.checked ? "radio" : (document.querySelector("#questionType").value === "多选题" ? "checkbox" : "radio")}" name="correctOption" value="${id}" /><span class="option-id">${id}</span><input class="field option-text" data-option-id="${id}" placeholder="选项内容" />`;
+  row.innerHTML = `<input type="radio" name="correctOption" value="${id}" /><span class="option-id">${id}</span><input class="field option-text" data-option-id="${id}" placeholder="选项内容" />`;
   document.querySelector("#questionOptions").append(row);
 }
 
@@ -383,15 +373,6 @@ document.addEventListener("click", event => {
     render();
     showToast("题目已删除");
   }
-});
-
-document.addEventListener("change", event => {
-  if (event.target.id !== "questionType" && event.target.id !== "questionCombination") return;
-  const inputs = [...document.querySelectorAll("input[name='correctOption']")];
-  const isMultiple = document.querySelector("#questionType")?.value === "多选题" && document.querySelector("#questionCombination")?.checked !== true;
-  inputs.forEach(input => { input.type = isMultiple ? "checkbox" : "radio"; });
-  if (!isMultiple) inputs.slice(1).forEach(input => { input.checked = false; });
-  if (event.target.id === "questionCombination" && event.target.checked) document.querySelector("#questionType").value = "多选题";
 });
 
 document.querySelector("#newQuestionButton").addEventListener("click", () => { state.editingQuestionId = "new"; renderEditor(); });

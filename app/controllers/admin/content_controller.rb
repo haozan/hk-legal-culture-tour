@@ -11,7 +11,7 @@ class Admin::ContentController < Admin::BaseController
   def save
     payload = JSON.parse(params.require(:snapshot_json))
     validate_snapshot!(payload)
-    @snapshot.update!(data: ContentSnapshot.normalize_data(payload), published_at: nil)
+    @snapshot.update!(data: payload, published_at: nil)
     render json: { ok: true, saved_at: @snapshot.updated_at.iso8601 }
   rescue JSON::ParserError, ActionController::ParameterMissing => e
     render json: { ok: false, error: e.message }, status: :unprocessable_entity
@@ -37,7 +37,7 @@ class Admin::ContentController < Admin::BaseController
 
     payload = JSON.parse(file.read)
     validate_snapshot!(payload)
-    @snapshot.update!(data: ContentSnapshot.normalize_data(payload), published_at: nil)
+    @snapshot.update!(data: payload, published_at: nil)
     redirect_to admin_content_path, notice: '题库快照已导入服务器。'
   rescue JSON::ParserError, ArgumentError => e
     redirect_to admin_content_path, alert: "导入失败：#{e.message}"
