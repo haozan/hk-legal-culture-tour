@@ -111,6 +111,9 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
 .field, .select, .textarea { width: 100%; border: 1px solid var(--line); border-radius: 9px; outline: 0; padding: 10px 11px; color: var(--ink); background: var(--paper); font-size: 12px; }
 .textarea { min-height: 96px; resize: vertical; line-height: 1.55; }
 .field:focus, .select:focus, .textarea:focus { border-color: #9bc1b2; box-shadow: 0 0 0 3px rgba(40,100,84,.08); }
+.check-row { display: flex; align-items: center; gap: 8px; margin: 4px 0 15px 132px; color: var(--accent); font-size: 12px; font-weight: 700; }
+.check-row input { accent-color: var(--accent); }
+.form-help { margin-top: 10px; color: var(--muted); font-size: 11px; line-height: 1.5; }
 .outline-path { padding: 10px 12px; border-radius: 9px; color: var(--accent); background: var(--accent-soft); font-size: 12px; font-weight: 700; }
 .question-list { display: grid; gap: 9px; }
 .question-row { gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--paper); }
@@ -160,4 +163,5 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
   .outline-toolbar { padding-inline: 15px; }
   .outline-tree { padding-inline: 8px; }
   .field-row { grid-template-columns: 1fr; gap: 6px; }
+  .check-row { margin-left: 0; }
 }

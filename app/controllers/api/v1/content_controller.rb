@@ -6,7 +6,7 @@ class Api::V1::ContentController < Api::BaseController
     raise ActiveRecord::RecordNotFound unless snapshot
 
     response.headers['Cache-Control'] = 'public, max-age=60, must-revalidate'
-    render json: snapshot.data.merge(
+    render json: ContentSnapshot.normalize_data(snapshot.data).merge(
       paperName: snapshot.paper_name,
       updatedAt: snapshot.updated_at.iso8601,
       publishedAt: snapshot.published_at&.iso8601

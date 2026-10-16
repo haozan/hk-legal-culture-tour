@@ -10,14 +10,14 @@ class ContentSnapshot < ApplicationRecord
     {
       version: 'draft-2026.10.16',
       chapterNames: ['保险原理及实务', '人寿保险', '一般保险', '法规与合规', '风险管理'],
-      questions: question_bank || [
+      questions: normalize_questions(question_bank || [
         question(1, '1.1.1', '保险的最大诚信原则要求投保人如实披露重要事实。以下哪项最符合该原则？', '单选题', ['只披露对自己有利的资料', '投保时披露足以影响承保决定的所有重要事实', '签约后才披露重要事实', '由保险代理人代为决定披露范围'], ['B'], '最大诚信原则贯穿订立合约的全过程，投保人、被保险人及保险人都应披露重要事实。', ['核心概念', '卷一']),
         question(2, '1.2', '以下哪些属于厘定一般保险保费时通常考虑的因素？', '多选题', ['风险发生的概率', '潜在损失幅度', '营运费用', '投保人的幸运颜色'], ['A', 'B', 'C'], '保费通常综合风险概率、损失幅度、营运费用、资本成本及所需利润等因素。', ['多选', '卷一']),
         question(3, '2.1.1', '在合约成立时，哪一项属于有效合约的重要元素？', '单选题', ['要约与承诺', '幸运数字', '广告颜色', '代理人的个人偏好'], ['A'], '合约通常需要具备要约、承诺、代价及建立法律关系的意向等元素。', ['法律原则', '卷一']),
         question(4, '4.1', '保险中介人向客户介绍产品时，哪些做法符合客户为本原则？', '多选题', ['了解客户的需要和财务状况', '说明产品的主要风险和费用', '只推荐佣金最高的产品', '提供与客户情况相称的建议'], ['A', 'B', 'D'], '销售过程应充分了解客户需要、风险承受能力及支付能力，并提供合适、清晰的建议。', ['合规', '卷一']),
         question(5, '3.1.1', '人寿保险的保险利益通常须在何时存在？', '单选题', ['订立保单时', '每次缴费时', '理赔完成后', '保单失效后'], ['A'], '人寿保险的保险利益须在保单订立时存在。', ['高频考点', '卷一']),
         question(6, '5.1.1', '风险管理的首要步骤通常是什么？', '单选题', ['识别和分析风险', '立即购买最高保额的保单', '忽略低概率风险', '只记录已经发生的损失'], ['A'], '风险管理通常先识别、分析和评估风险，再决定处理方法。', ['风险管理', '卷一'])
-      ],
+      ]),
       paperOneSyllabus: [
         chapter('1', '风险及保险', '12%', [
           topic('1.1.1', '风险的意义', [topic('1.1.1.1', '风险与损失', [topic('1.1.1.1.1', '损失发生的可能性'), topic('1.1.1.1.2', '损失的经济后果')]), topic('1.1.1.2', '风险的不确定性'), topic('1.1.1.3', '可保风险的基本条件', [topic('1.1.1.3.1', '损失可以用金钱衡量'), topic('1.1.1.3.2', '风险发生具有偶然性')])]),
@@ -33,6 +33,22 @@ class ContentSnapshot < ApplicationRecord
         chapter('7', '职业道德及其他有关问题', '7%', [topic('7.1', '保险中介人对保单持有人的责任'), topic('7.2', '保护个人资料'), topic('7.3', '平等机会事宜'), topic('7.4', '打击洗钱及恐怖分子资金筹集'), topic('7.5', '防止贪污'), topic('7.6', '防止保险诈骗')])
       ]
     }.deep_stringify_keys
+  end
+
+  def self.normalize_questions(questions)
+    questions.map do |question_item|
+      tags = question_item['tags'] || question_item[:tags] || []
+      is_combination = tags.include?('组合选项') || question_item['answerMode'] == '组合选项' || question_item[:answerMode] == '组合选项'
+      next question_item unless is_combination
+
+      question_item.merge('type' => '多选题', 'answerMode' => '组合选项')
+    end
+  end
+
+  def self.normalize_data(data)
+    normalized = data.deep_dup
+    normalized['questions'] = normalize_questions(normalized['questions'] || [])
+    normalized
   end
 
   def self.question(id, number, title, type, option_texts, correct_ids, explanation, tags)
