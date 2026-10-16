@@ -1,0 +1,102 @@
+<% content_for :title, '录题后台' %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'content_admin', media: 'all' %>
+<% end %>
+
+<div class="content-admin" data-save-url="<%= save_admin_content_path %>">
+  <header class="topbar">
+    <div class="brand-lockup">
+      <div class="brand-mark">象</div>
+      <div>
+        <div class="eyebrow">CONTENT STUDIO</div>
+        <h1>港险小象 <span>录题后台</span></h1>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="save-status" id="saveStatus">服务器草稿 · 已保存</span>
+      <button class="button ghost" id="importButton" type="button">导入快照</button>
+      <button class="button primary" id="exportButton" type="button">导出快照</button>
+      <%= button_to '退出', admin_logout_path, method: :delete, class: 'button ghost' %>
+      <input id="importInput" name="file" form="importForm" type="file" accept="application/json,.json" hidden />
+    </div>
+  </header>
+
+  <div class="workspace">
+    <aside class="sidebar">
+      <div class="side-heading">
+        <div>
+          <div class="eyebrow">PAPERS</div>
+          <h2>试卷</h2>
+        </div>
+        <span class="count-badge">5</span>
+      </div>
+      <nav class="paper-list" id="paperList"></nav>
+      <div class="side-footer">
+        <div class="sync-card">
+          <div class="sync-icon">↗</div>
+          <div>
+            <strong>服务器同步</strong>
+            <p>保存后写入香港服务器，App 后续可读取同一份快照。</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="page-head">
+        <div>
+          <div class="eyebrow">卷一 · 内容维护</div>
+          <h2>大纲与题目</h2>
+          <p>先维护章节树，再把题目挂到对应的参考章节。</p>
+        </div>
+        <div class="head-metrics" id="headMetrics"></div>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel outline-panel">
+          <div class="panel-head">
+            <div>
+              <h3>卷一大纲</h3>
+              <p>点击节点编辑；题目图标表示该节点已有题目。</p>
+            </div>
+            <div class="panel-actions">
+              <button class="button small" id="addChapterButton" type="button">＋ 新章节</button>
+            </div>
+          </div>
+          <div class="outline-toolbar">
+            <label class="search-box">
+              <span>⌕</span>
+              <input id="outlineSearch" type="search" placeholder="搜索编号或标题" />
+            </label>
+            <button class="text-button" id="collapseAllButton" type="button">全部收起</button>
+          </div>
+          <div class="outline-tree" id="outlineTree"></div>
+        </section>
+
+        <section class="panel editor-panel">
+          <div class="panel-head editor-head">
+            <div>
+              <div class="eyebrow" id="selectionEyebrow">选择一个大纲节点</div>
+              <h3 id="selectionTitle">开始录入内容</h3>
+              <p id="selectionHint">从左侧选择章节或小节。</p>
+            </div>
+            <button class="button small primary" id="newQuestionButton" type="button" disabled>＋ 新题目</button>
+          </div>
+          <div id="editorContent" class="editor-content empty-state">
+            <div class="empty-illustration">✦</div>
+            <h3>从大纲开始</h3>
+            <p>选择一个章节或小节，维护标题、比重与题目。</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<%= form_with url: import_admin_content_path, method: :post, id: 'importForm', multipart: true, class: 'hidden', data: { turbo: false } do %>
+  <%= hidden_field_tag :_import_marker, '1' %>
+<% end %>
+
+<div class="toast" id="toast" role="status"></div>
+<script type="application/json" id="gangxian-content-data"><%= raw json_escape(@data.to_json) %></script>
+<%= javascript_include_tag 'content_admin', type: 'module' %>
