@@ -5,7 +5,8 @@ class Admin::ContentController < Admin::BaseController
 
   def show
     @full_render = true
-    @data = ContentSnapshot.traditionalize_data(@snapshot.data.presence || ContentSnapshot.default_data)
+    raw_data = @snapshot.data.presence || ContentSnapshot.default_data
+    @data = JSON.parse(ContentSnapshot.traditionalize_data(raw_data.to_json))
   end
 
   def save
