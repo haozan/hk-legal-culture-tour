@@ -1,4 +1,4 @@
-class ImportQuestionBankQ2Zp5SixHundredEightyTwo < ActiveRecord::Migration[7.2]
+class ImportQuestionBankQ2Zp5682 < ActiveRecord::Migration[7.2]
   def up
     ContentSnapshot.reset_column_information
     paper_name = ContentSnapshot::PAPER_TWO_NAME
