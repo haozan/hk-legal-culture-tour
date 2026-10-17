@@ -9,6 +9,7 @@ class ImportQuestionBankQ2Zp5682 < ActiveRecord::Migration[7.2]
     # from the authoritative 682-question source file.
     if existing
       clear_contents(existing)
+      existing['questions'] = []
       copy_source_contents(existing, ContentSnapshot.default_data_for(paper_name))
     end
     snapshot.data = ContentSnapshot.merge_question_bank_data(existing, paper_name)
