@@ -5,7 +5,8 @@ WORKDIR /app
 # Set production environment
 ENV RAILS_ENV="production" \
     NODE_ENV="production" \
-    PORT="3000"
+    PORT="3000" \
+    APP_REVISION="q2-682-20261018"
 
 # Check and install only missing gems (if Gemfile changed)
 # bundle check returns 0 if all gems are satisfied, otherwise install
