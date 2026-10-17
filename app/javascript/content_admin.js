@@ -513,10 +513,14 @@ document.addEventListener("click", event => {
     renderOutline();
   }
   if (action === "select-node") {
-    selectNode(target.dataset.key);
     const context = findNode(target.dataset.key);
+    selectNode(target.dataset.key);
     if (context?.kind === "topic" && context.node.children?.length) {
-      state.expandedNodes.add(context.node.id);
+      if (state.expandedNodes.has(context.node.id)) {
+        state.expandedNodes.delete(context.node.id);
+      } else {
+        state.expandedNodes.add(context.node.id);
+      }
       renderOutline();
     }
   }
