@@ -321,7 +321,12 @@ class ContentSnapshot < ApplicationRecord
         content['id'] = content[:id] || content['id'] || content_id(node, text)
         content['text'] = text
         content['questionIDs'] = Array(content[:questionIDs] || content['questionIDs']).map(&:to_i).uniq
-        grouped[node.object_id][text] = content
+        existing_content = grouped[node.object_id][text]
+        if existing_content
+          existing_content['questionIDs'] = (Array(existing_content['questionIDs']) + Array(content['questionIDs'])).map(&:to_i).uniq
+        else
+          grouped[node.object_id][text] = content
+        end
       end
     end
 
