@@ -10,7 +10,7 @@ class ContentSnapshot < ApplicationRecord
     question_bank = JSON.parse(File.read(question_bank_path)) if File.exist?(question_bank_path)
 
     data = {
-      version: 'draft-2026.10.16',
+      version: 'draft-2026.10.17-outline-content',
       chapterNames: ['保险原理及实务', '人寿保险', '一般保险', '法规与合规', '风险管理'],
       questions: question_bank || [
         question(1, '1.1.1', '保险的最大诚信原则要求投保人如实披露重要事实。以下哪项最符合该原则？', '单选题', ['只披露对自己有利的资料', '投保时披露足以影响承保决定的所有重要事实', '签约后才披露重要事实', '由保险代理人代为决定披露范围'], ['B'], '最大诚信原则贯穿订立合约的全过程，投保人、被保险人及保险人都应披露重要事实。', ['核心概念', '卷一']),
