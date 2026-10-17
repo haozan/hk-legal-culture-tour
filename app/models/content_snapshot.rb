@@ -246,7 +246,7 @@ class ContentSnapshot < ApplicationRecord
     question_bank = JSON.parse(File.read(question_bank_path)) if File.exist?(question_bank_path)
 
     data = {
-      version: 'draft-2026.10.17-outline-content',
+      version: 'draft-2026.10.18-q1-927',
       chapterNames: ['保險原理及實務', '人壽保險', '一般保險', '法規與合規', '風險管理'],
       questions: question_bank || [
         question(1, '1.1.1', '保險的最大誠信原則要求投保人如實披露重要事實。以下哪項最符合該原則？', '單選題', ['只披露對自己有利的資料', '投保時披露足以影響承保決定的所有重要事實', '簽約後才披露重要事實', '由保險代理人代為決定披露範圍'], ['B'], '最大誠信原則貫穿訂立合約的全過程，投保人、被保險人及保險人都應披露重要事實。', ['核心概念', '卷一']),
@@ -273,6 +273,19 @@ class ContentSnapshot < ApplicationRecord
     }
 
     traditionalize_data(with_explanation_contents(data).deep_stringify_keys)
+  end
+
+  def self.merge_question_bank_data(existing_data = nil)
+    source = default_data
+    existing = traditionalize_data(existing_data.presence || {})
+    existing_questions = Array(existing['questions']).index_by { |question| question['id'].to_i }
+    source['questions'] = source['questions'].map do |question|
+      existing_questions[question['id'].to_i].presence || question
+    end
+    source['paperOneSyllabus'] = existing['paperOneSyllabus'] if existing['paperOneSyllabus'].is_a?(Array) && existing['paperOneSyllabus'].any?
+    source['chapterNames'] = existing['chapterNames'] if existing['chapterNames'].is_a?(Array) && existing['chapterNames'].any?
+    source['version'] = 'draft-2026.10.18-q1-927'
+    traditionalize_data(with_explanation_contents(source).deep_stringify_keys)
   end
 
   # Add every question explanation to the most specific syllabus node that
