@@ -42,7 +42,9 @@ const state = {
   editingQuestionId: null,
   expandedChapters: new Set(["1"]),
   expandedNodes: new Set(["1.1.1"]),
-  search: ""
+  search: "",
+  contextMenuKey: null,
+  linkQuery: ""
 };
 
 function loadData() {
@@ -86,9 +88,10 @@ function descendants(node) {
 }
 
 function nodeQuestions(node) {
-  const contentQuestionIDs = new Set([node, ...descendants(node)].flatMap(item => (item.contents || []).flatMap(content => content.questionIDs || [])).map(Number));
+  const scope = Array.isArray(node.topics) ? node.topics.flatMap(topic => [topic, ...descendants(topic)]) : [node, ...descendants(node)];
+  const contentQuestionIDs = new Set(scope.flatMap(item => (item.contents || []).flatMap(content => content.questionIDs || [])).map(Number));
   if (contentQuestionIDs.size) return state.data.questions.filter(questionItem => contentQuestionIDs.has(Number(questionItem.id)));
-  const numbers = [node, ...descendants(node)].map(item => item.number);
+  const numbers = scope.map(item => item.number);
   return state.data.questions.filter(questionItem => referenceNumbers(questionItem.chapterNumber).some(reference => numbers.some(number => reference === number || reference.startsWith(`${number}.`) || number.startsWith(`${reference}.`))));
 }
 
@@ -97,15 +100,24 @@ function chapterQuestionCount(chapterItem) {
 }
 
 function findNode(key) {
+  if (!key || typeof key !== "string") return null;
   if (key.startsWith("chapter:")) {
     const chapterItem = state.data.paperOneSyllabus.find(item => item.id === key.slice(8));
-    return chapterItem ? { node: chapterItem, kind: "chapter", chapter: chapterItem, parent: null } : null;
+    return chapterItem ? { node: chapterItem, kind: "chapter", chapter: chapterItem, parent: null, collection: state.data.paperOneSyllabus } : null;
   }
   const nodeID = key.slice(6);
   for (const chapterItem of state.data.paperOneSyllabus) {
-    const allNodes = [...chapterItem.topics.flatMap(node => [node, ...descendants(node)])];
-    const nodeItem = allNodes.find(item => item.id === nodeID);
-    if (nodeItem) return { node: nodeItem, kind: "topic", chapter: chapterItem, parent: null };
+    const location = findTopicLocation(chapterItem.topics, nodeID, chapterItem, null);
+    if (location) return location;
+  }
+  return null;
+}
+
+function findTopicLocation(collection, nodeID, chapter, parent) {
+  for (const node of collection) {
+    if (node.id === nodeID) return { node, kind: "topic", chapter, parent, collection };
+    const location = findTopicLocation(node.children || [], nodeID, chapter, node);
+    if (location) return location;
   }
   return null;
 }
@@ -156,7 +168,7 @@ function renderOutline() {
 function renderChapter(chapterItem) {
   const expanded = state.expandedChapters.has(chapterItem.id);
   const topicMarkup = expanded ? `<div class="chapter-children">${chapterItem.topics.map(node => renderNode(node, 0)).join("")}</div>` : "";
-  return `<div class="tree-chapter">
+  return `<div class="tree-chapter" data-node-key="chapter:${escapeHtml(chapterItem.id)}">
     <button class="chapter-row" data-action="toggle-chapter" data-id="${escapeHtml(chapterItem.id)}">
       <span class="chevron">${expanded ? "⌄" : "›"}</span>
       <span class="chapter-number">第${escapeHtml(chapterItem.number)}章</span>
@@ -172,10 +184,10 @@ function renderNode(node, depth) {
   const children = node.children || [];
   const childrenMarkup = expanded && children.length ? `<div class="node-children">${children.map(child => renderNode(child, depth + 1)).join("")}</div>` : "";
   const contentMarkup = (node.contents || []).map(content => {
-    const bells = (content.questionIDs || []).map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" title="编辑题目 #${escapeHtml(id)}">🔔</button>`).join("");
+    const bells = (content.questionIDs || []).map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" data-node-key="topic:${escapeHtml(node.id)}" title="编辑题目 #${escapeHtml(id)}">🔔</button>`).join("");
     return `<div class="node-content"><span class="node-content-text">${escapeHtml(content.text)}</span><span class="node-content-bells">${bells}</span></div>`;
   }).join("");
-  return `<div class="tree-node" data-depth="${depth}">
+  return `<div class="tree-node" data-depth="${depth}" data-node-key="topic:${escapeHtml(node.id)}">
     <div class="node-row">
       <button class="node-main" data-action="select-node" data-key="topic:${escapeHtml(node.id)}">
         <span class="node-chevron">${children.length ? (expanded ? "⌄" : "›") : "·"}</span>
@@ -204,7 +216,9 @@ function renderEditor() {
   document.querySelector("#selectionTitle").textContent = node.title;
   document.querySelector("#selectionHint").textContent = `${nodeQuestions(node).length} 道题目 · ${context.kind === "chapter" ? node.topics.length : (node.children || []).length} 个下级节点`;
   document.querySelector("#editorContent").className = "editor-content";
-  if (state.editingQuestionId !== null) {
+  if (state.editingQuestionId === "link") {
+    document.querySelector("#editorContent").innerHTML = renderQuestionLinkEditor(context);
+  } else if (state.editingQuestionId !== null) {
     document.querySelector("#editorContent").innerHTML = renderQuestionEditor(context);
   } else {
     document.querySelector("#editorContent").innerHTML = renderNodeEditor(context);
@@ -227,7 +241,7 @@ function renderNodeEditor(context) {
     <div class="form-label">大纲层级</div>
     <div class="field-row"><label>下级节点</label><div class="outline-path">${isChapter ? node.topics.length : (node.children || []).length} 个</div></div>
     ${!isChapter ? `<label class="form-label" for="nodeKeyPoints">补充要点（可选，每行一条）</label><textarea class="textarea" id="nodeKeyPoints" placeholder="用于旧版数据兼容；正式层级请使用“添加下级大纲”。">${escapeHtml(keyPoints)}</textarea>` : ""}
-    <div class="form-actions"><button class="button small" data-action="add-child">＋ 添加下级大纲</button><button class="button small primary" data-action="save-node">保存大纲</button></div>
+    <div class="form-actions"><button class="button small" data-action="add-child">＋ 添加下级大纲</button><button class="button small danger" data-action="delete-node">⌫ 删除节点</button><button class="button small primary" data-action="save-node">保存大纲</button></div>
   </div>
   <div class="editor-section">
     <div class="form-label">解析内容 · ${contents.length} 条</div>
@@ -236,6 +250,30 @@ function renderNodeEditor(context) {
   <div class="editor-section">
     <div class="form-label">关联题目 · ${questions.length} 道</div>
     <div class="question-list">${questions.length ? questions.map(renderQuestionRow).join("") : `<div class="outline-path">当前节点还没有题目，点击右上角“新题目”开始录入。</div>`}</div>
+  </div>`;
+}
+
+function renderQuestionLinkEditor(context) {
+  return `<div class="editor-section">
+    <div class="form-label">关联已有试题</div>
+    <p class="form-help">选择后会把题目挂到“${escapeHtml(context.node.title)}”，原题目不会被删除。</p>
+    <label class="search-box link-question-search"><span>⌕</span><input id="linkQuestionSearch" type="search" value="${escapeHtml(state.linkQuery)}" placeholder="搜索题号、题目或解析" /></label>
+  </div>
+  ${renderLinkQuestionList(context)}
+  <div class="form-actions"><button class="button small" data-action="cancel-question">返回节点</button></div>`;
+}
+
+function renderLinkQuestionList(context) {
+  const associatedIDs = new Set(nodeQuestions(context.node).map(item => Number(item.id)));
+  const query = state.linkQuery.trim().toLowerCase();
+  const candidates = state.data.questions.filter(item => {
+    if (associatedIDs.has(Number(item.id))) return false;
+    if (!query) return true;
+    return [item.id, item.title, item.chapterNumber, item.explanation].join(" ").toLowerCase().includes(query);
+  });
+  return `<div class="editor-section" id="linkQuestionList">
+    <div class="form-label">可关联题目 · ${candidates.length} 道</div>
+    <div class="question-list">${candidates.length ? candidates.map(item => `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>参考章节 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="button small" data-action="link-question-item" data-id="${escapeHtml(item.id)}">关联</button></div>`).join("") : `<div class="outline-path">没有可关联的题目。</div>`}</div>
   </div>`;
 }
 
@@ -261,6 +299,7 @@ function renderQuestionEditor(context) {
 
 function selectNode(key) {
   state.selectedKey = key;
+  state.contextMenuKey = null;
   state.editingQuestionId = null;
   renderEditor();
 }
@@ -281,6 +320,87 @@ function addChild() {
   saveData();
   render();
   showToast("已添加下级大纲");
+}
+
+function ensureNodeContents(node) {
+  if (!Array.isArray(node.contents)) node.contents = [];
+  return node.contents;
+}
+
+function allTopicNodes() {
+  return state.data.paperOneSyllabus.flatMap(chapterItem => chapterItem.topics.flatMap(node => [node, ...descendants(node)]));
+}
+
+function nodesWithQuestion(questionID) {
+  return allTopicNodes().filter(node => (node.contents || []).some(content => (content.questionIDs || []).some(id => Number(id) === Number(questionID))));
+}
+
+function attachQuestionToNode(question, node) {
+  const contents = ensureNodeContents(node);
+  const text = String(question.explanation || "").trim();
+  if (text) {
+    let content = contents.find(item => item.text === text);
+    if (!content) {
+      content = { id: `content-${node.id}-${Date.now()}-${question.id}`, text, questionIDs: [] };
+      contents.push(content);
+    }
+    content.questionIDs = [...new Set([...(content.questionIDs || []).map(Number), Number(question.id)])];
+  }
+  const references = referenceNumbers(question.chapterNumber);
+  if (!references.includes(String(node.number))) {
+    question.chapterNumber = [...references, String(node.number)].join(" & ");
+  }
+}
+
+function removeQuestionFromContents(questionID) {
+  const removeFrom = node => {
+    if (Array.isArray(node.contents)) {
+      node.contents = node.contents
+        .map(content => ({ ...content, questionIDs: (content.questionIDs || []).filter(id => Number(id) !== Number(questionID)) }))
+        .filter(content => content.questionIDs.length);
+    }
+    (node.children || []).forEach(removeFrom);
+  };
+  state.data.paperOneSyllabus.forEach(chapterItem => chapterItem.topics.forEach(removeFrom));
+}
+
+function linkQuestion(questionID) {
+  const context = findNode(state.selectedKey);
+  const question = state.data.questions.find(item => Number(item.id) === Number(questionID));
+  if (!context || !question) return;
+  const targetNode = context.kind === "chapter" ? context.node.topics[0] : context.node;
+  if (!targetNode) return;
+  attachQuestionToNode(question, targetNode);
+  state.linkQuery = "";
+  saveData();
+  renderEditor();
+  renderOutline();
+  showToast(`题目 #${question.id} 已关联到「${context.node.title}」`);
+}
+
+function deleteNode() {
+  const context = findNode(state.contextMenuKey || state.selectedKey);
+  if (!context) return;
+  const descendantCount = context.kind === "chapter" ? context.node.topics.length : descendants(context.node).length;
+  const questionCount = nodeQuestions(context.node).length;
+  const detail = questionCount ? `\n\n节点下的 ${questionCount} 道题目会保留，但会失去这个大纲节点的关联。` : "";
+  const label = context.kind === "chapter" ? `第${context.node.number}章 ${context.node.title}` : `${context.node.number} ${context.node.title}`;
+  if (!window.confirm(`确定删除「${label}」吗？${descendantCount ? `\n\n这会同时删除 ${descendantCount} 个下级节点。` : ""}${detail}`)) return;
+
+  if (context.kind === "chapter") {
+    const index = state.data.paperOneSyllabus.indexOf(context.node);
+    if (index >= 0) state.data.paperOneSyllabus.splice(index, 1);
+  } else {
+    const index = context.collection.indexOf(context.node);
+    if (index >= 0) context.collection.splice(index, 1);
+  }
+  state.selectedKey = null;
+  state.contextMenuKey = null;
+  state.editingQuestionId = null;
+  closeContextMenu();
+  saveData();
+  render();
+  showToast(`已删除「${label}」`);
 }
 
 function saveNode() {
@@ -311,8 +431,12 @@ function saveQuestion() {
   if (!title || !chapterNumber || options.length < 2 || !correctOptionIDs.length) return showToast("请填写题目、参考章节、至少两个选项和正确答案");
   if (correctOptionIDs.length !== 1) return showToast("每题只能选择一个答案");
   const item = { id: state.editingQuestionId === "new" ? nextQuestionID() : Number(state.editingQuestionId), chapter: PAPER_NAME, chapterNumber, title, type, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags: document.querySelector("#questionTags").value.split(",").map(value => value.trim()).filter(Boolean) };
+  const previousNodes = state.editingQuestionId !== "new" ? nodesWithQuestion(item.id) : [];
+  if (state.editingQuestionId !== "new") removeQuestionFromContents(item.id);
   const index = state.data.questions.findIndex(questionItem => questionItem.id === item.id);
   if (index >= 0) state.data.questions[index] = item; else state.data.questions.push(item);
+  const targetNode = context.kind === "chapter" ? context.node.topics[0] : context.node;
+  [...new Set([targetNode, ...previousNodes].filter(Boolean))].forEach(node => attachQuestionToNode(item, node));
   state.editingQuestionId = null;
   saveData();
   render();
@@ -347,7 +471,40 @@ function importSnapshot(file) {
   document.querySelector("#importForm")?.requestSubmit();
 }
 
+function closeContextMenu() {
+  const menu = document.querySelector("#outlineContextMenu");
+  if (menu) menu.hidden = true;
+}
+
+function openContextMenu(event, key) {
+  event.preventDefault();
+  selectNode(key);
+  state.contextMenuKey = key;
+  const context = findNode(key);
+  const menu = document.querySelector("#outlineContextMenu");
+  if (!menu || !context) return;
+  document.querySelector("#contextMenuTitle").textContent = context.kind === "chapter"
+    ? `第${context.node.number}章 · ${context.node.title}`
+    : `${context.node.number} · ${context.node.title}`;
+  menu.hidden = false;
+  const width = 230;
+  const height = 188;
+  menu.style.left = `${Math.max(8, Math.min(event.clientX, window.innerWidth - width - 8))}px`;
+  menu.style.top = `${Math.max(8, Math.min(event.clientY, window.innerHeight - height - 8))}px`;
+}
+
+document.addEventListener("contextmenu", event => {
+  const node = event.target.closest("[data-node-key]");
+  if (!node) return;
+  openContextMenu(event, node.dataset.nodeKey);
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeContextMenu();
+});
+
 document.addEventListener("click", event => {
+  if (!event.target.closest("#outlineContextMenu")) closeContextMenu();
   const target = event.target.closest("[data-action]");
   if (!target) return;
   const action = target.dataset.action;
@@ -368,11 +525,19 @@ document.addEventListener("click", event => {
     state.editingQuestionId = "new";
     renderEditor();
   }
-  if (action === "edit-question") { state.editingQuestionId = target.dataset.id; renderEditor(); }
+  if (action === "edit-question") {
+    if (target.dataset.nodeKey) selectNode(target.dataset.nodeKey);
+    state.editingQuestionId = target.dataset.id;
+    renderEditor();
+  }
   if (action === "newQuestion") { state.editingQuestionId = "new"; renderEditor(); }
   if (action === "cancel-question") { state.editingQuestionId = null; renderEditor(); }
   if (action === "save-node") saveNode();
-  if (action === "add-child") addChild();
+  if (action === "add-child" || action === "new-child") { if (action === "new-child") state.selectedKey = state.contextMenuKey; closeContextMenu(); addChild(); }
+  if (action === "new-question") { state.selectedKey = state.contextMenuKey; closeContextMenu(); state.editingQuestionId = "new"; renderEditor(); }
+  if (action === "link-question") { state.selectedKey = state.contextMenuKey; closeContextMenu(); state.linkQuery = ""; state.editingQuestionId = "link"; renderEditor(); }
+  if (action === "link-question-item") linkQuestion(target.dataset.id);
+  if (action === "delete-node") deleteNode();
   if (action === "save-question") saveQuestion();
   if (action === "add-option") addOption();
   if (action === "delete-question") {
@@ -396,6 +561,13 @@ document.querySelector("#addChapterButton").addEventListener("click", () => {
 });
 document.querySelector("#collapseAllButton").addEventListener("click", () => { state.expandedChapters.clear(); state.expandedNodes.clear(); renderOutline(); });
 document.querySelector("#outlineSearch").addEventListener("input", event => { state.search = event.target.value; renderOutline(); });
+document.addEventListener("input", event => {
+  if (event.target.id !== "linkQuestionSearch") return;
+  state.linkQuery = event.target.value;
+  const context = findNode(state.selectedKey);
+  const list = document.querySelector("#linkQuestionList");
+  if (context && list) list.outerHTML = renderLinkQuestionList(context);
+});
 document.querySelector("#exportButton").addEventListener("click", exportSnapshot);
 document.querySelector("#importButton").addEventListener("click", () => document.querySelector("#importInput").click());
 document.querySelector("#importInput").addEventListener("change", event => { if (event.target.files[0]) importSnapshot(event.target.files[0]); event.target.value = ""; });

@@ -57,7 +57,7 @@
           <div class="panel-head">
             <div>
               <h3>卷一大纲</h3>
-              <p>点击节点编辑；题目图标表示该节点已有题目。</p>
+              <p>点击节点编辑；右键节点可新建、关联试题或删除大纲。</p>
             </div>
             <div class="panel-actions">
               <button class="button small" id="addChapterButton" type="button">＋ 新章节</button>
@@ -98,5 +98,13 @@
 <% end %>
 
 <div class="toast" id="toast" role="status"></div>
+<div class="outline-context-menu" id="outlineContextMenu" hidden role="menu" aria-label="大纲操作">
+  <div class="context-menu-title" id="contextMenuTitle">大纲节点</div>
+  <button type="button" data-action="new-child">＋ 新建下级大纲</button>
+  <button type="button" data-action="new-question">＋ 新建试题</button>
+  <button type="button" data-action="link-question">↗ 关联已有试题</button>
+  <div class="context-menu-divider"></div>
+  <button type="button" class="danger" data-action="delete-node">⌫ 删除节点</button>
+</div>
 <script type="application/json" id="gangxian-content-data"><%= raw json_escape(@data.to_json) %></script>
 <%= javascript_include_tag 'content_admin', type: 'module' %>
