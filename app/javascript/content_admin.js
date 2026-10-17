@@ -1,32 +1,32 @@
 /* global document, console, structuredClone, fetch, URLSearchParams, clearTimeout, setTimeout, Blob, URL */
 
-const PAPER_NAME = "保险原理及实务";
-const PAPER_NAMES = ["保险原理及实务", "人寿保险", "一般保险", "法规与合规", "风险管理"];
+const PAPER_NAME = "保險原理及實務";
+const PAPER_NAMES = ["保險原理及實務", "人壽保險", "一般保險", "法規與合規", "風險管理"];
 
 const seedSnapshot = {
   version: "draft-2026.10.16",
   chapterNames: PAPER_NAMES,
   questions: [
-    question(1, "1.1.1", "保险的最大诚信原则要求投保人如实披露重要事实。以下哪项最符合该原则？", "单选题", ["只披露对自己有利的资料", "投保时披露足以影响承保决定的所有重要事实", "签约后才披露重要事实", "由保险代理人代为决定披露范围"], ["B"], "最大诚信原则贯穿订立合约的全过程，投保人、被保险人及保险人都应披露重要事实。", ["核心概念", "卷一"]),
-    question(2, "1.2", "以下哪些属于厘定一般保险保费时通常考虑的因素？", "多选题", ["风险发生的概率", "潜在损失幅度", "营运费用", "投保人的幸运颜色"], ["A", "B", "C"], "保费通常综合风险概率、损失幅度、营运费用、资本成本及所需利润等因素。", ["多选", "卷一"]),
-    question(3, "2.1.1", "在合约成立时，哪一项属于有效合约的重要元素？", "单选题", ["要约与承诺", "幸运数字", "广告颜色", "代理人的个人偏好"], ["A"], "合约通常需要具备要约、承诺、代价及建立法律关系的意向等元素。", ["法律原则", "卷一"]),
-    question(4, "4.1", "保险中介人向客户介绍产品时，哪些做法符合客户为本原则？", "多选题", ["了解客户的需要和财务状况", "说明产品的主要风险和费用", "只推荐佣金最高的产品", "提供与客户情况相称的建议"], ["A", "B", "D"], "销售过程应充分了解客户需要、风险承受能力及支付能力，并提供合适、清晰的建议。", ["合规", "卷一"]),
-    question(5, "3.1.1", "人寿保险的保险利益通常须在何时存在？", "单选题", ["订立保单时", "每次缴费时", "理赔完成后", "保单失效后"], ["A"], "人寿保险的保险利益须在保单订立时存在。", ["高频考点", "卷一"]),
-    question(6, "5.1.1", "风险管理的首要步骤通常是什么？", "单选题", ["识别和分析风险", "立即购买最高保额的保单", "忽略低概率风险", "只记录已经发生的损失"], ["A"], "风险管理通常先识别、分析和评估风险，再决定处理方法。", ["风险管理", "卷一"])
+    question(1, "1.1.1", "保險的最大誠信原則要求投保人如實披露重要事實。以下哪項最符合該原則？", "單選題", ["只披露對自己有利的資料", "投保時披露足以影響承保決定的所有重要事實", "簽約後才披露重要事實", "由保險代理人代為決定披露範圍"], ["B"], "最大誠信原則貫穿訂立合約的全過程，投保人、被保險人及保險人都應披露重要事實。", ["核心概念", "卷一"]),
+    question(2, "1.2", "以下哪些屬於釐定一般保險保費時通常考慮的因素？", "多選題", ["風險發生的機率", "潛在損失幅度", "營運費用", "投保人的幸運顏色"], ["A", "B", "C"], "保費通常綜合風險機率、損失幅度、營運費用、資本成本及所需利潤等因素。", ["多選", "卷一"]),
+    question(3, "2.1.1", "在合約成立時，哪一項屬於有效合約的重要元素？", "單選題", ["要約與承諾", "幸運數字", "廣告顏色", "代理人的個人偏好"], ["A"], "合約通常需要具備要約、承諾、代價及建立法律關係的意向等元素。", ["法律原則", "卷一"]),
+    question(4, "4.1", "保險中介人向客戶介紹產品時，哪些做法符合客戶為本原則？", "多選題", ["瞭解客戶的需要和財務狀況", "說明產品的主要風險和費用", "只推薦傭金最高的產品", "提供與客戶情況相稱的建議"], ["A", "B", "D"], "銷售過程應充分了解客戶需要、風險承受能力及支付能力，並提供合適、清晰的建議。", ["合規", "卷一"]),
+    question(5, "3.1.1", "人壽保險的保險利益通常須在何時存在？", "單選題", ["訂立保單時", "每次繳費時", "理賠完成後", "保單失效後"], ["A"], "人壽保險的保險利益須在保單訂立時存在。", ["高頻考點", "卷一"]),
+    question(6, "5.1.1", "風險管理的首要步驟通常是什麼？", "單選題", ["識別和分析風險", "立即購買最高保額的保單", "忽略低機率風險", "只記錄已經發生的損失"], ["A"], "風險管理通常先識別、分析和評估風險，再決定處理方法。", ["風險管理", "卷一"])
   ],
   paperOneSyllabus: [
-    chapter("1", "风险及保险", "12%", [
-      topic("1.1.1", "风险的意义", [topic("1.1.1.1", "风险与损失", [topic("1.1.1.1.1", "损失发生的可能性"), topic("1.1.1.1.2", "损失的经济后果")]), topic("1.1.1.2", "风险的不确定性"), topic("1.1.1.3", "可保风险的基本条件", [topic("1.1.1.3.1", "损失可以用金钱衡量"), topic("1.1.1.3.2", "风险发生具有偶然性")])]),
-      topic("1.1.2", "风险的类别", [topic("1.1.2.1", "纯粹风险与投机风险"), topic("1.1.2.2", "静态风险与动态风险")]),
-      topic("1.1.3", "风险管理", [topic("1.1.3.1", "识别、分析及评估风险"), topic("1.1.3.2", "风险处理方法")]),
-      topic("1.2", "保险功能及好处", [topic("1.2.1", "风险转移与分散"), topic("1.2.2", "经济保障及社会功能")])
+    chapter("1", "風險及保險", "12%", [
+      topic("1.1.1", "風險的意義", [topic("1.1.1.1", "風險與損失", [topic("1.1.1.1.1", "損失發生的可能性"), topic("1.1.1.1.2", "損失的經濟後果")]), topic("1.1.1.2", "風險的不確定性"), topic("1.1.1.3", "可保風險的基本條件", [topic("1.1.1.3.1", "損失可以用金錢衡量"), topic("1.1.1.3.2", "風險發生具有偶然性")])]),
+      topic("1.1.2", "風險的類別", [topic("1.1.2.1", "純粹風險與投機風險"), topic("1.1.2.2", "靜態風險與動態風險")]),
+      topic("1.1.3", "風險管理", [topic("1.1.3.1", "識別、分析及評估風險"), topic("1.1.3.2", "風險處理方法")]),
+      topic("1.2", "保險功能及好處", [topic("1.2.1", "風險轉移與分散"), topic("1.2.2", "經濟保障及社會功能")])
     ]),
-    chapter("2", "法律原则", "16%", [topic("2.1.1", "合约法：定义"), topic("2.1.2", "合约种类"), topic("2.1.3", "合约元素和要点"), topic("2.1.4", "合约的相对性"), topic("2.2.1", "代理法：定义"), topic("2.2.2", "代理关系如何产生"), topic("2.2.3", "代理人的权限"), topic("2.2.4", "代理人对委托人的责任"), topic("2.2.5", "委托人对代理人的责任"), topic("2.2.6", "终止代理")]),
-    chapter("3", "保险原则", "30%", [topic("3.1.1", "可保权益"), topic("3.1.2", "可保权益的重要性"), topic("3.1.3", "可保权益的必要条件"), topic("3.1.4", "可保权益如何产生"), topic("3.1.5", "可保权益何时需要"), topic("3.1.6", "转让"), topic("3.2.1–3.2.2", "一般诚信及最高诚信"), topic("3.2.3", "重要事实"), topic("3.2.4", "何时披露重要事实"), topic("3.2.5", "违反最高诚信"), topic("3.2.6", "违反最高诚信的补救方法"), topic("3.3.1", "近因"), topic("3.3.2", "危险的种类"), topic("3.3.3", "近因原则的应用"), topic("3.3.4", "保单对原则的更改")]),
-    chapter("4", "保险公司的主要功能", "9%", [topic("4.1", "产品的开发"), topic("4.2", "客户服务"), topic("4.3", "市场营销及促销"), topic("4.4", "保险的销售"), topic("4.5", "核保"), topic("4.6", "保单的处理"), topic("4.7", "理赔"), topic("4.8", "再保险"), topic("4.9", "精算支援"), topic("4.10", "会计及投资"), topic("4.11", "培训及发展"), topic("4.12", "管控要员")]),
-    chapter("5", "香港保险业结构", "5%", [topic("5.1.1", "保险业务种类：法定分类"), topic("5.1.2", "保险业务种类：实务分类"), topic("5.1.3", "保险业务种类：学术分类"), topic("5.1.4", "再保险"), topic("5.2", "行业规模"), topic("5.3", "保险公司"), topic("5.4", "保险中介人"), topic("5.5.1", "香港保险业联会"), topic("5.5.2", "认可保险经纪团体")]),
-    chapter("6", "保险业的规管架构", "21%", [topic("6.1.1", "《保险业条例》"), topic("6.1.2", "《承保商专业守则》"), topic("6.1.3", "保险投诉局"), topic("6.2.1", "监管保险中介人的持牌制度"), topic("6.2.2", "获授权保险人与其代理人的关系"), topic("6.2.3", "持牌保险中介人的多重角色"), topic("6.2.4", "发牌"), topic("6.2.5", "其他监管措施")]),
-    chapter("7", "职业道德及其他有关问题", "7%", [topic("7.1", "保险中介人对保单持有人的责任"), topic("7.2", "保护个人资料"), topic("7.3", "平等机会事宜"), topic("7.4", "打击洗钱及恐怖分子资金筹集"), topic("7.5", "防止贪污"), topic("7.6", "防止保险诈骗")])
+    chapter("2", "法律原則", "16%", [topic("2.1.1", "合約法：定義"), topic("2.1.2", "合約種類"), topic("2.1.3", "合約元素和要點"), topic("2.1.4", "合約的相對性"), topic("2.2.1", "代理法：定義"), topic("2.2.2", "代理關係如何產生"), topic("2.2.3", "代理人的許可權"), topic("2.2.4", "代理人對委託人的責任"), topic("2.2.5", "委託人對代理人的責任"), topic("2.2.6", "終止代理")]),
+    chapter("3", "保險原則", "30%", [topic("3.1.1", "可保權益"), topic("3.1.2", "可保權益的重要性"), topic("3.1.3", "可保權益的必要條件"), topic("3.1.4", "可保權益如何產生"), topic("3.1.5", "可保權益何時需要"), topic("3.1.6", "轉讓"), topic("3.2.1–3.2.2", "一般誠信及最高誠信"), topic("3.2.3", "重要事實"), topic("3.2.4", "何時披露重要事實"), topic("3.2.5", "違反最高誠信"), topic("3.2.6", "違反最高誠信的補救方法"), topic("3.3.1", "近因"), topic("3.3.2", "危險的種類"), topic("3.3.3", "近因原則的應用"), topic("3.3.4", "保單對原則的更改")]),
+    chapter("4", "保險公司的主要功能", "9%", [topic("4.1", "產品的開發"), topic("4.2", "客戶服務"), topic("4.3", "市場營銷及促銷"), topic("4.4", "保險的銷售"), topic("4.5", "核保"), topic("4.6", "保單的處理"), topic("4.7", "理賠"), topic("4.8", "再保險"), topic("4.9", "精算支援"), topic("4.10", "會計及投資"), topic("4.11", "培訓及發展"), topic("4.12", "管控要員")]),
+    chapter("5", "香港保險業結構", "5%", [topic("5.1.1", "保險業務種類：法定分類"), topic("5.1.2", "保險業務種類：實務分類"), topic("5.1.3", "保險業務種類：學術分類"), topic("5.1.4", "再保險"), topic("5.2", "行業規模"), topic("5.3", "保險公司"), topic("5.4", "保險中介人"), topic("5.5.1", "香港保險業聯會"), topic("5.5.2", "認可保險經紀團體")]),
+    chapter("6", "保險業的規管架構", "21%", [topic("6.1.1", "《保險業條例》"), topic("6.1.2", "《承保商專業守則》"), topic("6.1.3", "保險投訴局"), topic("6.2.1", "監管保險中介人的持牌制度"), topic("6.2.2", "獲授權保險人與其代理人的關係"), topic("6.2.3", "持牌保險中介人的多重角色"), topic("6.2.4", "發牌"), topic("6.2.5", "其他監管措施")]),
+    chapter("7", "職業道德及其他有關問題", "7%", [topic("7.1", "保險中介人對保單持有人的責任"), topic("7.2", "保護個人資料"), topic("7.3", "平等機會事宜"), topic("7.4", "打擊洗錢及恐怖分子資金籌集"), topic("7.5", "防止貪汙"), topic("7.6", "防止保險詐騙")])
   ]
 };
 
@@ -58,7 +58,7 @@ function loadData() {
   return structuredClone(seedSnapshot);
 }
 
-function saveData(message = "服务器草稿 · 保存中") {
+function saveData(message = "伺服器草稿 · 儲存中") {
   const status = document.querySelector("#saveStatus");
   const saveUrl = document.querySelector(".content-admin")?.dataset.saveUrl;
   const token = document.querySelector("meta[name='csrf-token']")?.content;
@@ -69,12 +69,12 @@ function saveData(message = "服务器草稿 · 保存中") {
     headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8", "X-CSRF-Token": token, Accept: "application/json" },
     body: new URLSearchParams({ snapshot_json: JSON.stringify(state.data) })
   }).then(response => {
-    if (!response.ok) throw new Error("保存失败");
-    status.textContent = "服务器草稿 · 已保存";
+    if (!response.ok) throw new Error("儲存失敗");
+    status.textContent = "伺服器草稿 · 已儲存";
   }).catch(error => {
     console.error(error);
-    status.textContent = "服务器草稿 · 保存失败";
-    showToast("服务器保存失败，请检查网络连接");
+    status.textContent = "伺服器草稿 · 儲存失敗";
+    showToast("伺服器儲存失敗，請檢查網路連線");
   });
 }
 
@@ -148,7 +148,7 @@ function renderPapers() {
   document.querySelector("#paperList").innerHTML = PAPER_NAMES.map((name, index) => `
     <button class="paper-item ${index === 0 ? "active" : ""}" ${index === 0 ? "" : "disabled"}>
       <span class="paper-number">${String(index + 1).padStart(2, "0")}</span>
-      <span class="paper-copy"><strong>${escapeHtml(name)}</strong><span>${index === 0 ? "可编辑" : "待录入"}</span></span>
+      <span class="paper-copy"><strong>${escapeHtml(name)}</strong><span>${index === 0 ? "可編輯" : "待錄入"}</span></span>
     </button>
   `).join("");
 }
@@ -157,17 +157,17 @@ function renderMetrics() {
   const totalQuestions = state.data.questions.length;
   const unresolvedCount = unresolvedQuestionCount();
   document.querySelector("#headMetrics").innerHTML = `
-    <div class="metric"><strong>${state.data.paperOneSyllabus.length}</strong><span>章节</span></div>
-    <div class="metric"><strong>${totalNodeCount()}</strong><span>大纲节点</span></div>
-    <div class="metric"><strong>${totalQuestions}</strong><span>题目</span></div>
-    <div class="metric ${unresolvedCount ? "metric-warning" : ""}"><strong>${unresolvedCount}</strong><span>待关联</span></div>
+    <div class="metric"><strong>${state.data.paperOneSyllabus.length}</strong><span>章節</span></div>
+    <div class="metric"><strong>${totalNodeCount()}</strong><span>大綱節點</span></div>
+    <div class="metric"><strong>${totalQuestions}</strong><span>題目</span></div>
+    <div class="metric ${unresolvedCount ? "metric-warning" : ""}"><strong>${unresolvedCount}</strong><span>待關聯</span></div>
   `;
 }
 
 function renderOutline() {
   const query = state.search.trim().toLowerCase();
   const chapters = state.data.paperOneSyllabus.filter(chapterItem => !query || JSON.stringify(chapterItem).toLowerCase().includes(query));
-  document.querySelector("#outlineTree").innerHTML = chapters.map(renderChapter).join("") || `<div class="empty-state"><h3>没有匹配的大纲</h3><p>尝试搜索章节编号或标题。</p></div>`;
+  document.querySelector("#outlineTree").innerHTML = chapters.map(renderChapter).join("") || `<div class="empty-state"><h3>沒有匹配的大綱</h3><p>嘗試搜尋章節編號或標題。</p></div>`;
 }
 
 function renderChapter(chapterItem) {
@@ -178,7 +178,7 @@ function renderChapter(chapterItem) {
       <span class="chevron">${expanded ? "⌄" : "›"}</span>
       <span class="chapter-number">第${escapeHtml(chapterItem.number)}章</span>
       <span class="chapter-title">${escapeHtml(chapterItem.title)}</span>
-      <span class="chapter-weight">${chapterItem.topics.length}节 · ${chapterQuestionCount(chapterItem)}题 · ${escapeHtml(chapterItem.weight || "—")}</span>
+      <span class="chapter-weight">${chapterItem.topics.length}節 · ${chapterQuestionCount(chapterItem)}題 · ${escapeHtml(chapterItem.weight || "—")}</span>
     </button>
     ${topicMarkup}
   </div>`;
@@ -189,7 +189,7 @@ function renderNode(node, depth) {
   const children = node.children || [];
   const childrenMarkup = expanded && children.length ? `<div class="node-children">${children.map(child => renderNode(child, depth + 1)).join("")}</div>` : "";
   const contentMarkup = (node.contents || []).map(content => {
-    const bells = (content.questionIDs || []).map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" data-node-key="topic:${escapeHtml(node.id)}" title="编辑题目 #${escapeHtml(id)}">🔔</button>`).join("");
+    const bells = (content.questionIDs || []).map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" data-node-key="topic:${escapeHtml(node.id)}" title="編輯題目 #${escapeHtml(id)}">🔔</button>`).join("");
     return `<div class="node-content"><span class="node-content-text">${escapeHtml(content.text)}</span><span class="node-content-bells">${bells}</span></div>`;
   }).join("");
   return `<div class="tree-node" data-depth="${depth}" data-node-key="topic:${escapeHtml(node.id)}">
@@ -209,17 +209,17 @@ function renderEditor() {
   const button = document.querySelector("#newQuestionButton");
   button.disabled = !context;
   if (!context) {
-    document.querySelector("#selectionEyebrow").textContent = "选择一个大纲节点";
-    document.querySelector("#selectionTitle").textContent = "开始录入内容";
-    document.querySelector("#selectionHint").textContent = "从左侧选择章节或小节。";
+    document.querySelector("#selectionEyebrow").textContent = "選擇一個大綱節點";
+    document.querySelector("#selectionTitle").textContent = "開始錄入內容";
+    document.querySelector("#selectionHint").textContent = "從左側選擇章節或小節。";
     document.querySelector("#editorContent").className = "editor-content empty-state";
-    document.querySelector("#editorContent").innerHTML = `<div class="empty-illustration">✦</div><h3>从大纲开始</h3><p>选择一个章节或小节，维护标题、比重与题目。</p>`;
+    document.querySelector("#editorContent").innerHTML = `<div class="empty-illustration">✦</div><h3>從大綱開始</h3><p>選擇一個章節或小節，維護標題、比重與題目。</p>`;
     return;
   }
   const node = context.node;
-  document.querySelector("#selectionEyebrow").textContent = context.kind === "chapter" ? `第${node.number}章 · 章节设置` : `参考章节 ${node.number}`;
+  document.querySelector("#selectionEyebrow").textContent = context.kind === "chapter" ? `第${node.number}章 · 章節設定` : `參考章節 ${node.number}`;
   document.querySelector("#selectionTitle").textContent = node.title;
-  document.querySelector("#selectionHint").textContent = `${nodeQuestions(node).length} 道题目 · ${context.kind === "chapter" ? node.topics.length : (node.children || []).length} 个下级节点`;
+  document.querySelector("#selectionHint").textContent = `${nodeQuestions(node).length} 道題目 · ${context.kind === "chapter" ? node.topics.length : (node.children || []).length} 個下級節點`;
   document.querySelector("#editorContent").className = "editor-content";
   if (state.editingQuestionId === "link") {
     document.querySelector("#editorContent").innerHTML = renderQuestionLinkEditor(context);
@@ -237,35 +237,35 @@ function renderNodeEditor(context) {
   const contents = node.contents || [];
   const questions = nodeQuestions(node);
   return `<div class="editor-section">
-    <div class="form-label">基本信息</div>
-    <div class="field-row"><label>编号</label><input class="field" id="nodeNumber" value="${escapeHtml(node.number)}" ${isChapter ? "" : ""} /></div>
-    <div class="field-row"><label>标题</label><input class="field" id="nodeTitle" value="${escapeHtml(node.title)}" /></div>
-    ${isChapter ? `<div class="field-row"><label>考试比重</label><input class="field" id="nodeWeight" value="${escapeHtml(node.weight || "")}" placeholder="例如 12%" /></div>` : `<div class="field-row"><label>上级章节</label><div class="outline-path">第${escapeHtml(context.chapter.number)}章 · ${escapeHtml(context.chapter.title)}</div></div>`}
+    <div class="form-label">基本資訊</div>
+    <div class="field-row"><label>編號</label><input class="field" id="nodeNumber" value="${escapeHtml(node.number)}" ${isChapter ? "" : ""} /></div>
+    <div class="field-row"><label>標題</label><input class="field" id="nodeTitle" value="${escapeHtml(node.title)}" /></div>
+    ${isChapter ? `<div class="field-row"><label>考試比重</label><input class="field" id="nodeWeight" value="${escapeHtml(node.weight || "")}" placeholder="例如 12%" /></div>` : `<div class="field-row"><label>上級章節</label><div class="outline-path">第${escapeHtml(context.chapter.number)}章 · ${escapeHtml(context.chapter.title)}</div></div>`}
   </div>
   <div class="editor-section">
-    <div class="form-label">大纲层级</div>
-    <div class="field-row"><label>下级节点</label><div class="outline-path">${isChapter ? node.topics.length : (node.children || []).length} 个</div></div>
-    ${!isChapter ? `<label class="form-label" for="nodeKeyPoints">补充要点（可选，每行一条）</label><textarea class="textarea" id="nodeKeyPoints" placeholder="用于旧版数据兼容；正式层级请使用“添加下级大纲”。">${escapeHtml(keyPoints)}</textarea>` : ""}
-    <div class="form-actions"><button class="button small" data-action="add-child">＋ 添加下级大纲</button><button class="button small danger" data-action="delete-node">⌫ 删除节点</button><button class="button small primary" data-action="save-node">保存大纲</button></div>
+    <div class="form-label">大綱層級</div>
+    <div class="field-row"><label>下級節點</label><div class="outline-path">${isChapter ? node.topics.length : (node.children || []).length} 個</div></div>
+    ${!isChapter ? `<label class="form-label" for="nodeKeyPoints">補充要點（可選，每行一條）</label><textarea class="textarea" id="nodeKeyPoints" placeholder="用於舊版資料相容；正式層級請使用“新增下級大綱”。">${escapeHtml(keyPoints)}</textarea>` : ""}
+    <div class="form-actions"><button class="button small" data-action="add-child">＋ 新增下級大綱</button><button class="button small danger" data-action="delete-node">⌫ 刪除節點</button><button class="button small primary" data-action="save-node">儲存大綱</button></div>
   </div>
   <div class="editor-section">
-    <div class="form-label">解析内容 · ${contents.length} 条</div>
-    ${contents.length ? `<div class="content-list">${contents.map(content => `<div class="content-list-row"><span>${escapeHtml(content.text)}</span><span class="content-list-bells">${(content.questionIDs || []).map(id => `🔔 #${escapeHtml(id)}`).join(" ")}</span></div>`).join("")}</div>` : `<div class="outline-path">此节点暂无题目解析内容。</div>`}
+    <div class="form-label">解析內容 · ${contents.length} 條</div>
+    ${contents.length ? `<div class="content-list">${contents.map(content => `<div class="content-list-row"><span>${escapeHtml(content.text)}</span><span class="content-list-bells">${(content.questionIDs || []).map(id => `🔔 #${escapeHtml(id)}`).join(" ")}</span></div>`).join("")}</div>` : `<div class="outline-path">此節點暫無題目解析內容。</div>`}
   </div>
   <div class="editor-section">
-    <div class="form-label">关联题目 · ${questions.length} 道</div>
-    <div class="question-list">${questions.length ? questions.map(renderQuestionRow).join("") : `<div class="outline-path">当前节点还没有题目，点击右上角“新题目”开始录入。</div>`}</div>
+    <div class="form-label">關聯題目 · ${questions.length} 道</div>
+    <div class="question-list">${questions.length ? questions.map(renderQuestionRow).join("") : `<div class="outline-path">當前節點還沒有題目，點選右上角“新題目”開始錄入。</div>`}</div>
   </div>`;
 }
 
 function renderQuestionLinkEditor(context) {
   return `<div class="editor-section">
-    <div class="form-label">关联已有试题</div>
-    <p class="form-help">选择后会把题目挂到“${escapeHtml(context.node.title)}”，原题目不会被删除。</p>
-    <label class="search-box link-question-search"><span>⌕</span><input id="linkQuestionSearch" type="search" value="${escapeHtml(state.linkQuery)}" placeholder="搜索题号、题目或解析" /></label>
+    <div class="form-label">關聯已有試題</div>
+    <p class="form-help">選擇後會把題目掛到“${escapeHtml(context.node.title)}”，原題目不會被刪除。</p>
+    <label class="search-box link-question-search"><span>⌕</span><input id="linkQuestionSearch" type="search" value="${escapeHtml(state.linkQuery)}" placeholder="搜尋題號、題目或解析" /></label>
   </div>
   ${renderLinkQuestionList(context)}
-  <div class="form-actions"><button class="button small" data-action="cancel-question">返回节点</button></div>`;
+  <div class="form-actions"><button class="button small" data-action="cancel-question">返回節點</button></div>`;
 }
 
 function renderLinkQuestionList(context) {
@@ -277,42 +277,42 @@ function renderLinkQuestionList(context) {
     return [item.id, item.title, item.chapterNumber, item.explanation].join(" ").toLowerCase().includes(query);
   });
   return `<div class="editor-section" id="linkQuestionList">
-    <div class="form-label">可关联题目 · ${candidates.length} 道</div>
-    <div class="question-list">${candidates.length ? candidates.map(item => `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>参考章节 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="button small" data-action="link-question-item" data-id="${escapeHtml(item.id)}">关联</button></div>`).join("") : `<div class="outline-path">没有可关联的题目。</div>`}</div>
+    <div class="form-label">可關聯題目 · ${candidates.length} 道</div>
+    <div class="question-list">${candidates.length ? candidates.map(item => `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>參考章節 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="button small" data-action="link-question-item" data-id="${escapeHtml(item.id)}">關聯</button></div>`).join("") : `<div class="outline-path">沒有可關聯的題目。</div>`}</div>
   </div>`;
 }
 
 function renderQuestionRow(item) {
   const unresolved = unresolvedQuestionReferences(item);
-  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>参考章节 ${escapeHtml(item.chapterNumber)}</span>${unresolved.length ? `<span class="question-warning">未对应大纲</span>` : ""}</div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="编辑">✎</button></div>`;
+  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>參考章節 ${escapeHtml(item.chapterNumber)}</span>${unresolved.length ? `<span class="question-warning">未對應大綱</span>` : ""}</div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="編輯">✎</button></div>`;
 }
 
 function renderQuestionEditor(context) {
   const existing = state.editingQuestionId === "new" ? null : state.data.questions.find(item => String(item.id) === String(state.editingQuestionId));
   const defaultReference = context.kind === "chapter" ? (context.node.topics[0]?.number || context.node.number) : context.node.number;
-  const item = existing || { id: "new", chapter: PAPER_NAME, chapterNumber: defaultReference, title: "", type: "单选题", options: [{ id: "A", text: "" }, { id: "B", text: "" }, { id: "C", text: "" }, { id: "D", text: "" }], correctOptionIDs: [], explanation: "", tags: [] };
+  const item = existing || { id: "new", chapter: PAPER_NAME, chapterNumber: defaultReference, title: "", type: "單選題", options: [{ id: "A", text: "" }, { id: "B", text: "" }, { id: "C", text: "" }, { id: "D", text: "" }], correctOptionIDs: [], explanation: "", tags: [] };
   const chapterNumber = state.referenceDraft ?? item.chapterNumber;
   const options = item.options || [];
   const unresolved = unresolvedQuestionReferences({ ...item, chapterNumber });
   return `<div class="editor-section">
-    <div class="form-label">题目设置 ${existing ? `· #${item.id}` : "· 新题目"}</div>
-    <div class="field-row"><label>试题编号</label><input class="field" id="questionID" value="${escapeHtml(existing ? item.id : nextQuestionID())}" inputmode="numeric" ${existing ? "readonly" : ""} /></div>
-    <div class="field-row"><label>题型</label><select class="select" id="questionType"><option ${item.type === "单选题" ? "selected" : ""}>单选题</option><option ${item.type === "多选题" ? "selected" : ""}>多选题</option></select></div>
-    <div class="field-row"><label>参考章节</label><div class="reference-editor"><input class="field" id="questionChapterNumber" value="${escapeHtml(chapterNumber || context.node.number)}" placeholder="可手填，例如 1.1.1" /><button class="button small" type="button" data-action="toggle-reference-picker">从大纲选择</button></div></div>
-    ${unresolved.length ? `<div class="unresolved-warning">未找到对应大纲：${unresolved.map(escapeHtml).join("、")}。可以继续保存，或用“从大纲选择”完成关联。</div>` : ""}
+    <div class="form-label">題目設定 ${existing ? `· #${item.id}` : "· 新題目"}</div>
+    <div class="field-row"><label>試題編號</label><input class="field" id="questionID" value="${escapeHtml(existing ? item.id : nextQuestionID())}" inputmode="numeric" ${existing ? "readonly" : ""} /></div>
+    <div class="field-row"><label>題型</label><select class="select" id="questionType"><option ${item.type === "單選題" ? "selected" : ""}>單選題</option><option ${item.type === "多選題" ? "selected" : ""}>多選題</option></select></div>
+    <div class="field-row"><label>參考章節</label><div class="reference-editor"><input class="field" id="questionChapterNumber" value="${escapeHtml(chapterNumber || context.node.number)}" placeholder="可手填，例如 1.1.1" /><button class="button small" type="button" data-action="toggle-reference-picker">從大綱選擇</button></div></div>
+    ${unresolved.length ? `<div class="unresolved-warning">未找到對應大綱：${unresolved.map(escapeHtml).join("、")}。可以繼續儲存，或用“從大綱選擇”完成關聯。</div>` : ""}
     ${state.chapterPickerOpen ? renderReferencePicker(chapterNumber) : ""}
-    <label class="form-label" for="questionTitle">题目正文</label><textarea class="textarea" id="questionTitle" placeholder="输入题目正文">${escapeHtml(item.title)}</textarea>
+    <label class="form-label" for="questionTitle">題目正文</label><textarea class="textarea" id="questionTitle" placeholder="輸入題目正文">${escapeHtml(item.title)}</textarea>
   </div>
-  <div class="editor-section"><div class="form-label">选项与答案</div><div class="options" id="questionOptions">${options.map(option => `<div class="option-row"><input type="radio" name="correctOption" value="${escapeHtml(option.id)}" ${item.correctOptionIDs.includes(option.id) ? "checked" : ""} /><span class="option-id">${escapeHtml(option.id)}</span><input class="field option-text" data-option-id="${escapeHtml(option.id)}" value="${escapeHtml(option.text)}" placeholder="选项内容" /></div>`).join("")}</div><button class="add-option" data-action="add-option">＋ 添加选项</button>${item.type === "多选题" ? `<div class="form-help">多选题按原卷组合选项录入，A/B/C/D 中选择一个组合答案。</div>` : ""}</div>
-  <div class="editor-section"><label class="form-label" for="questionExplanation">解析</label><textarea class="textarea" id="questionExplanation" placeholder="输入答案解析">${escapeHtml(item.explanation)}</textarea></div>
-  <div class="form-actions"><button class="button small" data-action="cancel-question">取消</button>${existing ? `<button class="button small danger" data-action="delete-question" data-id="${item.id}">删除题目</button>` : ""}<button class="button small primary" data-action="save-question" data-id="${item.id}">保存题目</button></div>`;
+  <div class="editor-section"><div class="form-label">選項與答案</div><div class="options" id="questionOptions">${options.map(option => `<div class="option-row"><input type="radio" name="correctOption" value="${escapeHtml(option.id)}" ${item.correctOptionIDs.includes(option.id) ? "checked" : ""} /><span class="option-id">${escapeHtml(option.id)}</span><input class="field option-text" data-option-id="${escapeHtml(option.id)}" value="${escapeHtml(option.text)}" placeholder="選項內容" /></div>`).join("")}</div><button class="add-option" data-action="add-option">＋ 新增選項</button>${item.type === "多選題" ? `<div class="form-help">多選題按原卷組合選項錄入，A/B/C/D 中選擇一個組合答案。</div>` : ""}</div>
+  <div class="editor-section"><label class="form-label" for="questionExplanation">解析</label><textarea class="textarea" id="questionExplanation" placeholder="輸入答案解析">${escapeHtml(item.explanation)}</textarea></div>
+  <div class="form-actions"><button class="button small" data-action="cancel-question">取消</button>${existing ? `<button class="button small danger" data-action="delete-question" data-id="${item.id}">刪除題目</button>` : ""}<button class="button small primary" data-action="save-question" data-id="${item.id}">儲存題目</button></div>`;
 }
 
 function renderReferencePicker(chapterNumber) {
   const selected = new Set(referenceNumbers(chapterNumber));
   const query = state.chapterPickerQuery.trim().toLowerCase();
   const items = allTopicNodes().filter(node => !query || `${node.number} ${node.title}`.toLowerCase().includes(query));
-  return `<div class="outline-picker"><div class="outline-picker-head"><strong>选择参考大纲</strong><button class="text-button" data-action="toggle-reference-picker">收起</button></div><input class="field" id="chapterPickerSearch" value="${escapeHtml(state.chapterPickerQuery)}" placeholder="搜索大纲编号或标题" /><div class="outline-picker-list">${items.length ? items.map(node => `<label class="outline-picker-item"><input type="checkbox" data-action="toggle-question-reference" data-number="${escapeHtml(node.number)}" ${selected.has(node.number) ? "checked" : ""} /><span><b>${escapeHtml(node.number)}</b>${escapeHtml(node.title)}</span></label>`).join("") : `<div class="outline-path">没有匹配的大纲节点。</div>`}</div></div>`;
+  return `<div class="outline-picker"><div class="outline-picker-head"><strong>選擇參考大綱</strong><button class="text-button" data-action="toggle-reference-picker">收起</button></div><input class="field" id="chapterPickerSearch" value="${escapeHtml(state.chapterPickerQuery)}" placeholder="搜尋大綱編號或標題" /><div class="outline-picker-list">${items.length ? items.map(node => `<label class="outline-picker-item"><input type="checkbox" data-action="toggle-question-reference" data-number="${escapeHtml(node.number)}" ${selected.has(node.number) ? "checked" : ""} /><span><b>${escapeHtml(node.number)}</b>${escapeHtml(node.title)}</span></label>`).join("") : `<div class="outline-path">沒有匹配的大綱節點。</div>`}</div></div>`;
 }
 
 function selectNode(key) {
@@ -333,14 +333,14 @@ function addChild() {
   const children = node.topics || node.children || [];
   const next = children.length + 1;
   const newNumber = `${base}.${next}`;
-  const child = topic(newNumber, "新大纲节点");
+  const child = topic(newNumber, "新大綱節點");
   if (context.kind === "chapter") node.topics.push(child); else node.children.push(child);
   state.expandedChapters.add(context.chapter.id);
   state.expandedNodes.add(node.id);
   state.selectedKey = `topic:${child.id}`;
   saveData();
   render();
-  showToast("已添加下级大纲");
+  showToast("已新增下級大綱");
 }
 
 function ensureNodeContents(node) {
@@ -412,7 +412,7 @@ function linkQuestion(questionID) {
   saveData();
   renderEditor();
   renderOutline();
-  showToast(`题目 #${question.id} 已关联到「${context.node.title}」`);
+  showToast(`題目 #${question.id} 已關聯到「${context.node.title}」`);
 }
 
 function deleteNode() {
@@ -420,9 +420,9 @@ function deleteNode() {
   if (!context) return;
   const descendantCount = context.kind === "chapter" ? context.node.topics.length : descendants(context.node).length;
   const questionCount = nodeQuestions(context.node).length;
-  const detail = questionCount ? `\n\n节点下的 ${questionCount} 道题目会保留，但会失去这个大纲节点的关联。` : "";
+  const detail = questionCount ? `\n\n節點下的 ${questionCount} 道題目會保留，但會失去這個大綱節點的關聯。` : "";
   const label = context.kind === "chapter" ? `第${context.node.number}章 ${context.node.title}` : `${context.node.number} ${context.node.title}`;
-  if (!window.confirm(`确定删除「${label}」吗？${descendantCount ? `\n\n这会同时删除 ${descendantCount} 个下级节点。` : ""}${detail}`)) return;
+  if (!window.confirm(`確定刪除「${label}」嗎？${descendantCount ? `\n\n這會同時刪除 ${descendantCount} 個下級節點。` : ""}${detail}`)) return;
 
   if (context.kind === "chapter") {
     const index = state.data.paperOneSyllabus.indexOf(context.node);
@@ -437,7 +437,7 @@ function deleteNode() {
   closeContextMenu();
   saveData();
   render();
-  showToast(`已删除「${label}」`);
+  showToast(`已刪除「${label}」`);
 }
 
 function saveNode() {
@@ -445,7 +445,7 @@ function saveNode() {
   if (!context) return;
   const title = document.querySelector("#nodeTitle").value.trim();
   const number = document.querySelector("#nodeNumber").value.trim();
-  if (!title || !number) return showToast("编号和标题不能为空");
+  if (!title || !number) return showToast("編號和標題不能為空");
   context.node.title = title;
   context.node.number = number;
   context.node.id = number;
@@ -454,7 +454,7 @@ function saveNode() {
   state.selectedKey = `${context.kind === "chapter" ? "chapter" : "topic"}:${number}`;
   saveData();
   render();
-  showToast("大纲已保存");
+  showToast("大綱已儲存");
 }
 
 function saveQuestion() {
@@ -466,11 +466,11 @@ function saveQuestion() {
   const chapterNumber = document.querySelector("#questionChapterNumber").value.trim();
   const options = [...document.querySelectorAll(".option-row")].map(row => ({ id: row.querySelector("[data-option-id]").dataset.optionId, text: row.querySelector("[data-option-id]").value.trim() })).filter(option => option.text);
   const correctOptionIDs = [...document.querySelectorAll("input[name='correctOption']:checked")].map(input => input.value);
-  if (!Number.isInteger(questionID) || questionID <= 0) return showToast("试题编号必须是正整数");
+  if (!Number.isInteger(questionID) || questionID <= 0) return showToast("試題編號必須是正整數");
   const duplicate = state.data.questions.find(questionItem => Number(questionItem.id) === questionID && String(questionItem.id) !== String(state.editingQuestionId));
-  if (duplicate) return showToast(`试题编号 #${questionID} 已存在`);
-  if (!title || !chapterNumber || options.length < 2 || !correctOptionIDs.length) return showToast("请填写题目、参考章节、至少两个选项和正确答案");
-  if (correctOptionIDs.length !== 1) return showToast("每题只能选择一个答案");
+  if (duplicate) return showToast(`試題編號 #${questionID} 已存在`);
+  if (!title || !chapterNumber || options.length < 2 || !correctOptionIDs.length) return showToast("請填寫題目、參考章節、至少兩個選項和正確答案");
+  if (correctOptionIDs.length !== 1) return showToast("每題只能選擇一個答案");
   const item = { id: questionID, chapter: PAPER_NAME, chapterNumber, title, type, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags: [] };
   if (state.editingQuestionId !== "new") removeQuestionFromContents(item.id);
   const index = state.data.questions.findIndex(questionItem => questionItem.id === item.id);
@@ -486,7 +486,7 @@ function saveQuestion() {
   saveData();
   render();
   const unresolved = unresolvedQuestionReferences(item);
-  showToast(unresolved.length ? `题目已保存，未对应大纲：${unresolved.join("、")}` : "题目已保存并关联大纲");
+  showToast(unresolved.length ? `題目已儲存，未對應大綱：${unresolved.join("、")}` : "題目已儲存並關聯大綱");
 }
 
 function nextQuestionID() { return Math.max(0, ...state.data.questions.map(item => Number(item.id) || 0)) + 1; }
@@ -496,7 +496,7 @@ function addOption() {
   const id = String.fromCharCode(65 + options.length);
   const row = document.createElement("div");
   row.className = "option-row";
-  row.innerHTML = `<input type="radio" name="correctOption" value="${id}" /><span class="option-id">${id}</span><input class="field option-text" data-option-id="${id}" placeholder="选项内容" />`;
+  row.innerHTML = `<input type="radio" name="correctOption" value="${id}" /><span class="option-id">${id}</span><input class="field option-text" data-option-id="${id}" placeholder="選項內容" />`;
   document.querySelector("#questionOptions").append(row);
 }
 
@@ -508,8 +508,8 @@ function exportSnapshot() {
   anchor.download = `gangxian-content-${new Date().toISOString().slice(0, 10)}.json`;
   anchor.click();
   URL.revokeObjectURL(url);
-  saveData("服务器草稿 · 已导出");
-  showToast("已导出 App 可用的题库快照");
+  saveData("伺服器草稿 · 已匯出");
+  showToast("已匯出 App 可用的題庫快照");
 }
 
 function importSnapshot(file) {
@@ -605,19 +605,19 @@ document.addEventListener("click", event => {
     state.editingQuestionId = null;
     saveData();
     render();
-    showToast("题目已删除");
+    showToast("題目已刪除");
   }
 });
 
 document.querySelector("#newQuestionButton").addEventListener("click", () => { state.editingQuestionId = "new"; renderEditor(); });
 document.querySelector("#addChapterButton").addEventListener("click", () => {
   const number = String(state.data.paperOneSyllabus.length + 1);
-  const item = chapter(number, "新章节", "", []);
+  const item = chapter(number, "新章節", "", []);
   state.data.paperOneSyllabus.push(item);
   state.selectedKey = `chapter:${number}`;
   saveData();
   render();
-  showToast("已添加新章节");
+  showToast("已新增新章節");
 });
 document.querySelector("#collapseAllButton").addEventListener("click", () => { state.expandedChapters.clear(); state.expandedNodes.clear(); renderOutline(); });
 document.querySelector("#outlineSearch").addEventListener("input", event => { state.search = event.target.value; renderOutline(); });
@@ -651,5 +651,5 @@ document.querySelector("#importInput").addEventListener("change", event => { if 
 
 render();
 if (unresolvedQuestionCount()) {
-  showToast(`有 ${unresolvedQuestionCount()} 道试题的参考章节未对应大纲，请用大纲选择器关联`);
+  showToast(`有 ${unresolvedQuestionCount()} 道試題的參考章節未對應大綱，請用大綱選擇器關聯`);
 }

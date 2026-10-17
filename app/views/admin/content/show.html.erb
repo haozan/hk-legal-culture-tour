@@ -1,4 +1,4 @@
-<% content_for :title, '录题后台' %>
+<% content_for :title, '錄題後臺' %>
 <% content_for :head do %>
   <%= stylesheet_link_tag 'content_admin', media: 'all' %>
 <% end %>
@@ -9,13 +9,13 @@
       <div class="brand-mark">象</div>
       <div>
         <div class="eyebrow">CONTENT STUDIO</div>
-        <h1>港险小象 <span>录题后台</span></h1>
+        <h1>港險小象 <span>錄題後臺</span></h1>
       </div>
     </div>
     <div class="top-actions">
-      <span class="save-status" id="saveStatus">服务器草稿 · 已保存</span>
-      <button class="button ghost" id="importButton" type="button">导入快照</button>
-      <button class="button primary" id="exportButton" type="button">导出快照</button>
+      <span class="save-status" id="saveStatus">伺服器草稿 · 已儲存</span>
+      <button class="button ghost" id="importButton" type="button">匯入快照</button>
+      <button class="button primary" id="exportButton" type="button">匯出快照</button>
       <%= button_to '退出', admin_logout_path, method: :delete, class: 'button ghost' %>
       <input id="importInput" name="file" form="importForm" type="file" accept="application/json,.json" hidden />
     </div>
@@ -26,7 +26,7 @@
       <div class="side-heading">
         <div>
           <div class="eyebrow">PAPERS</div>
-          <h2>试卷</h2>
+          <h2>試卷</h2>
         </div>
         <span class="count-badge">5</span>
       </div>
@@ -35,8 +35,8 @@
         <div class="sync-card">
           <div class="sync-icon">↗</div>
           <div>
-            <strong>服务器同步</strong>
-            <p>保存后写入香港服务器，App 后续可读取同一份快照。</p>
+            <strong>伺服器同步</strong>
+            <p>儲存後寫入香港伺服器，App 後續可讀取同一份快照。</p>
           </div>
         </div>
       </div>
@@ -45,9 +45,9 @@
     <main class="main-content">
       <section class="page-head">
         <div>
-          <div class="eyebrow">卷一 · 内容维护</div>
-          <h2>大纲与题目</h2>
-          <p>先维护章节树，再把题目挂到对应的参考章节。</p>
+          <div class="eyebrow">卷一 · 內容維護</div>
+          <h2>大綱與題目</h2>
+          <p>先維護章節樹，再把題目掛到對應的參考章節。</p>
         </div>
         <div class="head-metrics" id="headMetrics"></div>
       </section>
@@ -56,17 +56,17 @@
         <section class="panel outline-panel">
           <div class="panel-head">
             <div>
-              <h3>卷一大纲</h3>
-              <p>点击节点编辑；右键节点可新建、关联试题或删除大纲。</p>
+              <h3>卷一大綱</h3>
+              <p>點選節點編輯；右鍵節點可新建、關聯試題或刪除大綱。</p>
             </div>
             <div class="panel-actions">
-              <button class="button small" id="addChapterButton" type="button">＋ 新章节</button>
+              <button class="button small" id="addChapterButton" type="button">＋ 新章節</button>
             </div>
           </div>
           <div class="outline-toolbar">
             <label class="search-box">
               <span>⌕</span>
-              <input id="outlineSearch" type="search" placeholder="搜索编号或标题" />
+              <input id="outlineSearch" type="search" placeholder="搜尋編號或標題" />
             </label>
             <button class="text-button" id="collapseAllButton" type="button">全部收起</button>
           </div>
@@ -76,16 +76,16 @@
         <section class="panel editor-panel">
           <div class="panel-head editor-head">
             <div>
-              <div class="eyebrow" id="selectionEyebrow">选择一个大纲节点</div>
-              <h3 id="selectionTitle">开始录入内容</h3>
-              <p id="selectionHint">从左侧选择章节或小节。</p>
+              <div class="eyebrow" id="selectionEyebrow">選擇一個大綱節點</div>
+              <h3 id="selectionTitle">開始錄入內容</h3>
+              <p id="selectionHint">從左側選擇章節或小節。</p>
             </div>
-            <button class="button small primary" id="newQuestionButton" type="button" disabled>＋ 新题目</button>
+            <button class="button small primary" id="newQuestionButton" type="button" disabled>＋ 新題目</button>
           </div>
           <div id="editorContent" class="editor-content empty-state">
             <div class="empty-illustration">✦</div>
-            <h3>从大纲开始</h3>
-            <p>选择一个章节或小节，维护标题、比重与题目。</p>
+            <h3>從大綱開始</h3>
+            <p>選擇一個章節或小節，維護標題、比重與題目。</p>
           </div>
         </section>
       </div>
@@ -98,13 +98,13 @@
 <% end %>
 
 <div class="toast" id="toast" role="status"></div>
-<div class="outline-context-menu" id="outlineContextMenu" hidden role="menu" aria-label="大纲操作">
-  <div class="context-menu-title" id="contextMenuTitle">大纲节点</div>
-  <button type="button" data-action="new-child">＋ 新建下级大纲</button>
-  <button type="button" data-action="new-question">＋ 新建试题</button>
-  <button type="button" data-action="link-question">↗ 关联已有试题</button>
+<div class="outline-context-menu" id="outlineContextMenu" hidden role="menu" aria-label="大綱操作">
+  <div class="context-menu-title" id="contextMenuTitle">大綱節點</div>
+  <button type="button" data-action="new-child">＋ 新建下級大綱</button>
+  <button type="button" data-action="new-question">＋ 新建試題</button>
+  <button type="button" data-action="link-question">↗ 關聯已有試題</button>
   <div class="context-menu-divider"></div>
-  <button type="button" class="danger" data-action="delete-node">⌫ 删除节点</button>
+  <button type="button" class="danger" data-action="delete-node">⌫ 刪除節點</button>
 </div>
 <script type="application/json" id="gangxian-content-data"><%= raw json_escape(@data.to_json) %></script>
 <%= javascript_include_tag 'content_admin', type: 'module' %>
