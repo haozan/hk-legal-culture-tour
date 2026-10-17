@@ -33,7 +33,7 @@ const seedSnapshot = {
 function question(id, chapterNumber, title, type, optionTexts, correctOptionIDs, explanation, tags) {
   return { id, chapter: PAPER_NAME, chapterNumber, title, type, options: optionTexts.map((text, index) => ({ id: String.fromCharCode(65 + index), text })), correctOptionIDs, explanation, tags };
 }
-function topic(number, title, children = [], keyPoints = []) { return { id: number, number, title, keyPoints, children }; }
+function topic(number, title, children = [], keyPoints = [], contents = []) { return { id: number, number, title, keyPoints, contents, children }; }
 function chapter(number, title, weight, topics) { return { id: number, number, title, weight, topics }; }
 
 const state = {
@@ -86,8 +86,10 @@ function descendants(node) {
 }
 
 function nodeQuestions(node) {
+  const contentQuestionIDs = new Set([node, ...descendants(node)].flatMap(item => (item.contents || []).flatMap(content => content.questionIDs || [])).map(Number));
+  if (contentQuestionIDs.size) return state.data.questions.filter(questionItem => contentQuestionIDs.has(Number(questionItem.id)));
   const numbers = [node, ...descendants(node)].map(item => item.number);
-  return state.data.questions.filter(questionItem => referenceNumbers(questionItem.chapterNumber).some(reference => numbers.some(number => reference === number || reference.startsWith(`${number}.`))));
+  return state.data.questions.filter(questionItem => referenceNumbers(questionItem.chapterNumber).some(reference => numbers.some(number => reference === number || reference.startsWith(`${number}.`) || number.startsWith(`${reference}.`))));
 }
 
 function chapterQuestionCount(chapterItem) {
@@ -168,17 +170,19 @@ function renderChapter(chapterItem) {
 function renderNode(node, depth) {
   const expanded = state.expandedNodes.has(node.id);
   const children = node.children || [];
-  const questions = nodeQuestions(node);
   const childrenMarkup = expanded && children.length ? `<div class="node-children">${children.map(child => renderNode(child, depth + 1)).join("")}</div>` : "";
-  const questionButton = questions.length ? `<button class="question-link" data-action="edit-questions" data-key="topic:${escapeHtml(node.id)}" title="${questions.length} 道题">▣</button>` : "";
+  const contentMarkup = (node.contents || []).map(content => {
+    const bells = (content.questionIDs || []).map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" title="编辑题目 #${escapeHtml(id)}">🔔</button>`).join("");
+    return `<div class="node-content"><span class="node-content-text">${escapeHtml(content.text)}</span><span class="node-content-bells">${bells}</span></div>`;
+  }).join("");
   return `<div class="tree-node" data-depth="${depth}">
     <div class="node-row">
       <button class="node-main" data-action="select-node" data-key="topic:${escapeHtml(node.id)}">
         <span class="node-chevron">${children.length ? (expanded ? "⌄" : "›") : "·"}</span>
         <span class="node-copy"><span class="node-number">${escapeHtml(node.number)}</span><span class="node-title">${escapeHtml(node.title)}</span></span>
       </button>
-      ${questionButton}
     </div>
+    ${contentMarkup}
     ${childrenMarkup}
   </div>`;
 }
@@ -211,6 +215,7 @@ function renderNodeEditor(context) {
   const node = context.node;
   const isChapter = context.kind === "chapter";
   const keyPoints = (node.keyPoints || []).join("\n");
+  const contents = node.contents || [];
   const questions = nodeQuestions(node);
   return `<div class="editor-section">
     <div class="form-label">基本信息</div>
@@ -223,6 +228,10 @@ function renderNodeEditor(context) {
     <div class="field-row"><label>下级节点</label><div class="outline-path">${isChapter ? node.topics.length : (node.children || []).length} 个</div></div>
     ${!isChapter ? `<label class="form-label" for="nodeKeyPoints">补充要点（可选，每行一条）</label><textarea class="textarea" id="nodeKeyPoints" placeholder="用于旧版数据兼容；正式层级请使用“添加下级大纲”。">${escapeHtml(keyPoints)}</textarea>` : ""}
     <div class="form-actions"><button class="button small" data-action="add-child">＋ 添加下级大纲</button><button class="button small primary" data-action="save-node">保存大纲</button></div>
+  </div>
+  <div class="editor-section">
+    <div class="form-label">解析内容 · ${contents.length} 条</div>
+    ${contents.length ? `<div class="content-list">${contents.map(content => `<div class="content-list-row"><span>${escapeHtml(content.text)}</span><span class="content-list-bells">${(content.questionIDs || []).map(id => `🔔 #${escapeHtml(id)}`).join(" ")}</span></div>`).join("")}</div>` : `<div class="outline-path">此节点暂无题目解析内容。</div>`}
   </div>
   <div class="editor-section">
     <div class="form-label">关联题目 · ${questions.length} 道</div>

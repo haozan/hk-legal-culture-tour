@@ -89,7 +89,10 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
 .node-copy { min-width: 0; display: grid; gap: 2px; }
 .node-number { color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; font-weight: 750; }
 .node-title { overflow: hidden; color: var(--ink); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
-.question-link { width: 25px; height: 25px; display: grid; place-items: center; flex: 0 0 auto; border: 0; border-radius: 50%; color: var(--accent); background: var(--accent-soft); font-size: 12px; }
+.node-content { display: flex; align-items: flex-start; gap: 7px; margin: 0 0 7px 25px; padding: 7px 8px; border-radius: 8px; color: var(--muted); background: #fbfcfa; font-size: 11px; line-height: 1.45; }
+.node-content-text { min-width: 0; flex: 1; }
+.node-content-bells, .content-list-bells { display: flex; flex: 0 0 auto; gap: 3px; color: var(--accent); white-space: nowrap; }
+.question-link { width: 22px; height: 22px; display: grid; place-items: center; flex: 0 0 auto; border: 0; border-radius: 50%; color: var(--accent); background: var(--accent-soft); font-size: 11px; }
 .question-link:hover { color: white; background: var(--accent); }
 .node-children { margin-left: 22px; }
 
@@ -114,6 +117,9 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
 .form-help { margin-top: 10px; color: var(--muted); font-size: 11px; line-height: 1.5; }
 .outline-path { padding: 10px 12px; border-radius: 9px; color: var(--accent); background: var(--accent-soft); font-size: 12px; font-weight: 700; }
 .question-list { display: grid; gap: 9px; }
+.content-list { display: grid; gap: 7px; }
+.content-list-row { display: flex; align-items: flex-start; gap: 8px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 9px; color: var(--muted); background: var(--paper); font-size: 11px; line-height: 1.45; }
+.content-list-row > span:first-child { min-width: 0; flex: 1; }
 .question-row { gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--paper); }
 .question-row-main { min-width: 0; flex: 1; }
 .question-row-title { overflow: hidden; font-size: 12px; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }

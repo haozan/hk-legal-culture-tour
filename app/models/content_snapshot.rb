@@ -1,3 +1,5 @@
+require 'digest'
+
 class ContentSnapshot < ApplicationRecord
   validates :paper_name, presence: true, uniqueness: true
 
@@ -7,7 +9,7 @@ class ContentSnapshot < ApplicationRecord
     question_bank_path = Rails.root.join('db', 'content_q1_q50_questions.json')
     question_bank = JSON.parse(File.read(question_bank_path)) if File.exist?(question_bank_path)
 
-    {
+    data = {
       version: 'draft-2026.10.16',
       chapterNames: ['保险原理及实务', '人寿保险', '一般保险', '法规与合规', '风险管理'],
       questions: question_bank || [
@@ -32,8 +34,96 @@ class ContentSnapshot < ApplicationRecord
         chapter('6', '保险业的规管架构', '21%', [topic('6.1.1', '《保险业条例》'), topic('6.1.2', '《承保商专业守则》'), topic('6.1.3', '保险投诉局'), topic('6.2.1', '监管保险中介人的持牌制度'), topic('6.2.2', '获授权保险人与其代理人的关系'), topic('6.2.3', '持牌保险中介人的多重角色'), topic('6.2.4', '发牌'), topic('6.2.5', '其他监管措施')]),
         chapter('7', '职业道德及其他有关问题', '7%', [topic('7.1', '保险中介人对保单持有人的责任'), topic('7.2', '保护个人资料'), topic('7.3', '平等机会事宜'), topic('7.4', '打击洗钱及恐怖分子资金筹集'), topic('7.5', '防止贪污'), topic('7.6', '防止保险诈骗')])
       ]
-    }.deep_stringify_keys
+    }
+
+    with_explanation_contents(data).deep_stringify_keys
   end
+
+  # Add every question explanation to the most specific syllabus node that
+  # matches its reference chapter. Identical explanations share one content
+  # line and keep all related question IDs, so the clients can render one bell
+  # per question without duplicating the sentence.
+  def self.with_explanation_contents(data)
+    snapshot = data.deep_dup
+    questions = Array(snapshot[:questions] || snapshot['questions'])
+    chapters = Array(snapshot[:paperOneSyllabus] || snapshot['paperOneSyllabus'])
+    nodes = chapters.flat_map { |chapter| flatten_topics(chapter) }
+    grouped = Hash.new { |hash, key| hash[key] = {} }
+
+    nodes.each do |node|
+      existing = Array(node[:contents] || node['contents'])
+      existing.each do |item|
+        content = item.deep_dup
+        text = content[:text] || content['text']
+        next if text.to_s.strip.empty?
+
+        content['id'] = content[:id] || content['id'] || content_id(node, text)
+        content['text'] = text
+        content['questionIDs'] = Array(content[:questionIDs] || content['questionIDs']).map(&:to_i).uniq
+        grouped[node.object_id][text] = content
+      end
+    end
+
+    questions.each do |question|
+      explanation = (question[:explanation] || question['explanation']).to_s.strip
+      next if explanation.empty?
+
+      references = reference_numbers(question[:chapterNumber] || question['chapterNumber'])
+      references.each do |reference|
+        matching_nodes = matching_nodes_for(nodes, reference)
+        matching_nodes.each do |node|
+          text = explanation
+          item = grouped[node.object_id][text] ||= {
+            'id' => content_id(node, text),
+            'text' => text,
+            'questionIDs' => []
+          }
+          question_id = (question[:id] || question['id']).to_i
+          item['questionIDs'] << question_id unless item['questionIDs'].include?(question_id)
+        end
+      end
+    end
+
+    nodes.each do |node|
+      node['contents'] = grouped[node.object_id].values
+    end
+    snapshot
+  end
+
+  def self.flatten_topics(chapter_or_topic)
+    children_key = chapter_or_topic.key?(:topics) || chapter_or_topic.key?('topics') ? :topics : :children
+    children = Array(chapter_or_topic[children_key] || chapter_or_topic[children_key.to_s])
+    children.flat_map { |child| [child, *flatten_topics(child)] }
+  end
+  private_class_method :flatten_topics
+
+  def self.reference_numbers(value)
+    value.to_s.gsub(' ', '').scan(/\d+(?:\.\d+)+/)
+  end
+  private_class_method :reference_numbers
+
+  def self.matching_nodes_for(nodes, reference)
+    exact = nodes.select { |node| node_number(node) == reference }
+    return exact unless exact.empty?
+
+    descendants = nodes.select { |node| node_number(node).start_with?("#{reference}.") }
+    return [] if descendants.empty?
+
+    minimum_depth = descendants.map { |node| node_number(node).count('.') }.min
+    descendants.select { |node| node_number(node).count('.') == minimum_depth }.first(1)
+  end
+  private_class_method :matching_nodes_for
+
+  def self.node_number(node)
+    node[:number] || node['number']
+  end
+  private_class_method :node_number
+
+  def self.content_id(node, text)
+    number = node_number(node).to_s.gsub(/[^0-9A-Za-z.-]/, '-')
+    "explanation-#{number}-#{Digest::SHA256.hexdigest(text.to_s)[0, 10]}"
+  end
+  private_class_method :content_id
 
   def self.question(id, number, title, type, option_texts, correct_ids, explanation, tags)
     { id: id, chapter: PAPER_NAME, chapterNumber: number, title: title, type: type,
@@ -42,7 +132,7 @@ class ContentSnapshot < ApplicationRecord
   end
 
   def self.topic(number, title, children = [])
-    { id: number, number: number, title: title, keyPoints: [], children: children }
+    { id: number, number: number, title: title, keyPoints: [], contents: [], children: children }
   end
 
   def self.chapter(number, title, weight, topics)
