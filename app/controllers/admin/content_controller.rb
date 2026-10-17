@@ -23,7 +23,7 @@ class Admin::ContentController < Admin::BaseController
 
   def publish
     @snapshot.update!(published_at: Time.current)
-    redirect_to admin_content_path, notice: '題庫快照已標記為可釋出版本。'
+    redirect_to admin_content_path(paper: @paper_name), notice: '題庫快照已標記為可釋出版本。'
   end
 
   def export
@@ -42,17 +42,24 @@ class Admin::ContentController < Admin::BaseController
     payload = ContentSnapshot.with_explanation_contents(payload)
     normalize_questions!(payload)
     @snapshot.update!(data: payload, published_at: nil)
-    redirect_to admin_content_path, notice: '題庫快照已匯入伺服器。'
+    redirect_to admin_content_path(paper: @paper_name), notice: '題庫快照已匯入伺服器。'
   rescue JSON::ParserError, ArgumentError => e
-    redirect_to admin_content_path, alert: "匯入失敗：#{e.message}"
+    redirect_to admin_content_path(paper: @paper_name), alert: "匯入失敗：#{e.message}"
   end
 
   private
 
   def load_snapshot
-    @snapshot = ContentSnapshot.find_by(paper_name: PAPER_NAME) || ContentSnapshot.find_by(paper_name: '保险原理及实务')
-    @snapshot ||= ContentSnapshot.create!(paper_name: PAPER_NAME, data: ContentSnapshot.default_data)
-    @snapshot.update!(paper_name: PAPER_NAME) if @snapshot.paper_name != PAPER_NAME
+    @paper_name = requested_paper_name
+    @snapshot = ContentSnapshot.find_by(paper_name: @paper_name)
+    @snapshot ||= ContentSnapshot.find_by(paper_name: '保险原理及实务') if @paper_name == PAPER_NAME
+    @snapshot ||= ContentSnapshot.create!(paper_name: @paper_name, data: ContentSnapshot.default_data_for(@paper_name) || ContentSnapshot.default_data)
+    @snapshot.update!(paper_name: @paper_name) if @snapshot.paper_name != @paper_name
+  end
+
+  def requested_paper_name
+    candidate = params[:paper].presence
+    ContentSnapshot::PAPER_NAMES.include?(candidate) ? candidate : PAPER_NAME
   end
 
   def validate_snapshot!(payload)

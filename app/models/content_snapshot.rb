@@ -227,6 +227,8 @@ class ContentSnapshot < ApplicationRecord
   validates :paper_name, presence: true, uniqueness: true
 
   PAPER_NAME = '保險原理及實務'.freeze
+  PAPER_TWO_NAME = '一般保險'.freeze
+  PAPER_NAMES = [PAPER_NAME, PAPER_TWO_NAME, '人壽保險', '法規與合規', '風險管理'].freeze
 
   def self.traditionalize_data(value)
     case value
@@ -247,7 +249,7 @@ class ContentSnapshot < ApplicationRecord
 
     data = {
       version: 'draft-2026.10.18-q1-927',
-      chapterNames: ['保險原理及實務', '人壽保險', '一般保險', '法規與合規', '風險管理'],
+      chapterNames: PAPER_NAMES,
       questions: question_bank || [
         question(1, '1.1.1', '保險的最大誠信原則要求投保人如實披露重要事實。以下哪項最符合該原則？', '單選題', ['只披露對自己有利的資料', '投保時披露足以影響承保決定的所有重要事實', '簽約後才披露重要事實', '由保險代理人代為決定披露範圍'], ['B'], '最大誠信原則貫穿訂立合約的全過程，投保人、被保險人及保險人都應披露重要事實。', ['核心概念', '卷一']),
         question(2, '1.2', '以下哪些屬於釐定一般保險保費時通常考慮的因素？', '多選題', ['風險發生的機率', '潛在損失幅度', '營運費用', '投保人的幸運顏色'], ['A', 'B', 'C'], '保費通常綜合風險機率、損失幅度、營運費用、資本成本及所需利潤等因素。', ['多選', '卷一']),
@@ -275,16 +277,26 @@ class ContentSnapshot < ApplicationRecord
     traditionalize_data(with_explanation_contents(data).deep_stringify_keys)
   end
 
-  def self.merge_question_bank_data(existing_data = nil)
-    source = default_data
+  def self.default_data_for(paper_name)
+    return default_data if paper_name.to_s == PAPER_NAME
+
+    path = Rails.root.join('db', 'content_q2_general_insurance.json') if paper_name.to_s == PAPER_TWO_NAME
+    return JSON.parse(File.read(path)) if path && File.exist?(path)
+
+    nil
+  end
+
+  def self.merge_question_bank_data(existing_data = nil, paper_name = PAPER_NAME)
+    source = default_data_for(paper_name) || default_data
     existing = traditionalize_data(existing_data.presence || {})
     existing_questions = Array(existing['questions']).index_by { |question| question['id'].to_i }
     source['questions'] = source['questions'].map do |question|
       existing_questions[question['id'].to_i].presence || question
     end
     source['paperOneSyllabus'] = existing['paperOneSyllabus'] if existing['paperOneSyllabus'].is_a?(Array) && existing['paperOneSyllabus'].any?
-    source['chapterNames'] = existing['chapterNames'] if existing['chapterNames'].is_a?(Array) && existing['chapterNames'].any?
-    source['version'] = 'draft-2026.10.18-q1-927'
+    source['chapterNames'] = existing['chapterNames'] if paper_name.to_s != PAPER_NAME && existing['chapterNames'].is_a?(Array) && existing['chapterNames'].any?
+    source['chapterNames'] = PAPER_NAMES if paper_name.to_s == PAPER_NAME
+    source['version'] = paper_name.to_s == PAPER_TWO_NAME ? 'draft-2026.10.18-q2-lecture-2024-02' : 'draft-2026.10.18-q1-927'
     traditionalize_data(with_explanation_contents(source).deep_stringify_keys)
   end
 

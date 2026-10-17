@@ -1,7 +1,9 @@
 /* global document, console, structuredClone, fetch, URLSearchParams, clearTimeout, setTimeout, Blob, URL */
 
-const PAPER_NAME = "保險原理及實務";
-const PAPER_NAMES = ["保險原理及實務", "人壽保險", "一般保險", "法規與合規", "風險管理"];
+const ADMIN_ROOT = document.querySelector(".content-admin");
+const PAPER_NAME = ADMIN_ROOT?.dataset.paperName || "保險原理及實務";
+const PAPER_NAMES = ["保險原理及實務", "一般保險", "人壽保險", "法規與合規", "風險管理"];
+const AVAILABLE_PAPERS = new Set((ADMIN_ROOT?.dataset.availablePapers || "保險原理及實務").split("|"));
 
 const TRADITIONAL_CHARACTERS = {
   "与": "與",
@@ -311,6 +313,10 @@ function escapeHtml(value = "") {
   return String(value).replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[character]));
 }
 
+function displayQuestionNumber(item) {
+  return item?.questionNumber || item?.id;
+}
+
 function referenceNumbers(value = "") {
   return [...String(value).replaceAll(" ", "").matchAll(/\d+(?:\.\d+)+/g)].map(match => match[0]);
 }
@@ -375,9 +381,9 @@ function render() {
 
 function renderPapers() {
   document.querySelector("#paperList").innerHTML = PAPER_NAMES.map((name, index) => `
-    <button class="paper-item ${index === 0 ? "active" : ""}" ${index === 0 ? "" : "disabled"}>
+    <button class="paper-item ${name === PAPER_NAME ? "active" : ""}" data-paper-name="${escapeHtml(name)}" data-paper-url="/admin/content?paper=${encodeURIComponent(name)}" ${AVAILABLE_PAPERS.has(name) ? "" : "disabled"}>
       <span class="paper-number">${String(index + 1).padStart(2, "0")}</span>
-      <span class="paper-copy"><strong>${escapeHtml(name)}</strong><span>${index === 0 ? "可編輯" : "待錄入"}</span></span>
+      <span class="paper-copy"><strong>${escapeHtml(name)}</strong><span>${AVAILABLE_PAPERS.has(name) ? "可編輯" : "待錄入"}</span></span>
     </button>
   `).join("");
 }
@@ -505,13 +511,13 @@ function renderLinkQuestionList(context) {
   });
   return `<div class="editor-section" id="linkQuestionList">
     <div class="form-label">可關聯題目 · ${candidates.length} 道</div>
-    <div class="question-list">${candidates.length ? candidates.map(item => `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>參考章節 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="button small" data-action="link-question-item" data-id="${escapeHtml(item.id)}">關聯</button></div>`).join("") : `<div class="outline-path">沒有可關聯的題目。</div>`}</div>
+    <div class="question-list">${candidates.length ? candidates.map(item => `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(displayQuestionNumber(item))} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>參考章節 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="button small" data-action="link-question-item" data-id="${escapeHtml(item.id)}">關聯</button></div>`).join("") : `<div class="outline-path">沒有可關聯的題目。</div>`}</div>
   </div>`;
 }
 
 function renderQuestionRow(item) {
   const unresolved = unresolvedQuestionReferences(item);
-  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>參考章節 ${escapeHtml(item.chapterNumber)}</span>${unresolved.length ? `<span class="question-warning">未對應大綱</span>` : ""}</div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="編輯">✎</button></div>`;
+  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(displayQuestionNumber(item))} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>參考章節 ${escapeHtml(item.chapterNumber)}</span>${unresolved.length ? `<span class="question-warning">未對應大綱</span>` : ""}</div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="編輯">✎</button></div>`;
 }
 
 function renderQuestionEditor(context) {
@@ -523,7 +529,8 @@ function renderQuestionEditor(context) {
   const unresolved = unresolvedQuestionReferences({ ...item, chapterNumber });
   return `<div class="editor-section">
     <div class="form-label">題目設定 ${existing ? `· #${item.id}` : "· 新題目"}</div>
-    <div class="field-row"><label>試題編號</label><input class="field" id="questionID" value="${escapeHtml(existing ? item.id : nextQuestionID())}" inputmode="numeric" ${existing ? "readonly" : ""} /></div>
+    <input id="questionStorageID" type="hidden" value="${escapeHtml(existing ? item.id : "new")}" />
+    <div class="field-row"><label>試題編號</label><input class="field" id="questionID" value="${escapeHtml(existing ? displayQuestionNumber(item) : nextQuestionID())}" inputmode="numeric" ${existing ? "readonly" : ""} /></div>
     <div class="field-row"><label>題型</label><select class="select" id="questionType"><option ${item.type === "單選題" ? "selected" : ""}>單選題</option><option ${item.type === "多選題" ? "selected" : ""}>多選題</option></select></div>
     <div class="field-row"><label>參考章節</label><div class="reference-editor"><input class="field" id="questionChapterNumber" value="${escapeHtml(chapterNumber || context.node.number)}" placeholder="可手填，例如 1.1.1" /><button class="button small" type="button" data-action="toggle-reference-picker">從大綱選擇</button></div></div>
     ${unresolved.length ? `<div class="unresolved-warning">未找到對應大綱：${unresolved.map(escapeHtml).join("、")}。可以繼續儲存，或用“從大綱選擇”完成關聯。</div>` : ""}
@@ -686,18 +693,23 @@ function saveNode() {
 function saveQuestion() {
   const context = findNode(state.selectedKey);
   if (!context) return;
-  const questionID = Number(document.querySelector("#questionID").value);
+  const questionNumber = String(document.querySelector("#questionID").value).trim();
+  const typedID = Number(questionNumber);
+  const storedID = Number(document.querySelector("#questionStorageID")?.value);
+  const questionID = Number.isInteger(storedID) && storedID > 0 ? storedID : typedID;
   const title = document.querySelector("#questionTitle").value.trim();
   const type = document.querySelector("#questionType").value;
   const chapterNumber = document.querySelector("#questionChapterNumber").value.trim();
   const options = [...document.querySelectorAll(".option-row")].map(row => ({ id: row.querySelector("[data-option-id]").dataset.optionId, text: row.querySelector("[data-option-id]").value.trim() })).filter(option => option.text);
   const correctOptionIDs = [...document.querySelectorAll("input[name='correctOption']:checked")].map(input => input.value);
-  if (!Number.isInteger(questionID) || questionID <= 0) return showToast("試題編號必須是正整數");
+  if (!Number.isInteger(typedID) || typedID <= 0) return showToast("試題編號必須是正整數");
   const duplicate = state.data.questions.find(questionItem => Number(questionItem.id) === questionID && String(questionItem.id) !== String(state.editingQuestionId));
   if (duplicate) return showToast(`試題編號 #${questionID} 已存在`);
   if (!title || !chapterNumber || options.length < 2 || !correctOptionIDs.length) return showToast("請填寫題目、參考章節、至少兩個選項和正確答案");
   if (correctOptionIDs.length !== 1) return showToast("每題只能選擇一個答案");
-  const item = { id: questionID, chapter: PAPER_NAME, chapterNumber, title, type, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags: [] };
+  const existing = state.data.questions.find(questionItem => Number(questionItem.id) === questionID);
+  const item = { id: questionID, questionNumber, chapter: PAPER_NAME, chapterNumber, title, type, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags: [] };
+  if (existing?.questionNumber && state.editingQuestionId !== "new") item.questionNumber = existing.questionNumber;
   if (state.editingQuestionId !== "new") removeQuestionFromContents(item.id);
   const index = state.data.questions.findIndex(questionItem => questionItem.id === item.id);
   if (index >= 0) state.data.questions[index] = item; else state.data.questions.push(item);
@@ -776,6 +788,11 @@ document.addEventListener("keydown", event => {
 });
 
 document.addEventListener("click", event => {
+  const paper = event.target.closest("[data-paper-name]");
+  if (paper && !paper.disabled && paper.dataset.paperName !== PAPER_NAME) {
+    window.location.href = paper.dataset.paperUrl;
+    return;
+  }
   if (!event.target.closest("#outlineContextMenu")) closeContextMenu();
   const target = event.target.closest("[data-action]");
   if (!target) return;

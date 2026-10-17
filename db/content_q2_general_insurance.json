@@ -1,0 +1,3030 @@
+{
+  "version": "draft-2026.10.18-q2-lecture-2024-02",
+  "chapterNames": [
+    "一般保險"
+  ],
+  "questions": [
+    {
+      "id": 2001,
+      "questionNumber": "1",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1(a)",
+      "title": "以下哪種汽車保險單，保障範圍包括對受保車輛 造成的損失及毀壞？ (I) 「法令」 (II) 第三者責任 (III) 第三者責任，火災及盜竊 (IV) 綜合",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "I & II"
+        },
+        {
+          "id": "B",
+          "text": "I & III"
+        },
+        {
+          "id": "C",
+          "text": "II & III"
+        },
+        {
+          "id": "D",
+          "text": "III & IV"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.1(a)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 53,
+      "sourceQuestionNumber": 1,
+      "sourceReference": "1.1(a)"
+    },
+    {
+      "id": 2002,
+      "questionNumber": "2",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1 (a)&(b)",
+      "title": "在道路意外中，被保險人的乘客遭受損傷， 其醫療費用可能包括於下列哪項汽車保險中？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "法令"
+        },
+        {
+          "id": "B",
+          "text": "第三者責任、火災、盜竊"
+        },
+        {
+          "id": "C",
+          "text": "綜合"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1.1 (a)&(b)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 54,
+      "sourceQuestionNumber": 2,
+      "sourceReference": "1.1 (a)&(b)"
+    },
+    {
+      "id": 2003,
+      "questionNumber": "3",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1 (a)&(b)",
+      "title": "若乘客在交通意外中受傷，以下 哪項保險可為被保險人的責任提 供保障？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "綜合保險"
+        },
+        {
+          "id": "B",
+          "text": "「法定」保險"
+        },
+        {
+          "id": "C",
+          "text": "第三者責任、火災及盜竊保險"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.1 (a)&(b)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 55,
+      "sourceQuestionNumber": 3,
+      "sourceReference": "1.1 (a)&(b)"
+    },
+    {
+      "id": 2004,
+      "questionNumber": "4",
+      "chapter": "一般保險",
+      "chapterNumber": "1b(i)",
+      "title": "只對火災，閃電及爆炸造成的損毀 提供保障的保障形式是：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "全險"
+        },
+        {
+          "id": "B",
+          "text": "第三者保險"
+        },
+        {
+          "id": "C",
+          "text": "除外危險"
+        },
+        {
+          "id": "D",
+          "text": "指明危險"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1b(i)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 56,
+      "sourceQuestionNumber": 4,
+      "sourceReference": "1b(i)"
+    },
+    {
+      "id": 2005,
+      "questionNumber": "5",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1(e)",
+      "title": "您認為以下哪一種不屬於保險人 釐定綜合私家汽車保險單保費的 考慮因素？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "被保險人對車輛的估計價值"
+        },
+        {
+          "id": "B",
+          "text": "保障範圍"
+        },
+        {
+          "id": "C",
+          "text": "被保險人的性別"
+        },
+        {
+          "id": "D",
+          "text": "被保險車輛的引擎容量"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1.1(e)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 57,
+      "sourceQuestionNumber": 5,
+      "sourceReference": "1.1(e)"
+    },
+    {
+      "id": 2006,
+      "questionNumber": "6",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1.1(a)(i)",
+      "title": "以下哪項損失及損毀的例子，可得 到綜合私家車保單的保障？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "更換破舊的死氣喉"
+        },
+        {
+          "id": "B",
+          "text": "更換破舊的電線的開支"
+        },
+        {
+          "id": "C",
+          "text": "被保險人的車輛的車胎被割損 (沒有其他損毀)"
+        },
+        {
+          "id": "D",
+          "text": "被保險人的車輛被盜賊偷去時損毀"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.1.1(a)(i)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 58,
+      "sourceQuestionNumber": 6,
+      "sourceReference": "1.1.1(a)(i)"
+    },
+    {
+      "id": 2007,
+      "questionNumber": "7",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1.2",
+      "title": "以下哪項描述不屬於「電單車」保單 的保障範圍？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "電單車乘客在意外中身體受傷"
+        },
+        {
+          "id": "B",
+          "text": "當整輛電單車遭到偷竊"
+        },
+        {
+          "id": "C",
+          "text": "電單車的意外損毀"
+        },
+        {
+          "id": "D",
+          "text": "為電單車乘客所付的醫療開支"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.1.2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 59,
+      "sourceQuestionNumber": 7,
+      "sourceReference": "1.1.2"
+    },
+    {
+      "id": 2008,
+      "questionNumber": "8",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1.3(b)",
+      "title": "由於車房的業務絕大程度與汽車有 關，而且有特別的需要，提供的保 障亦有所不同，這類保單稱為：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "汽車行業風險"
+        },
+        {
+          "id": "B",
+          "text": "商業車輛風險"
+        },
+        {
+          "id": "C",
+          "text": "貿易車輛風險"
+        },
+        {
+          "id": "D",
+          "text": "維修貿易風險"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.1.3(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 60,
+      "sourceQuestionNumber": 8,
+      "sourceReference": "1.1.3(b)"
+    },
+    {
+      "id": 2009,
+      "questionNumber": "9",
+      "chapter": "一般保險",
+      "chapterNumber": "1.2.1(a)",
+      "title": "個人意外保險屬於意外保險的首個 主要類別，是因應早期以下哪項不 斷上升的意外而發展？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "汽車"
+        },
+        {
+          "id": "B",
+          "text": "鐵路"
+        },
+        {
+          "id": "C",
+          "text": "船隻"
+        },
+        {
+          "id": "D",
+          "text": "腳踏車"
+        }
+      ],
+      "correctOptionIDs": [
+        "B"
+      ],
+      "explanation": "參考章節 1.2.1(a)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 76,
+      "sourceQuestionNumber": 9,
+      "sourceReference": "1.2.1(a)"
+    },
+    {
+      "id": 2010,
+      "questionNumber": "10",
+      "chapter": "一般保險",
+      "chapterNumber": "1.2.2(b)",
+      "title": "以下哪項正確描述醫療保險的除外責任？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "包括個人意外保單的除外責任"
+        },
+        {
+          "id": "B",
+          "text": "包括個人意外保單沒有提供的除外責任"
+        },
+        {
+          "id": "C",
+          "text": "包括「自願性」醫療開支 (例如：整容手術)"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "B"
+      ],
+      "explanation": "參考章節 1.2.2(b)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 77,
+      "sourceQuestionNumber": 10,
+      "sourceReference": "1.2.2(b)"
+    },
+    {
+      "id": 2011,
+      "questionNumber": "11",
+      "chapter": "一般保險",
+      "chapterNumber": "1.3.1",
+      "title": "家居保險一般是由下列哪個保險部 簽發的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "火險"
+        },
+        {
+          "id": "B",
+          "text": "意外保險"
+        },
+        {
+          "id": "C",
+          "text": "汽車保險"
+        },
+        {
+          "id": "D",
+          "text": "人壽及健康保險"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.3.1。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 106,
+      "sourceQuestionNumber": 11,
+      "sourceReference": "1.3.1"
+    },
+    {
+      "id": 2012,
+      "questionNumber": "12",
+      "chapter": "一般保險",
+      "chapterNumber": "1.3.1(b)(iv)",
+      "title": "一個物業在特定期間內空置，家居保單 通常會暫停提供保障。這段期 間為:",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "48小時"
+        },
+        {
+          "id": "B",
+          "text": "1星期"
+        },
+        {
+          "id": "C",
+          "text": "30天"
+        },
+        {
+          "id": "D",
+          "text": "60天"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1.3.1(b)(iv)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 107,
+      "sourceQuestionNumber": 12,
+      "sourceReference": "1.3.1(b)(iv)"
+    },
+    {
+      "id": 2013,
+      "questionNumber": "13",
+      "chapter": "一般保險",
+      "chapterNumber": "1.3.3",
+      "title": "旅遊保險通常歸類於：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "指明保險"
+        },
+        {
+          "id": "B",
+          "text": "渡假保險"
+        },
+        {
+          "id": "C",
+          "text": "「全險」"
+        },
+        {
+          "id": "D",
+          "text": "一籃子保單"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.3.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 108,
+      "sourceQuestionNumber": 13,
+      "sourceReference": "1.3.3"
+    },
+    {
+      "id": 2014,
+      "questionNumber": "14",
+      "chapter": "一般保險",
+      "chapterNumber": "1.3.4(c)",
+      "title": "以下哪項不是向大型機構所提供的 「傘括」類 型組合保障的特點？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "只提供財產及責任的保障"
+        },
+        {
+          "id": "B",
+          "text": "可按被保險人的需要而個別草擬"
+        },
+        {
+          "id": "C",
+          "text": "提供財產保障以全險為根據"
+        },
+        {
+          "id": "D",
+          "text": "包括大部份保險類別 (財產、責任等)"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.3.4(c)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 109,
+      "sourceQuestionNumber": 14,
+      "sourceReference": "1.3.4(c)"
+    },
+    {
+      "id": 2015,
+      "questionNumber": "15",
+      "chapter": "一般保險",
+      "chapterNumber": "1.4.1a(d)",
+      "title": "營業中斷保險是為「利潤」作出保障，它亦稱為：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "中斷賠償"
+        },
+        {
+          "id": "B",
+          "text": "利潤保障"
+        },
+        {
+          "id": "C",
+          "text": "後果損失"
+        },
+        {
+          "id": "D",
+          "text": "中斷期間"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1.4.1a(d)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 147,
+      "sourceQuestionNumber": 15,
+      "sourceReference": "1.4.1a(d)"
+    },
+    {
+      "id": 2016,
+      "questionNumber": "16",
+      "chapter": "一般保險",
+      "chapterNumber": "1.4.1 (a)(iv)",
+      "title": "以下哪項不屬於附加於本港簽發的 商業火險 單 中「附加危險」的替代 用詞?",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "擴展危險"
+        },
+        {
+          "id": "B",
+          "text": "類似危險"
+        },
+        {
+          "id": "C",
+          "text": "特殊危險"
+        },
+        {
+          "id": "D",
+          "text": "補充危險"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.4.1 (a)(iv)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 148,
+      "sourceQuestionNumber": 16,
+      "sourceReference": "1.4.1 (a)(iv)"
+    },
+    {
+      "id": 2017,
+      "questionNumber": "17",
+      "chapter": "一般保險",
+      "chapterNumber": "1.4.1(d)",
+      "title": "以下哪項不是商業火險的常見的標的物？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "建築物"
+        },
+        {
+          "id": "B",
+          "text": "營業存貨"
+        },
+        {
+          "id": "C",
+          "text": "辦公室家具"
+        },
+        {
+          "id": "D",
+          "text": "機器"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1.4.1(d)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 149,
+      "sourceQuestionNumber": 17,
+      "sourceReference": "1.4.1(d)"
+    },
+    {
+      "id": 2018,
+      "questionNumber": "18",
+      "chapter": "一般保險",
+      "chapterNumber": "1.4.3",
+      "title": "以下哪項會受到基本盜竊保險的保障？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "串同職員盜竊的款項"
+        },
+        {
+          "id": "B",
+          "text": "賊人由沒有鎖上及已開啟的門入內盜竊的損失"
+        },
+        {
+          "id": "C",
+          "text": "意圖毀滅證據而放火所導致的損毀"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項都不是"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.4.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 150,
+      "sourceQuestionNumber": 18,
+      "sourceReference": "1.4.3"
+    },
+    {
+      "id": 2019,
+      "questionNumber": "19",
+      "chapter": "一般保險",
+      "chapterNumber": "1.4.4(b)",
+      "title": "以下哪項引致玻璃碎裂的事項，是在基本的玻 璃保單中不承保的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "消防員尋找救火通道時弄破的玻璃"
+        },
+        {
+          "id": "B",
+          "text": "遭汽車撞擊而被破壞的玻璃"
+        },
+        {
+          "id": "C",
+          "text": "醉酒球迷擲汽水罐而破碎的玻璃"
+        },
+        {
+          "id": "D",
+          "text": "投保人不小心弄碎的玻璃"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.4.4(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 151,
+      "sourceQuestionNumber": 19,
+      "sourceReference": "1.4.4(b)"
+    },
+    {
+      "id": 2020,
+      "questionNumber": "20",
+      "chapter": "一般保險",
+      "chapterNumber": "1.4.5 (a)(ii)",
+      "title": "以下哪項描述有關於金錢保險屬正確的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "保障包括金錢以外的其他標的物，例 如支票、匯票等"
+        },
+        {
+          "id": "B",
+          "text": "只承保火災"
+        },
+        {
+          "id": "C",
+          "text": "所有保單自動承保職員住處"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.4.5 (a)(ii)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 152,
+      "sourceQuestionNumber": 20,
+      "sourceReference": "1.4.5 (a)(ii)"
+    },
+    {
+      "id": 2021,
+      "questionNumber": "21",
+      "chapter": "一般保險",
+      "chapterNumber": "1.4.7d(ii)",
+      "title": "反擔保是指：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "額外保費"
+        },
+        {
+          "id": "B",
+          "text": "風險的再評估"
+        },
+        {
+          "id": "C",
+          "text": "獨立諮詢代言人的保費率"
+        },
+        {
+          "id": "D",
+          "text": "抵押性的保障，由承建商董事 作個人擔保的保障"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.4.7d(ii)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 153,
+      "sourceQuestionNumber": 21,
+      "sourceReference": "1.4.7d(ii)"
+    },
+    {
+      "id": 2022,
+      "questionNumber": "22",
+      "chapter": "一般保險",
+      "chapterNumber": "1.5.1(a)",
+      "title": "鍋爐爆炸保單的基本保障：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "包括財產損毀及法律責任索償"
+        },
+        {
+          "id": "B",
+          "text": "針對鍋爐爆炸或倒塌的後果"
+        },
+        {
+          "id": "C",
+          "text": "涉及在正常工作過程中對鍋爐造成的損毀"
+        },
+        {
+          "id": "D",
+          "text": "與上述各項 說明相符"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.5.1(a)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 164,
+      "sourceQuestionNumber": 22,
+      "sourceReference": "1.5.1(a)"
+    },
+    {
+      "id": 2023,
+      "questionNumber": "23",
+      "chapter": "一般保險",
+      "chapterNumber": "1.5.3 (b)",
+      "title": "對其他建築物造成的支撐力減弱通常：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "已經包括在建築全險中的責任保障部份"
+        },
+        {
+          "id": "B",
+          "text": "已經包括在建築全險中的財產保險保障部份"
+        },
+        {
+          "id": "C",
+          "text": "在損失金額較免賠額為大時，已經包括在建築全險中"
+        },
+        {
+          "id": "D",
+          "text": "是建築全險的 除外責任"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.5.3 (b)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 165,
+      "sourceQuestionNumber": 23,
+      "sourceReference": "1.5.3 (b)"
+    },
+    {
+      "id": 2024,
+      "questionNumber": "24",
+      "chapter": "一般保險",
+      "chapterNumber": "1.6",
+      "title": "責任保險可能從法定要求(條例的 條款)及普通法規 (疏忽)下及合約下 (協議下)產生，下列那項是可保 的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "法定要求而已"
+        },
+        {
+          "id": "B",
+          "text": "普通法而已"
+        },
+        {
+          "id": "C",
+          "text": "法定及普通法 而已"
+        },
+        {
+          "id": "D",
+          "text": "法定、普通法及合約下的責任"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.6。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 191,
+      "sourceQuestionNumber": 24,
+      "sourceReference": "1.6"
+    },
+    {
+      "id": 2025,
+      "questionNumber": "25",
+      "chapter": "一般保險",
+      "chapterNumber": "1.6.1",
+      "title": "以下哪三項對僱員補償條例的描述是正確的？ (I) 在普通法下，僱員是受到保障的 (II) 此保障包括承保商的僱員 (III) 在僱員補償條例中的責任是受到保障的 (IV) 保費以百分比或千分比徵費，並以僱主 全年付出工資計算",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "I, II & III"
+        },
+        {
+          "id": "B",
+          "text": "I, II & IV"
+        },
+        {
+          "id": "C",
+          "text": "I, III & IV"
+        },
+        {
+          "id": "D",
+          "text": "II, III & IV"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1.6.1。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 192,
+      "sourceQuestionNumber": 25,
+      "sourceReference": "1.6.1"
+    },
+    {
+      "id": 2026,
+      "questionNumber": "26",
+      "chapter": "一般保險",
+      "chapterNumber": "1.6.2",
+      "title": "產品責任的保障包括： (I) 產品本身有問題 (II) 與公眾責任保障範圍一樣 (III) 是「索償申報」保單 (IV) 某些市場屬於高度風險市場",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "I、II 及 III"
+        },
+        {
+          "id": "B",
+          "text": "I、II 及 IV"
+        },
+        {
+          "id": "C",
+          "text": "II、III 及 IV"
+        },
+        {
+          "id": "D",
+          "text": "I、III 及 IV"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.6.2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 193,
+      "sourceQuestionNumber": 26,
+      "sourceReference": "1.6.2"
+    },
+    {
+      "id": 2027,
+      "questionNumber": "27",
+      "chapter": "一般保險",
+      "chapterNumber": "1.6.3",
+      "title": "以下哪項對於專業彌償保險的描述是正確的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "較常以索償申報的方式簽發"
+        },
+        {
+          "id": "B",
+          "text": "它可能以「醫療事故責任保險」出現"
+        },
+        {
+          "id": "C",
+          "text": "主要保障專業行為及疏忽出現的錯誤"
+        },
+        {
+          "id": "D",
+          "text": "以上所有 各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.6.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 194,
+      "sourceQuestionNumber": 27,
+      "sourceReference": "1.6.3"
+    },
+    {
+      "id": 2028,
+      "questionNumber": "28",
+      "chapter": "一般保險",
+      "chapterNumber": "1.6.5(b)",
+      "title": "以下哪項屬於公眾責任保險的除外責任？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "在特定地區範圍以外發生的意外"
+        },
+        {
+          "id": "B",
+          "text": "其他保單也提供較適合的 責任風險的保障"
+        },
+        {
+          "id": "C",
+          "text": "合約上的責任"
+        },
+        {
+          "id": "D",
+          "text": "以上所有 各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.6.5(b)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 195,
+      "sourceQuestionNumber": 28,
+      "sourceReference": "1.6.5(b)"
+    },
+    {
+      "id": 2029,
+      "questionNumber": "29",
+      "chapter": "一般保險",
+      "chapterNumber": "1.7",
+      "title": "水險單中指明免賠額為損失的5%，若船體價值為一佰萬， 當船隻出現全部損失時，賠償額為：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "25萬"
+        },
+        {
+          "id": "B",
+          "text": "75萬"
+        },
+        {
+          "id": "C",
+          "text": "95萬"
+        },
+        {
+          "id": "D",
+          "text": "100 萬"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.7。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 220,
+      "sourceQuestionNumber": 29,
+      "sourceReference": "1.7"
+    },
+    {
+      "id": 2030,
+      "questionNumber": "30",
+      "chapter": "一般保險",
+      "chapterNumber": "1.7(a)(i)",
+      "title": "在海上船險中，以下哪項屬於單獨海損？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "因船隻相撞造成的輕微損毀"
+        },
+        {
+          "id": "B",
+          "text": "因盜竊而損失的貨運物品"
+        },
+        {
+          "id": "C",
+          "text": "因漏電失火令導向舵損毀"
+        },
+        {
+          "id": "D",
+          "text": "以上所有 各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 1.7(a)(i)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 221,
+      "sourceQuestionNumber": 30,
+      "sourceReference": "1.7(a)(i)"
+    },
+    {
+      "id": 2031,
+      "questionNumber": "31",
+      "chapter": "一般保險",
+      "chapterNumber": "1.7.1(a)(i)",
+      "title": "下列哪三種水險，是以「特定危險」 為根據？ (i) 貨物條款A (ii) 貨物條款B (iii) 貨物條款C (iv) 遊艇條款保險",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "i、ii 及 iii"
+        },
+        {
+          "id": "B",
+          "text": "i、ii 及 iv"
+        },
+        {
+          "id": "C",
+          "text": "ii、iii 及 iv"
+        },
+        {
+          "id": "D",
+          "text": "i、ii、iii 及iv"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1.7.1(a)(i)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 222,
+      "sourceQuestionNumber": 31,
+      "sourceReference": "1.7.1(a)(i)"
+    },
+    {
+      "id": 2032,
+      "questionNumber": "32",
+      "chapter": "一般保險",
+      "chapterNumber": "1.7.3(e)",
+      "title": "遊艇保險的理賠通常基於不折舊的方法。但對於某些例外的物品可 能會作出折舊扣減，而最高折舊扣減額為原值的三分之一，例如： (i) 船帆 (ii) 船外的引擎 (iii) 船隻的小艇 (iv) 船上的個人財物",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "i, ii"
+        },
+        {
+          "id": "B",
+          "text": "i, ii, iii"
+        },
+        {
+          "id": "C",
+          "text": "ii, iii, iv"
+        },
+        {
+          "id": "D",
+          "text": "i, ii, iii, iv"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.7.3(e)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 223,
+      "sourceQuestionNumber": 32,
+      "sourceReference": "1.7.3(e)"
+    },
+    {
+      "id": 2033,
+      "questionNumber": "33",
+      "chapter": "一般保險",
+      "chapterNumber": "2",
+      "title": "核保的程序涉及：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "風險的類別"
+        },
+        {
+          "id": "B",
+          "text": "風險的選擇"
+        },
+        {
+          "id": "C",
+          "text": "變更標準合約的條款"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 238,
+      "sourceQuestionNumber": 33,
+      "sourceReference": "2"
+    },
+    {
+      "id": 2034,
+      "questionNumber": "34",
+      "chapter": "一般保險",
+      "chapterNumber": "2",
+      "title": "一般在判定一項風險的可保性和決定 採納甚麼合約條件的人是：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "代理人"
+        },
+        {
+          "id": "B",
+          "text": "核保 人"
+        },
+        {
+          "id": "C",
+          "text": "保險經紀"
+        },
+        {
+          "id": "D",
+          "text": "保險公司的行政總裁"
+        }
+      ],
+      "correctOptionIDs": [
+        "B"
+      ],
+      "explanation": "參考章節 2。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 239,
+      "sourceQuestionNumber": 34,
+      "sourceReference": "2"
+    },
+    {
+      "id": 2035,
+      "questionNumber": "35",
+      "chapter": "一般保險",
+      "chapterNumber": "2.1.2(a)",
+      "title": "風險的估定是實質本性與有關事實的結合， 可稱為 :",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "核保人承保的考慮因素"
+        },
+        {
+          "id": "B",
+          "text": "道德危險"
+        },
+        {
+          "id": "C",
+          "text": "實質 危險"
+        },
+        {
+          "id": "D",
+          "text": "受保商數"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 2.1.2(a)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 240,
+      "sourceQuestionNumber": 35,
+      "sourceReference": "2.1.2(a)"
+    },
+    {
+      "id": 2036,
+      "questionNumber": "36",
+      "chapter": "一般保險",
+      "chapterNumber": "2.1.3",
+      "title": "以下哪項不是投保書的主體問題？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "投保人的姓名"
+        },
+        {
+          "id": "B",
+          "text": "投保人的地址"
+        },
+        {
+          "id": "C",
+          "text": "投保人的 年齡"
+        },
+        {
+          "id": "D",
+          "text": "投保人過往的索償經驗"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 2.1.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 241,
+      "sourceQuestionNumber": 36,
+      "sourceReference": "2.1.3"
+    },
+    {
+      "id": 2037,
+      "questionNumber": "37",
+      "chapter": "一般保險",
+      "chapterNumber": "2.1.4(a)",
+      "title": "以下哪項一般保險業務，填妥的投保書是唯一的資料來源？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "火險"
+        },
+        {
+          "id": "B",
+          "text": "盜竊險"
+        },
+        {
+          "id": "C",
+          "text": "汽車保險 (私家車)"
+        },
+        {
+          "id": "D",
+          "text": "公眾責任"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 2.1.4(a)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 242,
+      "sourceQuestionNumber": 37,
+      "sourceReference": "2.1.4(a)"
+    },
+    {
+      "id": 2038,
+      "questionNumber": "38",
+      "chapter": "一般保險",
+      "chapterNumber": "2.2.3(a)&(b)(iii)",
+      "title": "以下哪項關於投保書的描述是不正確的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "保單一經批核，便不需要保存投保書"
+        },
+        {
+          "id": "B",
+          "text": "有時可能是核保的唯一資料來源"
+        },
+        {
+          "id": "C",
+          "text": "專家的報告被視為投保書的輔助文件"
+        },
+        {
+          "id": "D",
+          "text": "投保書的資料及聲明是合約的基礎"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 2.2.3(a)&(b)(iii)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 256,
+      "sourceQuestionNumber": 38,
+      "sourceReference": "2.2.3(a)&(b)(iii)"
+    },
+    {
+      "id": 2039,
+      "questionNumber": "39",
+      "chapter": "一般保險",
+      "chapterNumber": "2.2.3(a)&(b)(iii)",
+      "title": "以下那項正確描述一般保險中的〝 暫保單〞?",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "可取替保單"
+        },
+        {
+          "id": "B",
+          "text": "一經推出，保險人便不可再向 被保人搜集資料"
+        },
+        {
+          "id": "C",
+          "text": "是暫時性的，可被保單所取替"
+        },
+        {
+          "id": "D",
+          "text": "是保險合約的証據"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 2.2.3(a)&(b)(iii)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 257,
+      "sourceQuestionNumber": 39,
+      "sourceReference": "2.2.3(a)&(b)(iii)"
+    },
+    {
+      "id": 2040,
+      "questionNumber": "40",
+      "chapter": "一般保險",
+      "chapterNumber": "2.2.3(b)",
+      "title": "保險單是：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "保險合約的可見證據"
+        },
+        {
+          "id": "B",
+          "text": "保險的真正合約"
+        },
+        {
+          "id": "C",
+          "text": "必定屬於簡式合約"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項都符合"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 2.2.3(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 258,
+      "sourceQuestionNumber": 40,
+      "sourceReference": "2.2.3(b)"
+    },
+    {
+      "id": 2041,
+      "questionNumber": "41",
+      "chapter": "一般保險",
+      "chapterNumber": "2.2.3(c)",
+      "title": "以下哪項保險會提供保險憑証？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "船上貨物保險"
+        },
+        {
+          "id": "B",
+          "text": "旅遊保險"
+        },
+        {
+          "id": "C",
+          "text": "汽車保險"
+        },
+        {
+          "id": "D",
+          "text": "以上各項皆是"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 2.2.3(c)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 259,
+      "sourceQuestionNumber": 41,
+      "sourceReference": "2.2.3(c)"
+    },
+    {
+      "id": 2042,
+      "questionNumber": "42",
+      "chapter": "一般保險",
+      "chapterNumber": "2.2.4(a)(ii)",
+      "title": "風險差別對待是指：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "分辨承保的風險"
+        },
+        {
+          "id": "B",
+          "text": "確定保費的高低"
+        },
+        {
+          "id": "C",
+          "text": "釐訂保險合約的條件"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 2.2.4(a)(ii)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 260,
+      "sourceQuestionNumber": 42,
+      "sourceReference": "2.2.4(a)(ii)"
+    },
+    {
+      "id": 2043,
+      "questionNumber": "43",
+      "chapter": "一般保險",
+      "chapterNumber": "2.3.1(b)(i)",
+      "title": "以下哪項不會包含於承保表中？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "被保人的姓名、地址及年齡"
+        },
+        {
+          "id": "B",
+          "text": "仲裁條款"
+        },
+        {
+          "id": "C",
+          "text": "保額"
+        },
+        {
+          "id": "D",
+          "text": "標的物的描述"
+        }
+      ],
+      "correctOptionIDs": [
+        "B"
+      ],
+      "explanation": "參考章節 2.3.1(b)(i)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 279,
+      "sourceQuestionNumber": 43,
+      "sourceReference": "2.3.1(b)(i)"
+    },
+    {
+      "id": 2044,
+      "questionNumber": "44",
+      "chapter": "一般保險",
+      "chapterNumber": "2.3.1(b)(ii)",
+      "title": "「承保表式」的保單格式的敍文條款，較可能包含:",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "被保險人的姓名及地址"
+        },
+        {
+          "id": "B",
+          "text": "被保險標的物的完整描述"
+        },
+        {
+          "id": "C",
+          "text": "對投保書及聲明的參照"
+        },
+        {
+          "id": "D",
+          "text": "以上各項皆是"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 2.3.1(b)(ii)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 280,
+      "sourceQuestionNumber": 44,
+      "sourceReference": "2.3.1(b)(ii)"
+    },
+    {
+      "id": 2045,
+      "questionNumber": "45",
+      "chapter": "一般保險",
+      "chapterNumber": "2.3.1(b)(v)",
+      "title": "以下哪項對保單條件的說明是不正確的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "保單條件可以是明訂或隱含的"
+        },
+        {
+          "id": "B",
+          "text": "明訂條件比隱含條件重要"
+        },
+        {
+          "id": "C",
+          "text": "明訂條件是指實際出現在保單中的條款"
+        },
+        {
+          "id": "D",
+          "text": "隱含條件是適用的，然而不會出現在 保單文件中"
+        }
+      ],
+      "correctOptionIDs": [
+        "B"
+      ],
+      "explanation": "參考章節 2.3.1(b)(v)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 281,
+      "sourceQuestionNumber": 45,
+      "sourceReference": "2.3.1(b)(v)"
+    },
+    {
+      "id": 2046,
+      "questionNumber": "46",
+      "chapter": "一般保險",
+      "chapterNumber": "2.3.2(b)(ii)",
+      "title": "下列哪項是香港保單上常見的明訂條款？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "最高誠信"
+        },
+        {
+          "id": "B",
+          "text": "仲裁"
+        },
+        {
+          "id": "C",
+          "text": "保單除外責任"
+        },
+        {
+          "id": "D",
+          "text": "可保利益"
+        }
+      ],
+      "correctOptionIDs": [
+        "B"
+      ],
+      "explanation": "參考章節 2.3.2(b)(ii)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 282,
+      "sourceQuestionNumber": 46,
+      "sourceReference": "2.3.2(b)(ii)"
+    },
+    {
+      "id": 2047,
+      "questionNumber": "47",
+      "chapter": "一般保險",
+      "chapterNumber": "2.3.3(a)",
+      "title": "以下哪項描述對標準的自負額是正確的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "是保險公司額外實施的，藉此抗衡不利的特點"
+        },
+        {
+          "id": "B",
+          "text": "是被保險人取得保費扣減的手法"
+        },
+        {
+          "id": "C",
+          "text": "適用於所有同類保單 (例如「年輕司機」自負額)"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 2.3.3(a)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 283,
+      "sourceQuestionNumber": 47,
+      "sourceReference": "2.3.3(a)"
+    },
+    {
+      "id": 2048,
+      "questionNumber": "48",
+      "chapter": "一般保險",
+      "chapterNumber": "2.3.4",
+      "title": "優良保險慣例的一般原則建議不應因違反保証而 拒絕索償，除非：",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "索償額巨大"
+        },
+        {
+          "id": "B",
+          "text": "涉及強制性的保險索償"
+        },
+        {
+          "id": "C",
+          "text": "違反保証與索償有重要的 因果關係"
+        },
+        {
+          "id": "D",
+          "text": "這並非被保險人在該單的第一次索償"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 2.3.4。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 284,
+      "sourceQuestionNumber": 48,
+      "sourceReference": "2.3.4"
+    },
+    {
+      "id": 2049,
+      "questionNumber": "49",
+      "chapter": "一般保險",
+      "chapterNumber": "2.3.4(a)",
+      "title": "以下哪項有關保險保證的說明是正確的? (i) 若然違反保證,保險人便可拒絕承諾有關合約 (ii) 保險人在拒絕索償前會要求的一種關係 (iii) 保險人可要求被保險人採取一些行動(設置警鍾) (iv) 保險人可要求被保險人避免一些行動(拆御有關設施)",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "i , ii"
+        },
+        {
+          "id": "B",
+          "text": "iii , iv"
+        },
+        {
+          "id": "C",
+          "text": "i , ii , iii"
+        },
+        {
+          "id": "D",
+          "text": "i , ii , iii , iv"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 2.3.4(a)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 285,
+      "sourceQuestionNumber": 49,
+      "sourceReference": "2.3.4(a)"
+    },
+    {
+      "id": 2050,
+      "questionNumber": "50",
+      "chapter": "一般保險",
+      "chapterNumber": "2.4.2(a)&(b)",
+      "title": "根據取消條款，以下哪項描述是正確的？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "保險人或被保險人有權取消保單"
+        },
+        {
+          "id": "B",
+          "text": "若保險人取消保單，會退回短期保費"
+        },
+        {
+          "id": "C",
+          "text": "若被保險人取消保單，會按比例退回有關保費"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 2.4.2(a)&(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 290,
+      "sourceQuestionNumber": 50,
+      "sourceReference": "2.4.2(a)&(b)"
+    },
+    {
+      "id": 2051,
+      "questionNumber": "51",
+      "chapter": "一般保險",
+      "chapterNumber": "2.4.2",
+      "title": "根據一般保單的取消條款，以下哪項 屬於正確的描述？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "保險人有權取消該保單"
+        },
+        {
+          "id": "B",
+          "text": "通常由被保險人取消該保單"
+        },
+        {
+          "id": "C",
+          "text": "若該保單由保險人取消，已繳交的 保費可以按比例退還"
+        },
+        {
+          "id": "D",
+          "text": "以上所有各項"
+        }
+      ],
+      "correctOptionIDs": [
+        "D"
+      ],
+      "explanation": "參考章節 2.4.2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 291,
+      "sourceQuestionNumber": 51,
+      "sourceReference": "2.4.2"
+    },
+    {
+      "id": 2052,
+      "questionNumber": "52",
+      "chapter": "一般保險",
+      "chapterNumber": "1(b)(i)",
+      "title": "醫療保障是屬於哪類保險類別？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "財產保險"
+        },
+        {
+          "id": "B",
+          "text": "人身保險"
+        },
+        {
+          "id": "C",
+          "text": "經濟權益保險"
+        },
+        {
+          "id": "D",
+          "text": "責任保險"
+        }
+      ],
+      "correctOptionIDs": [
+        "B"
+      ],
+      "explanation": "參考章節 1(b)(i)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 12,
+      "sourceQuestionNumber": null,
+      "sourceReference": "1(b)(i)"
+    },
+    {
+      "id": 2053,
+      "questionNumber": "53",
+      "chapter": "一般保險",
+      "chapterNumber": "1(b)(ii)",
+      "title": "以下哪項不屬於主要的汽車保險類別?",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "商用車輛"
+        },
+        {
+          "id": "B",
+          "text": "私家車"
+        },
+        {
+          "id": "C",
+          "text": "的士"
+        },
+        {
+          "id": "D",
+          "text": "電單車"
+        }
+      ],
+      "correctOptionIDs": [
+        "C"
+      ],
+      "explanation": "參考章節 1(b)(ii)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 14,
+      "sourceQuestionNumber": null,
+      "sourceReference": "1(b)(ii)"
+    },
+    {
+      "id": 2054,
+      "questionNumber": "54",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1(a)",
+      "title": "i. 我們常提及保險人承保的「第三者」保險，以 下那三項是正確的？ (I) 它較強制性的「第三者」保險保障廣泛 (II) 它與強制性的「第三者」保險不同 (III) 它包括財產損毀保障 (IV) 它並不包括第三者財產保障",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "I, II, III"
+        },
+        {
+          "id": "B",
+          "text": "I, II, IV"
+        },
+        {
+          "id": "C",
+          "text": "I, III, IV"
+        },
+        {
+          "id": "D",
+          "text": "II, III & IV"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.1(a)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 18,
+      "sourceQuestionNumber": null,
+      "sourceReference": "1.1(a)"
+    },
+    {
+      "id": 2055,
+      "questionNumber": "55",
+      "chapter": "一般保險",
+      "chapterNumber": "1.1(c)(ii)",
+      "title": "在某種情況下，無索償折扣採用的「折扣回減」機制， 意思是不會因一次的索償而導致損失全部折扣，不過這 種機制只適用於？",
+      "type": "單選題",
+      "options": [
+        {
+          "id": "A",
+          "text": "私家車保險"
+        },
+        {
+          "id": "B",
+          "text": "電單車保險"
+        },
+        {
+          "id": "C",
+          "text": "商用車輛保險"
+        },
+        {
+          "id": "D",
+          "text": "汽車行業風險保險"
+        }
+      ],
+      "correctOptionIDs": [
+        "A"
+      ],
+      "explanation": "參考章節 1.1(c)(ii)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+      "tags": [],
+      "sourcePage": 22,
+      "sourceQuestionNumber": null,
+      "sourceReference": "1.1(c)(ii)"
+    }
+  ],
+  "paperOneSyllabus": [
+    {
+      "id": "1",
+      "number": "1",
+      "title": "保險產品",
+      "weight": "46%",
+      "topics": [
+        {
+          "id": "1.1",
+          "number": "1.1",
+          "title": "汽車保險",
+          "keyPoints": [],
+          "contents": [
+            {
+              "id": "content-1.1-q2001",
+              "text": "參考章節 1.1(a)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2001
+              ]
+            },
+            {
+              "id": "content-1.1-q2002",
+              "text": "參考章節 1.1 (a)&(b)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2002
+              ]
+            },
+            {
+              "id": "content-1.1-q2003",
+              "text": "參考章節 1.1 (a)&(b)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2003
+              ]
+            },
+            {
+              "id": "content-1.1-q2004",
+              "text": "參考章節 1b(i)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2004
+              ]
+            },
+            {
+              "id": "content-1.1-q2005",
+              "text": "參考章節 1.1(e)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2005
+              ]
+            },
+            {
+              "id": "content-1.1-q2052",
+              "text": "參考章節 1(b)(i)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2052
+              ]
+            },
+            {
+              "id": "content-1.1-q2053",
+              "text": "參考章節 1(b)(ii)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2053
+              ]
+            },
+            {
+              "id": "content-1.1-q2054",
+              "text": "參考章節 1.1(a)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2054
+              ]
+            },
+            {
+              "id": "content-1.1-q2055",
+              "text": "參考章節 1.1(c)(ii)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2055
+              ]
+            }
+          ],
+          "children": [
+            {
+              "id": "1.1.1",
+              "number": "1.1.1",
+              "title": "私家車",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.1.1-q2006",
+                  "text": "參考章節 1.1.1(a)(i)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2006
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.1.2",
+              "number": "1.1.2",
+              "title": "電單車",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.1.2-q2007",
+                  "text": "參考章節 1.1.2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2007
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.1.3",
+              "number": "1.1.3",
+              "title": "商用車輛",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.1.3-q2008",
+                  "text": "參考章節 1.1.3(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2008
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1.2",
+          "number": "1.2",
+          "title": "健康保險",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "1.2.1",
+              "number": "1.2.1",
+              "title": "人身意外及疾病保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.2.1-q2009",
+                  "text": "參考章節 1.2.1(a)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2009
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.2.2",
+              "number": "1.2.2",
+              "title": "醫療保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.2.2-q2010",
+                  "text": "參考章節 1.2.2(b)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2010
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.2.3",
+              "number": "1.2.3",
+              "title": "自願醫保計劃",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "1.2.4",
+              "number": "1.2.4",
+              "title": "醫療保險業務指引",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1.3",
+          "number": "1.3",
+          "title": "組合保單及一籃子保單",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "1.3.1",
+              "number": "1.3.1",
+              "title": "家居保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.3.1-q2011",
+                  "text": "參考章節 1.3.1。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2011
+                  ]
+                },
+                {
+                  "id": "content-1.3.1-q2012",
+                  "text": "參考章節 1.3.1(b)(iv)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2012
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.3.2",
+              "number": "1.3.2",
+              "title": "家傭保險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "1.3.3",
+              "number": "1.3.3",
+              "title": "旅遊保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.3.3-q2013",
+                  "text": "參考章節 1.3.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2013
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.3.4",
+              "number": "1.3.4",
+              "title": "商業保險組合保單",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.3.4-q2014",
+                  "text": "參考章節 1.3.4(c)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2014
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1.4",
+          "number": "1.4",
+          "title": "財產保險及經濟權益保險",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "1.4.1",
+              "number": "1.4.1",
+              "title": "火災及附加危險保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.4.1-q2015",
+                  "text": "參考章節 1.4.1a(d)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2015
+                  ]
+                },
+                {
+                  "id": "content-1.4.1-q2016",
+                  "text": "參考章節 1.4.1 (a)(iv)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2016
+                  ]
+                },
+                {
+                  "id": "content-1.4.1-q2017",
+                  "text": "參考章節 1.4.1(d)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2017
+                  ]
+                }
+              ],
+              "children": [
+                {
+                  "id": "1.4.1a",
+                  "number": "1.4.1a",
+                  "title": "火災營業中斷保險",
+                  "keyPoints": [],
+                  "contents": [],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "1.4.2",
+              "number": "1.4.2",
+              "title": "財產「全險」保險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "1.4.3",
+              "number": "1.4.3",
+              "title": "盜竊保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.4.3-q2018",
+                  "text": "參考章節 1.4.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2018
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.4.4",
+              "number": "1.4.4",
+              "title": "玻璃保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.4.4-q2019",
+                  "text": "參考章節 1.4.4(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2019
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.4.5",
+              "number": "1.4.5",
+              "title": "金錢保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.4.5-q2020",
+                  "text": "參考章節 1.4.5 (a)(ii)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2020
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.4.6",
+              "number": "1.4.6",
+              "title": "忠實保證保險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "1.4.7",
+              "number": "1.4.7",
+              "title": "保證書",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.4.7-q2021",
+                  "text": "參考章節 1.4.7d(ii)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2021
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1.5",
+          "number": "1.5",
+          "title": "工程保險",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "1.5.1",
+              "number": "1.5.1",
+              "title": "鍋爐爆炸保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.5.1-q2022",
+                  "text": "參考章節 1.5.1(a)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2022
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.5.2",
+              "number": "1.5.2",
+              "title": "機器損壞保險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "1.5.3",
+              "number": "1.5.3",
+              "title": "建築工程「全險」保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.5.3-q2023",
+                  "text": "參考章節 1.5.3 (b)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2023
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.5.4",
+              "number": "1.5.4",
+              "title": "安裝工程「全險」保險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1.6",
+          "number": "1.6",
+          "title": "責任保險",
+          "keyPoints": [],
+          "contents": [
+            {
+              "id": "content-1.6-q2024",
+              "text": "參考章節 1.6。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2024
+              ]
+            }
+          ],
+          "children": [
+            {
+              "id": "1.6.1",
+              "number": "1.6.1",
+              "title": "僱主責任保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.6.1-q2025",
+                  "text": "參考章節 1.6.1。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2025
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.6.2",
+              "number": "1.6.2",
+              "title": "產品責任保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.6.2-q2026",
+                  "text": "參考章節 1.6.2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2026
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.6.3",
+              "number": "1.6.3",
+              "title": "專業彌償保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.6.3-q2027",
+                  "text": "參考章節 1.6.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2027
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.6.4",
+              "number": "1.6.4",
+              "title": "董事及高級管理人員責任保險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "1.6.5",
+              "number": "1.6.5",
+              "title": "公眾責任保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.6.5-q2028",
+                  "text": "參考章節 1.6.5(b)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2028
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "1.7",
+          "number": "1.7",
+          "title": "水險",
+          "keyPoints": [],
+          "contents": [
+            {
+              "id": "content-1.7-q2029",
+              "text": "參考章節 1.7。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2029
+              ]
+            },
+            {
+              "id": "content-1.7-q2030",
+              "text": "參考章節 1.7(a)(i)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2030
+              ]
+            }
+          ],
+          "children": [
+            {
+              "id": "1.7.1",
+              "number": "1.7.1",
+              "title": "海上貨物保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.7.1-q2031",
+                  "text": "參考章節 1.7.1(a)(i)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2031
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.7.2",
+              "number": "1.7.2",
+              "title": "船舶保險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "1.7.3",
+              "number": "1.7.3",
+              "title": "遊艇保險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-1.7.3-q2032",
+                  "text": "參考章節 1.7.3(e)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2032
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "1.7.4",
+              "number": "1.7.4",
+              "title": "第三者風險保險的法定規定",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "number": "2",
+      "title": "核保及保單措詞",
+      "weight": "34%",
+      "topics": [
+        {
+          "id": "2.1",
+          "number": "2.1",
+          "title": "投保書及重要事實",
+          "keyPoints": [],
+          "contents": [
+            {
+              "id": "content-2.1-q2033",
+              "text": "參考章節 2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2033
+              ]
+            },
+            {
+              "id": "content-2.1-q2034",
+              "text": "參考章節 2。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+              "questionIDs": [
+                2034
+              ]
+            }
+          ],
+          "children": [
+            {
+              "id": "2.1.1",
+              "number": "2.1.1",
+              "title": "重要事實",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.1.1b",
+              "number": "2.1.1b",
+              "title": "「非重要」事實",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.1.1c",
+              "number": "2.1.1c",
+              "title": "風險評估",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.1.1d",
+              "number": "2.1.1d",
+              "title": "風險評估相關因素",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.1.2",
+              "number": "2.1.2",
+              "title": "實質及道德危險",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.1.2-q2035",
+                  "text": "參考章節 2.1.2(a)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2035
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.1.2a",
+              "number": "2.1.2a",
+              "title": "實質（物質）危險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.1.2b",
+              "number": "2.1.2b",
+              "title": "道德危險",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.1.3",
+              "number": "2.1.3",
+              "title": "投保書",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.1.3-q2036",
+                  "text": "參考章節 2.1.3。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2036
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.1.4",
+              "number": "2.1.4",
+              "title": "取得重要事實的方法",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.1.4-q2037",
+                  "text": "參考章節 2.1.4(a)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2037
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "2.2",
+          "number": "2.2",
+          "title": "核保程序",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "2.2.1",
+              "number": "2.2.1",
+              "title": "報價",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.2.2",
+              "number": "2.2.2",
+              "title": "投保書",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.2.3",
+              "number": "2.2.3",
+              "title": "發出暫保單、保險單及保險憑證",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.2.3-q2038",
+                  "text": "參考章節 2.2.3(a)&(b)(iii)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2038
+                  ]
+                },
+                {
+                  "id": "content-2.2.3-q2039",
+                  "text": "參考章節 2.2.3(a)&(b)(iii)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2039
+                  ]
+                },
+                {
+                  "id": "content-2.2.3-q2040",
+                  "text": "參考章節 2.2.3(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2040
+                  ]
+                },
+                {
+                  "id": "content-2.2.3-q2041",
+                  "text": "參考章節 2.2.3(c)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2041
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.2.4",
+              "number": "2.2.4",
+              "title": "保費",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.2.4-q2042",
+                  "text": "參考章節 2.2.4(a)(ii)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2042
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.2.5",
+              "number": "2.2.5",
+              "title": "保費徵款",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "2.3",
+          "number": "2.3",
+          "title": "保單措詞、條款和條件",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "2.3.1",
+              "number": "2.3.1",
+              "title": "保單及保單承保表",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.3.1-q2043",
+                  "text": "參考章節 2.3.1(b)(i)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2043
+                  ]
+                },
+                {
+                  "id": "content-2.3.1-q2044",
+                  "text": "參考章節 2.3.1(b)(ii)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2044
+                  ]
+                },
+                {
+                  "id": "content-2.3.1-q2045",
+                  "text": "參考章節 2.3.1(b)(v)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2045
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.3.2",
+              "number": "2.3.2",
+              "title": "常用保單除外責任及條件",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.3.2-q2046",
+                  "text": "參考章節 2.3.2(b)(ii)。答案為 B；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2046
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.3.3",
+              "number": "2.3.3",
+              "title": "自負額、免賠額及起賠額的運用",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.3.3-q2047",
+                  "text": "參考章節 2.3.3(a)。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2047
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.3.4",
+              "number": "2.3.4",
+              "title": "保證、條件及陳述",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.3.4-q2048",
+                  "text": "參考章節 2.3.4。答案為 C；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2048
+                  ]
+                },
+                {
+                  "id": "content-2.3.4-q2049",
+                  "text": "參考章節 2.3.4(a)。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2049
+                  ]
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "2.3.5",
+              "number": "2.3.5",
+              "title": "通用、特定及業界除外責任",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "2.4",
+          "number": "2.4",
+          "title": "續保及取消",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "2.4.1",
+              "number": "2.4.1",
+              "title": "續保",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "2.4.2",
+              "number": "2.4.2",
+              "title": "取消條款怎麼運作",
+              "keyPoints": [],
+              "contents": [
+                {
+                  "id": "content-2.4.2-q2050",
+                  "text": "參考章節 2.4.2(a)&(b)。答案為 A；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2050
+                  ]
+                },
+                {
+                  "id": "content-2.4.2-q2051",
+                  "text": "參考章節 2.4.2。答案為 D；本題依卷二課堂講義的保險原則及保單條款判斷。",
+                  "questionIDs": [
+                    2051
+                  ]
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "number": "3",
+      "title": "理賠",
+      "weight": "10%",
+      "topics": [
+        {
+          "id": "3.1",
+          "number": "3.1",
+          "title": "有效索償或保險金要求",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "3.1.1",
+              "number": "3.1.1",
+              "title": "法律對有效索償或保險金要求的要求",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "3.1.2",
+              "number": "3.1.2",
+              "title": "無效索償或保險金要求",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "3.1.3",
+              "number": "3.1.3",
+              "title": "影響索償或保險金要求的保單條文",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "3.1.4",
+              "number": "3.1.4",
+              "title": "損失發生後被保險人的責任",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "3.1.5",
+              "number": "3.1.5",
+              "title": "文件證據",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "3.1.6",
+              "number": "3.1.6",
+              "title": "相關專業人員的職能",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "3.2",
+          "number": "3.2",
+          "title": "理賠",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "3.2.1",
+              "number": "3.2.1",
+              "title": "結清方式",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "3.2.2",
+              "number": "3.2.2",
+              "title": "理賠糾紛",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            },
+            {
+              "id": "3.2.3",
+              "number": "3.2.3",
+              "title": "保險投訴局",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "number": "4",
+      "title": "客戶服務",
+      "weight": "10%",
+      "topics": [
+        {
+          "id": "4.1",
+          "number": "4.1",
+          "title": "客戶服務及其重要性",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "4.1.1",
+              "number": "4.1.1",
+              "title": "客戶服務的重要性",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "4.2",
+          "number": "4.2",
+          "title": "保險公司的服務政策及操守守則",
+          "keyPoints": [],
+          "contents": [],
+          "children": []
+        },
+        {
+          "id": "4.3",
+          "number": "4.3",
+          "title": "客戶服務標準及其實施",
+          "keyPoints": [],
+          "contents": [],
+          "children": [
+            {
+              "id": "4.3.1",
+              "number": "4.3.1",
+              "title": "客戶服務標準的實施",
+              "keyPoints": [],
+              "contents": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "4.4",
+          "number": "4.4",
+          "title": "保險公司的法律及規管責任",
+          "keyPoints": [],
+          "contents": [],
+          "children": []
+        },
+        {
+          "id": "4.5",
+          "number": "4.5",
+          "title": "支付及收受回佣的法律後果",
+          "keyPoints": [],
+          "contents": [],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "examWeighting": [
+    {
+      "chapter": "1",
+      "title": "保險產品",
+      "questionCount": 23,
+      "weight": "46%"
+    },
+    {
+      "chapter": "2",
+      "title": "核保及保單措詞",
+      "questionCount": 17,
+      "weight": "34%"
+    },
+    {
+      "chapter": "3",
+      "title": "理賠",
+      "questionCount": 5,
+      "weight": "10%"
+    },
+    {
+      "chapter": "4",
+      "title": "客戶服務",
+      "questionCount": 5,
+      "weight": "10%"
+    }
+  ]
+}

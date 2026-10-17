@@ -3,7 +3,7 @@
   <%= stylesheet_link_tag 'content_admin', media: 'all' %>
 <% end %>
 
-<div class="content-admin" data-save-url="<%= save_admin_content_path %>">
+<div class="content-admin" data-save-url="<%= save_admin_content_path(paper: @paper_name) %>" data-paper-name="<%= @paper_name %>" data-available-papers="<%= ContentSnapshot::PAPER_NAME %>|<%= ContentSnapshot::PAPER_TWO_NAME %>">
   <header class="topbar">
     <div class="brand-lockup">
       <div class="brand-mark">象</div>
@@ -56,7 +56,7 @@
         <section class="panel outline-panel">
           <div class="panel-head">
             <div>
-              <h3>卷一大綱</h3>
+              <h3><%= @paper_name == ContentSnapshot::PAPER_TWO_NAME ? '卷二' : '卷一' %>大綱</h3>
               <p>點選節點編輯；右鍵節點可新建、關聯試題或刪除大綱。</p>
             </div>
             <div class="panel-actions">

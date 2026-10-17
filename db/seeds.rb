@@ -15,4 +15,11 @@ ContentSnapshot.create!(
   data: ContentSnapshot.default_data
 )
 
+if ContentSnapshot.default_data_for(ContentSnapshot::PAPER_TWO_NAME)
+  ContentSnapshot.create!(
+    paper_name: ContentSnapshot::PAPER_TWO_NAME,
+    data: ContentSnapshot.default_data_for(ContentSnapshot::PAPER_TWO_NAME)
+  )
+end
+
 puts "Created #{ContentSnapshot::PAPER_NAME} with #{ContentSnapshot.default_data['questions'].length} questions and #{ContentSnapshot.default_data['paperOneSyllabus'].length} chapters."
