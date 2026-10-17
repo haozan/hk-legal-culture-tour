@@ -462,7 +462,6 @@ function renderEditor() {
 function renderNodeEditor(context) {
   const node = context.node;
   const isChapter = context.kind === "chapter";
-  const keyPoints = (node.keyPoints || []).join("\n");
   const contents = node.contents || [];
   const questions = nodeQuestions(node);
   return `<div class="editor-section">
@@ -474,7 +473,6 @@ function renderNodeEditor(context) {
   <div class="editor-section">
     <div class="form-label">大綱層級</div>
     <div class="field-row"><label>下級節點</label><div class="outline-path">${isChapter ? node.topics.length : (node.children || []).length} 個</div></div>
-    ${!isChapter ? `<label class="form-label" for="nodeKeyPoints">補充要點（可選，每行一條）</label><textarea class="textarea" id="nodeKeyPoints" placeholder="用於舊版資料相容；正式層級請使用“新增下級大綱”。">${escapeHtml(keyPoints)}</textarea>` : ""}
     <div class="form-actions"><button class="button small" data-action="add-child">＋ 新增下級大綱</button><button class="button small danger" data-action="delete-node">⌫ 刪除節點</button><button class="button small primary" data-action="save-node">儲存大綱</button></div>
   </div>
   <div class="editor-section">
@@ -679,7 +677,6 @@ function saveNode() {
   context.node.number = number;
   context.node.id = number;
   if (context.kind === "chapter") context.node.weight = document.querySelector("#nodeWeight").value.trim();
-  if (context.kind === "topic" && document.querySelector("#nodeKeyPoints")) context.node.keyPoints = document.querySelector("#nodeKeyPoints").value.split("\n").map(value => value.trim()).filter(Boolean);
   state.selectedKey = `${context.kind === "chapter" ? "chapter" : "topic"}:${number}`;
   saveData();
   render();
