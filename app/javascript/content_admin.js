@@ -44,7 +44,10 @@ const state = {
   expandedNodes: new Set(["1.1.1"]),
   search: "",
   contextMenuKey: null,
-  linkQuery: ""
+  linkQuery: "",
+  chapterPickerOpen: false,
+  chapterPickerQuery: "",
+  referenceDraft: null
 };
 
 function loadData() {
@@ -152,10 +155,12 @@ function renderPapers() {
 
 function renderMetrics() {
   const totalQuestions = state.data.questions.length;
+  const unresolvedCount = unresolvedQuestionCount();
   document.querySelector("#headMetrics").innerHTML = `
     <div class="metric"><strong>${state.data.paperOneSyllabus.length}</strong><span>章节</span></div>
     <div class="metric"><strong>${totalNodeCount()}</strong><span>大纲节点</span></div>
     <div class="metric"><strong>${totalQuestions}</strong><span>题目</span></div>
+    <div class="metric ${unresolvedCount ? "metric-warning" : ""}"><strong>${unresolvedCount}</strong><span>待关联</span></div>
   `;
 }
 
@@ -278,29 +283,45 @@ function renderLinkQuestionList(context) {
 }
 
 function renderQuestionRow(item) {
-  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>参考章节 ${escapeHtml(item.chapterNumber)}</span></div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="编辑">✎</button></div>`;
+  const unresolved = unresolvedQuestionReferences(item);
+  return `<div class="question-row"><div class="question-row-main"><div class="question-row-title">#${escapeHtml(item.id)} · ${escapeHtml(item.title)}</div><div class="question-row-meta"><span class="tag">${escapeHtml(item.type)}</span><span>参考章节 ${escapeHtml(item.chapterNumber)}</span>${unresolved.length ? `<span class="question-warning">未对应大纲</span>` : ""}</div></div><button class="icon-button" data-action="edit-question" data-id="${item.id}" title="编辑">✎</button></div>`;
 }
 
 function renderQuestionEditor(context) {
   const existing = state.editingQuestionId === "new" ? null : state.data.questions.find(item => String(item.id) === String(state.editingQuestionId));
   const defaultReference = context.kind === "chapter" ? (context.node.topics[0]?.number || context.node.number) : context.node.number;
   const item = existing || { id: "new", chapter: PAPER_NAME, chapterNumber: defaultReference, title: "", type: "单选题", options: [{ id: "A", text: "" }, { id: "B", text: "" }, { id: "C", text: "" }, { id: "D", text: "" }], correctOptionIDs: [], explanation: "", tags: [] };
+  const chapterNumber = state.referenceDraft ?? item.chapterNumber;
   const options = item.options || [];
+  const unresolved = unresolvedQuestionReferences({ ...item, chapterNumber });
   return `<div class="editor-section">
     <div class="form-label">题目设置 ${existing ? `· #${item.id}` : "· 新题目"}</div>
+    <div class="field-row"><label>试题编号</label><input class="field" id="questionID" value="${escapeHtml(existing ? item.id : nextQuestionID())}" inputmode="numeric" ${existing ? "readonly" : ""} /></div>
     <div class="field-row"><label>题型</label><select class="select" id="questionType"><option ${item.type === "单选题" ? "selected" : ""}>单选题</option><option ${item.type === "多选题" ? "selected" : ""}>多选题</option></select></div>
-    <div class="field-row"><label>参考章节</label><input class="field" id="questionChapterNumber" value="${escapeHtml(item.chapterNumber || context.node.number)}" placeholder="例如 1.1.1" /></div>
+    <div class="field-row"><label>参考章节</label><div class="reference-editor"><input class="field" id="questionChapterNumber" value="${escapeHtml(chapterNumber || context.node.number)}" placeholder="可手填，例如 1.1.1" /><button class="button small" type="button" data-action="toggle-reference-picker">从大纲选择</button></div></div>
+    ${unresolved.length ? `<div class="unresolved-warning">未找到对应大纲：${unresolved.map(escapeHtml).join("、")}。可以继续保存，或用“从大纲选择”完成关联。</div>` : ""}
+    ${state.chapterPickerOpen ? renderReferencePicker(chapterNumber) : ""}
     <label class="form-label" for="questionTitle">题目正文</label><textarea class="textarea" id="questionTitle" placeholder="输入题目正文">${escapeHtml(item.title)}</textarea>
   </div>
   <div class="editor-section"><div class="form-label">选项与答案</div><div class="options" id="questionOptions">${options.map(option => `<div class="option-row"><input type="radio" name="correctOption" value="${escapeHtml(option.id)}" ${item.correctOptionIDs.includes(option.id) ? "checked" : ""} /><span class="option-id">${escapeHtml(option.id)}</span><input class="field option-text" data-option-id="${escapeHtml(option.id)}" value="${escapeHtml(option.text)}" placeholder="选项内容" /></div>`).join("")}</div><button class="add-option" data-action="add-option">＋ 添加选项</button>${item.type === "多选题" ? `<div class="form-help">多选题按原卷组合选项录入，A/B/C/D 中选择一个组合答案。</div>` : ""}</div>
-  <div class="editor-section"><label class="form-label" for="questionExplanation">解析</label><textarea class="textarea" id="questionExplanation" placeholder="输入答案解析">${escapeHtml(item.explanation)}</textarea><div class="field-row" style="margin-top:12px"><label>标签</label><input class="field" id="questionTags" value="${escapeHtml((item.tags || []).join(", "))}" placeholder="例如 高频考点, 卷一" /></div></div>
+  <div class="editor-section"><label class="form-label" for="questionExplanation">解析</label><textarea class="textarea" id="questionExplanation" placeholder="输入答案解析">${escapeHtml(item.explanation)}</textarea></div>
   <div class="form-actions"><button class="button small" data-action="cancel-question">取消</button>${existing ? `<button class="button small danger" data-action="delete-question" data-id="${item.id}">删除题目</button>` : ""}<button class="button small primary" data-action="save-question" data-id="${item.id}">保存题目</button></div>`;
+}
+
+function renderReferencePicker(chapterNumber) {
+  const selected = new Set(referenceNumbers(chapterNumber));
+  const query = state.chapterPickerQuery.trim().toLowerCase();
+  const items = allTopicNodes().filter(node => !query || `${node.number} ${node.title}`.toLowerCase().includes(query));
+  return `<div class="outline-picker"><div class="outline-picker-head"><strong>选择参考大纲</strong><button class="text-button" data-action="toggle-reference-picker">收起</button></div><input class="field" id="chapterPickerSearch" value="${escapeHtml(state.chapterPickerQuery)}" placeholder="搜索大纲编号或标题" /><div class="outline-picker-list">${items.length ? items.map(node => `<label class="outline-picker-item"><input type="checkbox" data-action="toggle-question-reference" data-number="${escapeHtml(node.number)}" ${selected.has(node.number) ? "checked" : ""} /><span><b>${escapeHtml(node.number)}</b>${escapeHtml(node.title)}</span></label>`).join("") : `<div class="outline-path">没有匹配的大纲节点。</div>`}</div></div>`;
 }
 
 function selectNode(key) {
   state.selectedKey = key;
   state.contextMenuKey = null;
   state.editingQuestionId = null;
+  state.chapterPickerOpen = false;
+  state.chapterPickerQuery = "";
+  state.referenceDraft = null;
   renderEditor();
 }
 
@@ -331,8 +352,26 @@ function allTopicNodes() {
   return state.data.paperOneSyllabus.flatMap(chapterItem => chapterItem.topics.flatMap(node => [node, ...descendants(node)]));
 }
 
-function nodesWithQuestion(questionID) {
-  return allTopicNodes().filter(node => (node.contents || []).some(content => (content.questionIDs || []).some(id => Number(id) === Number(questionID))));
+function outlineNodesForReference(reference) {
+  const nodes = allTopicNodes();
+  const exact = nodes.filter(node => node.number === reference);
+  if (exact.length) return exact;
+  const descendantsForReference = nodes.filter(node => node.number.startsWith(`${reference}.`));
+  if (!descendantsForReference.length) return [];
+  const minimumDepth = Math.min(...descendantsForReference.map(node => node.number.split(".").length));
+  return descendantsForReference.filter(node => node.number.split(".").length === minimumDepth).slice(0, 1);
+}
+
+function questionReferenceNodes(question) {
+  return [...new Set(referenceNumbers(question.chapterNumber).flatMap(outlineNodesForReference))];
+}
+
+function unresolvedQuestionReferences(question) {
+  return referenceNumbers(question.chapterNumber).filter(reference => outlineNodesForReference(reference).length === 0);
+}
+
+function unresolvedQuestionCount() {
+  return state.data.questions.filter(question => unresolvedQuestionReferences(question).length).length;
 }
 
 function attachQuestionToNode(question, node) {
@@ -345,10 +384,6 @@ function attachQuestionToNode(question, node) {
       contents.push(content);
     }
     content.questionIDs = [...new Set([...(content.questionIDs || []).map(Number), Number(question.id)])];
-  }
-  const references = referenceNumbers(question.chapterNumber);
-  if (!references.includes(String(node.number))) {
-    question.chapterNumber = [...references, String(node.number)].join(" & ");
   }
 }
 
@@ -370,6 +405,8 @@ function linkQuestion(questionID) {
   if (!context || !question) return;
   const targetNode = context.kind === "chapter" ? context.node.topics[0] : context.node;
   if (!targetNode) return;
+  const references = referenceNumbers(question.chapterNumber);
+  if (!references.includes(String(targetNode.number))) question.chapterNumber = [...references, String(targetNode.number)].join(" & ");
   attachQuestionToNode(question, targetNode);
   state.linkQuery = "";
   saveData();
@@ -423,24 +460,33 @@ function saveNode() {
 function saveQuestion() {
   const context = findNode(state.selectedKey);
   if (!context) return;
+  const questionID = Number(document.querySelector("#questionID").value);
   const title = document.querySelector("#questionTitle").value.trim();
   const type = document.querySelector("#questionType").value;
   const chapterNumber = document.querySelector("#questionChapterNumber").value.trim();
   const options = [...document.querySelectorAll(".option-row")].map(row => ({ id: row.querySelector("[data-option-id]").dataset.optionId, text: row.querySelector("[data-option-id]").value.trim() })).filter(option => option.text);
   const correctOptionIDs = [...document.querySelectorAll("input[name='correctOption']:checked")].map(input => input.value);
+  if (!Number.isInteger(questionID) || questionID <= 0) return showToast("试题编号必须是正整数");
+  const duplicate = state.data.questions.find(questionItem => Number(questionItem.id) === questionID && String(questionItem.id) !== String(state.editingQuestionId));
+  if (duplicate) return showToast(`试题编号 #${questionID} 已存在`);
   if (!title || !chapterNumber || options.length < 2 || !correctOptionIDs.length) return showToast("请填写题目、参考章节、至少两个选项和正确答案");
   if (correctOptionIDs.length !== 1) return showToast("每题只能选择一个答案");
-  const item = { id: state.editingQuestionId === "new" ? nextQuestionID() : Number(state.editingQuestionId), chapter: PAPER_NAME, chapterNumber, title, type, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags: document.querySelector("#questionTags").value.split(",").map(value => value.trim()).filter(Boolean) };
-  const previousNodes = state.editingQuestionId !== "new" ? nodesWithQuestion(item.id) : [];
+  const item = { id: questionID, chapter: PAPER_NAME, chapterNumber, title, type, options, correctOptionIDs, explanation: document.querySelector("#questionExplanation").value.trim(), tags: [] };
   if (state.editingQuestionId !== "new") removeQuestionFromContents(item.id);
   const index = state.data.questions.findIndex(questionItem => questionItem.id === item.id);
   if (index >= 0) state.data.questions[index] = item; else state.data.questions.push(item);
-  const targetNode = context.kind === "chapter" ? context.node.topics[0] : context.node;
-  [...new Set([targetNode, ...previousNodes].filter(Boolean))].forEach(node => attachQuestionToNode(item, node));
+  const references = referenceNumbers(item.chapterNumber);
+  const targetNodes = questionReferenceNodes(item);
+  if (!targetNodes.length && context.kind === "topic" && references.includes(context.node.number)) targetNodes.push(context.node);
+  targetNodes.forEach(node => attachQuestionToNode(item, node));
   state.editingQuestionId = null;
+  state.chapterPickerOpen = false;
+  state.chapterPickerQuery = "";
+  state.referenceDraft = null;
   saveData();
   render();
-  showToast("题目已保存");
+  const unresolved = unresolvedQuestionReferences(item);
+  showToast(unresolved.length ? `题目已保存，未对应大纲：${unresolved.join("、")}` : "题目已保存并关联大纲");
 }
 
 function nextQuestionID() { return Math.max(0, ...state.data.questions.map(item => Number(item.id) || 0)) + 1; }
@@ -531,15 +577,25 @@ document.addEventListener("click", event => {
   }
   if (action === "edit-question") {
     if (target.dataset.nodeKey) selectNode(target.dataset.nodeKey);
+    state.referenceDraft = null;
+    state.chapterPickerOpen = false;
     state.editingQuestionId = target.dataset.id;
     renderEditor();
   }
-  if (action === "newQuestion") { state.editingQuestionId = "new"; renderEditor(); }
-  if (action === "cancel-question") { state.editingQuestionId = null; renderEditor(); }
+  if (action === "newQuestion") { state.referenceDraft = null; state.chapterPickerOpen = false; state.editingQuestionId = "new"; renderEditor(); }
+  if (action === "cancel-question") { state.referenceDraft = null; state.chapterPickerOpen = false; state.chapterPickerQuery = ""; state.editingQuestionId = null; renderEditor(); }
   if (action === "save-node") saveNode();
   if (action === "add-child" || action === "new-child") { if (action === "new-child") state.selectedKey = state.contextMenuKey; closeContextMenu(); addChild(); }
-  if (action === "new-question") { state.selectedKey = state.contextMenuKey; closeContextMenu(); state.editingQuestionId = "new"; renderEditor(); }
+  if (action === "new-question") { state.selectedKey = state.contextMenuKey; closeContextMenu(); state.referenceDraft = null; state.chapterPickerOpen = false; state.editingQuestionId = "new"; renderEditor(); }
   if (action === "link-question") { state.selectedKey = state.contextMenuKey; closeContextMenu(); state.linkQuery = ""; state.editingQuestionId = "link"; renderEditor(); }
+  if (action === "toggle-reference-picker") { state.chapterPickerOpen = !state.chapterPickerOpen; renderEditor(); }
+  if (action === "toggle-question-reference") {
+    const current = state.referenceDraft ?? document.querySelector("#questionChapterNumber")?.value ?? "";
+    const references = referenceNumbers(current);
+    const number = target.dataset.number;
+    state.referenceDraft = references.includes(number) ? references.filter(reference => reference !== number).join(" & ") : [...references, number].join(" & ");
+    renderEditor();
+  }
   if (action === "link-question-item") linkQuestion(target.dataset.id);
   if (action === "delete-node") deleteNode();
   if (action === "save-question") saveQuestion();
@@ -566,6 +622,23 @@ document.querySelector("#addChapterButton").addEventListener("click", () => {
 document.querySelector("#collapseAllButton").addEventListener("click", () => { state.expandedChapters.clear(); state.expandedNodes.clear(); renderOutline(); });
 document.querySelector("#outlineSearch").addEventListener("input", event => { state.search = event.target.value; renderOutline(); });
 document.addEventListener("input", event => {
+  if (event.target.id === "questionChapterNumber") {
+    state.referenceDraft = event.target.value;
+    return;
+  }
+  if (event.target.id === "chapterPickerSearch") {
+    state.chapterPickerQuery = event.target.value;
+    const context = findNode(state.selectedKey);
+    const picker = document.querySelector(".outline-picker");
+    if (context && picker) {
+      const value = event.target.value;
+      picker.outerHTML = renderReferencePicker(state.referenceDraft ?? document.querySelector("#questionChapterNumber")?.value ?? "");
+      const nextSearch = document.querySelector("#chapterPickerSearch");
+      nextSearch?.focus();
+      nextSearch?.setSelectionRange(value.length, value.length);
+    }
+    return;
+  }
   if (event.target.id !== "linkQuestionSearch") return;
   state.linkQuery = event.target.value;
   const context = findNode(state.selectedKey);
@@ -577,3 +650,6 @@ document.querySelector("#importButton").addEventListener("click", () => document
 document.querySelector("#importInput").addEventListener("change", event => { if (event.target.files[0]) importSnapshot(event.target.files[0]); event.target.value = ""; });
 
 render();
+if (unresolvedQuestionCount()) {
+  showToast(`有 ${unresolvedQuestionCount()} 道试题的参考章节未对应大纲，请用大纲选择器关联`);
+}

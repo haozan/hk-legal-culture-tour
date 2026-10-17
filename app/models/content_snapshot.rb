@@ -65,6 +65,7 @@ class ContentSnapshot < ApplicationRecord
     end
 
     questions.each do |question|
+      question['tags'] = []
       explanation = (question[:explanation] || question['explanation']).to_s.strip
       next if explanation.empty?
 

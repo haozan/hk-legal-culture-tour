@@ -11,6 +11,7 @@ class Admin::ContentController < Admin::BaseController
   def save
     payload = JSON.parse(params.require(:snapshot_json))
     validate_snapshot!(payload)
+    normalize_questions!(payload)
     @snapshot.update!(data: payload, published_at: nil)
     render json: { ok: true, saved_at: @snapshot.updated_at.iso8601 }
   rescue JSON::ParserError, ActionController::ParameterMissing => e
@@ -37,6 +38,8 @@ class Admin::ContentController < Admin::BaseController
 
     payload = JSON.parse(file.read)
     validate_snapshot!(payload)
+    payload = ContentSnapshot.with_explanation_contents(payload)
+    normalize_questions!(payload)
     @snapshot.update!(data: payload, published_at: nil)
     redirect_to admin_content_path, notice: '题库快照已导入服务器。'
   rescue JSON::ParserError, ArgumentError => e
@@ -53,5 +56,11 @@ class Admin::ContentController < Admin::BaseController
 
   def validate_snapshot!(payload)
     raise ArgumentError, '快照格式不完整' unless payload.is_a?(Hash) && payload['questions'].is_a?(Array) && payload['paperOneSyllabus'].is_a?(Array)
+  end
+
+  def normalize_questions!(payload)
+    payload['questions'].each do |question|
+      question['tags'] = []
+    end
   end
 end
