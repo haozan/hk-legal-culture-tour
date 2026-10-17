@@ -45,7 +45,7 @@
     <main class="main-content">
       <section class="page-head">
         <div>
-          <div class="eyebrow">卷一 · 內容維護</div>
+          <div class="eyebrow"><%= @paper_name == ContentSnapshot::PAPER_TWO_NAME ? '卷二' : '卷一' %> · 內容維護</div>
           <h2>大綱與題目</h2>
           <p>先維護章節樹，再把題目掛到對應的參考章節。</p>
         </div>
