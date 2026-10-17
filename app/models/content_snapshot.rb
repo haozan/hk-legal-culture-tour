@@ -296,7 +296,7 @@ class ContentSnapshot < ApplicationRecord
     source['paperOneSyllabus'] = existing['paperOneSyllabus'] if existing['paperOneSyllabus'].is_a?(Array) && existing['paperOneSyllabus'].any?
     source['chapterNames'] = existing['chapterNames'] if paper_name.to_s != PAPER_NAME && existing['chapterNames'].is_a?(Array) && existing['chapterNames'].any?
     source['chapterNames'] = PAPER_NAMES if paper_name.to_s == PAPER_NAME
-    source['version'] = paper_name.to_s == PAPER_TWO_NAME ? 'draft-2026.10.18-q2-lecture-2024-02' : 'draft-2026.10.18-q1-927'
+    source['version'] = paper_name.to_s == PAPER_TWO_NAME ? 'draft-2026.10.18-q2-zp5-2026-09-682' : 'draft-2026.10.18-q1-927'
     traditionalize_data(with_explanation_contents(source).deep_stringify_keys)
   end
 
