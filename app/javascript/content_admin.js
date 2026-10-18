@@ -428,8 +428,9 @@ function renderNode(node, depth) {
   const contents = node.contents || [];
   const contentsExpanded = state.expandedContents.has(node.id);
   const contentListMarkup = contents.map(content => {
-    const bells = (content.questionIDs || []).map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" data-node-key="topic:${escapeHtml(node.id)}" title="編輯題目 #${escapeHtml(id)}">🔔</button>`).join("");
-    return `<div class="node-content"><span class="node-content-text">${escapeHtml(content.text)}</span><span class="node-content-bells">${bells}</span></div>`;
+    const questionIDs = content.questionIDs || [];
+    const bells = questionIDs.map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" data-node-key="topic:${escapeHtml(node.id)}" title="編輯題目 #${escapeHtml(id)}">🔔<span class="sr-only">#${escapeHtml(id)}</span></button>`).join("");
+    return `<div class="node-content"><div class="node-content-text">${escapeHtml(content.text)}</div><div class="node-content-meta"><span class="node-content-count">關聯 ${questionIDs.length} 題</span><span class="node-content-bells">${bells}</span></div></div>`;
   }).join("");
   const contentMarkup = contents.length ? `<button class="node-content-toggle" data-action="toggle-contents" data-id="${escapeHtml(node.id)}" aria-expanded="${contentsExpanded}"><span>${contentsExpanded ? "⌄" : "›"}</span><strong>解析 ${contents.length} 條</strong><span class="node-content-hint">${contentsExpanded ? "收起解析" : "點擊查看"}</span></button>${contentsExpanded ? `<div class="node-content-list">${contentListMarkup}</div>` : ""}` : "";
   return `<div class="tree-node" data-depth="${depth}" data-node-key="topic:${escapeHtml(node.id)}">
@@ -488,7 +489,7 @@ function renderNodeEditor(context) {
   </div>
   <div class="editor-section">
     <div class="form-label editor-content-heading"><span>解析內容 · ${contents.length} 條</span>${contents.length ? `<button class="text-button" data-action="toggle-editor-contents">${state.editorContentsExpanded ? "收起解析" : "展開解析"}</button>` : ""}</div>
-    ${contents.length && state.editorContentsExpanded ? `<div class="content-list editor-content-list">${contents.map(content => `<div class="content-list-row"><span>${escapeHtml(content.text)}</span><span class="content-list-bells">${(content.questionIDs || []).map(id => `🔔 #${escapeHtml(id)}`).join(" ")}</span></div>`).join("")}</div>` : contents.length ? `<div class="outline-path">解析內容已收起，點擊「展開解析」查看。</div>` : `<div class="outline-path">此節點暫無題目解析內容。</div>`}
+    ${contents.length && state.editorContentsExpanded ? `<div class="content-list editor-content-list">${contents.map(content => `<div class="content-list-row"><div>${escapeHtml(content.text)}</div><div class="content-list-meta"><span class="content-list-count">關聯 ${(content.questionIDs || []).length} 題</span><span class="content-list-bells">${(content.questionIDs || []).map(id => `<span class="content-list-bell">🔔 #${escapeHtml(id)}</span>`).join("")}</span></div></div>`).join("")}</div>` : contents.length ? `<div class="outline-path">解析內容已收起，點擊「展開解析」查看。</div>` : `<div class="outline-path">此節點暫無題目解析內容。</div>`}
   </div>
   <div class="editor-section">
     <div class="form-label">關聯題目 · ${questions.length} 道</div>
