@@ -432,9 +432,9 @@ function renderNode(node, depth) {
     const bells = questionIDs.map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" data-node-key="topic:${escapeHtml(node.id)}" title="編輯題目 #${escapeHtml(id)}">🔔<span class="sr-only">#${escapeHtml(id)}</span></button>`).join("");
     return `<div class="node-content"><div class="node-content-text">${escapeHtml(content.text)}</div><div class="node-content-meta"><span class="node-content-count">關聯 ${questionIDs.length} 題</span><span class="node-content-bells">${bells}</span></div></div>`;
   }).join("");
-  const contentMarkup = contents.length ? `<button class="node-content-toggle" data-action="toggle-contents" data-id="${escapeHtml(node.id)}" aria-expanded="${contentsExpanded}"><span>${contentsExpanded ? "⌄" : "›"}</span><strong>解析 ${contents.length} 條</strong><span class="node-content-hint">${contentsExpanded ? "收起解析" : "點擊查看"}</span></button>${contentsExpanded ? `<div class="node-content-list">${contentListMarkup}</div>` : ""}` : "";
+  const contentMarkup = contents.length ? `<button class="node-content-toggle" data-action="toggle-contents" data-id="${escapeHtml(node.id)}" aria-expanded="${contentsExpanded}"><span class="node-content-toggle-icon">${contentsExpanded ? "−" : "+"}</span><strong>解析 ${contents.length} 條</strong><span class="node-content-hint">${contentsExpanded ? "收起解析" : "點擊查看"}</span></button>${contentsExpanded ? `<div class="node-content-list">${contentListMarkup}</div>` : ""}` : "";
   return `<div class="tree-node" data-depth="${depth}" data-node-key="topic:${escapeHtml(node.id)}">
-    <div class="node-row">
+    <div class="node-row${contents.length ? " has-content" : ""}">
       <button class="node-main" data-action="select-node" data-key="topic:${escapeHtml(node.id)}">
         <span class="node-chevron">${children.length ? (expanded ? "⌄" : "›") : "·"}</span>
         <span class="node-copy"><span class="node-number">${escapeHtml(node.number)}</span><span class="node-title">${escapeHtml(node.title)}</span></span>

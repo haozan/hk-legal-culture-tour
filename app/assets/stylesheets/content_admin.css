@@ -84,6 +84,7 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
 .tree-node { position: relative; }
 .tree-node::before { content: ""; position: absolute; top: 0; bottom: 0; left: 8px; width: 1px; background: #dbe7e1; }
 .node-row { position: relative; display: flex; align-items: center; gap: 5px; min-height: 42px; padding: 7px 0 7px 0; border-bottom: 1px solid #eff3f0; }
+.node-row.has-content { border-bottom: 0; }
 .node-row:last-child { border-bottom: 0; }
 .node-main { flex: 1; min-width: 0; gap: 8px; border: 0; padding: 0 3px 0 0; color: var(--ink); background: transparent; text-align: left; }
 .node-chevron { width: 17px; height: 22px; display: grid; place-items: center; color: var(--accent); background: var(--paper); font-size: 12px; z-index: 1; }
@@ -92,7 +93,7 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
 .node-title { overflow: hidden; color: var(--ink); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
 .node-content-toggle { display: flex; align-items: center; gap: 6px; width: calc(100% - 25px); margin: 0 0 7px 25px; padding: 6px 8px; border: 0; border-radius: 8px; color: var(--accent); background: var(--accent-soft); font-size: 11px; text-align: left; }
 .node-content-toggle:hover { background: #dcebe5; }
-.node-content-toggle > span:first-child { width: 12px; font-size: 13px; }
+.node-content-toggle-icon { width: 15px; height: 15px; display: inline-grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: 12px; line-height: 1; }
 .node-content-toggle strong { font-size: 11px; }
 .node-content-hint { margin-left: auto; color: var(--muted); font-size: 10px; }
 .node-content-list { max-height: 290px; margin: 0 0 8px 25px; padding-right: 4px; overflow-y: auto; overscroll-behavior: contain; }
