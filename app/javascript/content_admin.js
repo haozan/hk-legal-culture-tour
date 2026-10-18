@@ -2,7 +2,7 @@
 
 const ADMIN_ROOT = document.querySelector(".content-admin");
 const PAPER_NAME = ADMIN_ROOT?.dataset.paperName || "保險原理及實務";
-const PAPER_NAMES = ["保險原理及實務", "一般保險", "長期保險", "強積金計劃", "風險管理"];
+const PAPER_NAMES = ["保險原理及實務", "一般保險", "長期保險", "強積金計劃", "投資相連長期保險"];
 const AVAILABLE_PAPERS = new Set((ADMIN_ROOT?.dataset.availablePapers || "保險原理及實務").split("|"));
 
 const TRADITIONAL_CHARACTERS = {

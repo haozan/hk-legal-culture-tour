@@ -230,7 +230,8 @@ class ContentSnapshot < ApplicationRecord
   PAPER_TWO_NAME = '一般保險'.freeze
   PAPER_THREE_NAME = '長期保險'.freeze
   PAPER_FOUR_NAME = '強積金計劃'.freeze
-  PAPER_NAMES = [PAPER_NAME, PAPER_TWO_NAME, PAPER_THREE_NAME, PAPER_FOUR_NAME, '風險管理'].freeze
+  PAPER_FIVE_NAME = '投資相連長期保險'.freeze
+  PAPER_NAMES = [PAPER_NAME, PAPER_TWO_NAME, PAPER_THREE_NAME, PAPER_FOUR_NAME, PAPER_FIVE_NAME].freeze
 
   def self.traditionalize_data(value)
     case value
@@ -285,6 +286,7 @@ class ContentSnapshot < ApplicationRecord
     path = Rails.root.join('db', 'content_q2_general_insurance.json') if paper_name.to_s == PAPER_TWO_NAME
     path = Rails.root.join('db', 'content_q3_long_term_insurance.json') if paper_name.to_s == PAPER_THREE_NAME
     path = Rails.root.join('db', 'content_q4_mpf.json') if paper_name.to_s == PAPER_FOUR_NAME
+    path = Rails.root.join('db', 'content_q5_investment_linked.json') if paper_name.to_s == PAPER_FIVE_NAME
     return JSON.parse(File.read(path)) if path && File.exist?(path)
 
     nil
@@ -304,6 +306,7 @@ class ContentSnapshot < ApplicationRecord
                         when PAPER_TWO_NAME then 'draft-2026.10.18-q2-zp5-2026-09-682'
                         when PAPER_THREE_NAME then 'draft-2026.10.18-q3-eg1-944'
                         when PAPER_FOUR_NAME then 'draft-2026.10.18-q4-gcx-600'
+                        when PAPER_FIVE_NAME then 'draft-2026.10.18-q5-mlh-649'
                         else 'draft-2026.10.18-q1-927'
                         end
     traditionalize_data(with_explanation_contents(source).deep_stringify_keys)
