@@ -2,13 +2,14 @@
 <% paper_label = case @paper_name
                  when ContentSnapshot::PAPER_TWO_NAME then '卷二'
                  when ContentSnapshot::PAPER_THREE_NAME then '卷三'
+                 when ContentSnapshot::PAPER_FOUR_NAME then '卷四'
                  else '卷一'
                  end %>
 <% content_for :head do %>
   <%= stylesheet_link_tag 'content_admin', media: 'all' %>
 <% end %>
 
-<div class="content-admin" data-save-url="<%= save_admin_content_path(paper: @paper_name) %>" data-paper-name="<%= @paper_name %>" data-available-papers="<%= [ContentSnapshot::PAPER_NAME, ContentSnapshot::PAPER_TWO_NAME, ContentSnapshot::PAPER_THREE_NAME].join('|') %>">
+<div class="content-admin" data-save-url="<%= save_admin_content_path(paper: @paper_name) %>" data-paper-name="<%= @paper_name %>" data-available-papers="<%= [ContentSnapshot::PAPER_NAME, ContentSnapshot::PAPER_TWO_NAME, ContentSnapshot::PAPER_THREE_NAME, ContentSnapshot::PAPER_FOUR_NAME].join('|') %>">
   <header class="topbar">
     <div class="brand-lockup">
       <div class="brand-mark">象</div>
