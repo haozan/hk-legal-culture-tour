@@ -228,7 +228,8 @@ class ContentSnapshot < ApplicationRecord
 
   PAPER_NAME = '保險原理及實務'.freeze
   PAPER_TWO_NAME = '一般保險'.freeze
-  PAPER_NAMES = [PAPER_NAME, PAPER_TWO_NAME, '人壽保險', '法規與合規', '風險管理'].freeze
+  PAPER_THREE_NAME = '長期保險'.freeze
+  PAPER_NAMES = [PAPER_NAME, PAPER_TWO_NAME, PAPER_THREE_NAME, '法規與合規', '風險管理'].freeze
 
   def self.traditionalize_data(value)
     case value
@@ -281,6 +282,7 @@ class ContentSnapshot < ApplicationRecord
     return default_data if paper_name.to_s == PAPER_NAME
 
     path = Rails.root.join('db', 'content_q2_general_insurance.json') if paper_name.to_s == PAPER_TWO_NAME
+    path = Rails.root.join('db', 'content_q3_long_term_insurance.json') if paper_name.to_s == PAPER_THREE_NAME
     return JSON.parse(File.read(path)) if path && File.exist?(path)
 
     nil
@@ -296,7 +298,11 @@ class ContentSnapshot < ApplicationRecord
     source['paperOneSyllabus'] = existing['paperOneSyllabus'] if existing['paperOneSyllabus'].is_a?(Array) && existing['paperOneSyllabus'].any?
     source['chapterNames'] = existing['chapterNames'] if paper_name.to_s != PAPER_NAME && existing['chapterNames'].is_a?(Array) && existing['chapterNames'].any?
     source['chapterNames'] = PAPER_NAMES if paper_name.to_s == PAPER_NAME
-    source['version'] = paper_name.to_s == PAPER_TWO_NAME ? 'draft-2026.10.18-q2-zp5-2026-09-682' : 'draft-2026.10.18-q1-927'
+    source['version'] = case paper_name.to_s
+                        when PAPER_TWO_NAME then 'draft-2026.10.18-q2-zp5-2026-09-682'
+                        when PAPER_THREE_NAME then 'draft-2026.10.18-q3-eg1-944'
+                        else 'draft-2026.10.18-q1-927'
+                        end
     traditionalize_data(with_explanation_contents(source).deep_stringify_keys)
   end
 
@@ -365,7 +371,11 @@ class ContentSnapshot < ApplicationRecord
   private_class_method :flatten_topics
 
   def self.reference_numbers(value)
-    value.to_s.gsub(' ', '').scan(/\d+(?:\.\d+)+/)
+    compact = value.to_s.gsub(/[[:space:]]+/, '').tr('（）', '()')
+    compact.scan(/\d+(?:\.\d+)*(?:[a-z])?(?:\([a-z]\))?/i).flat_map do |token|
+      base = token.sub(/\([a-z]\)\z/i, '')
+      [token, base].uniq
+    end
   end
   private_class_method :reference_numbers
 

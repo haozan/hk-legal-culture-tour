@@ -3,7 +3,7 @@
   <%= stylesheet_link_tag 'content_admin', media: 'all' %>
 <% end %>
 
-<div class="content-admin" data-save-url="<%= save_admin_content_path(paper: @paper_name) %>" data-paper-name="<%= @paper_name %>" data-available-papers="<%= ContentSnapshot::PAPER_NAME %>|<%= ContentSnapshot::PAPER_TWO_NAME %>">
+<div class="content-admin" data-save-url="<%= save_admin_content_path(paper: @paper_name) %>" data-paper-name="<%= @paper_name %>" data-available-papers="<%= [ContentSnapshot::PAPER_NAME, ContentSnapshot::PAPER_TWO_NAME, ContentSnapshot::PAPER_THREE_NAME].join('|') %>">
   <header class="topbar">
     <div class="brand-lockup">
       <div class="brand-mark">象</div>
