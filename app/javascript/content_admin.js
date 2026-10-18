@@ -273,6 +273,8 @@ const state = {
   editingQuestionId: null,
   expandedChapters: new Set(["1"]),
   expandedNodes: new Set(["1.1.1"]),
+  expandedContents: new Set(),
+  editorContentsExpanded: false,
   search: "",
   contextMenuKey: null,
   linkQuery: "",
@@ -423,10 +425,13 @@ function renderNode(node, depth) {
   const expanded = state.expandedNodes.has(node.id);
   const children = node.children || [];
   const childrenMarkup = expanded && children.length ? `<div class="node-children">${children.map(child => renderNode(child, depth + 1)).join("")}</div>` : "";
-  const contentMarkup = (node.contents || []).map(content => {
+  const contents = node.contents || [];
+  const contentsExpanded = state.expandedContents.has(node.id);
+  const contentListMarkup = contents.map(content => {
     const bells = (content.questionIDs || []).map(id => `<button class="question-link" data-action="edit-question" data-id="${escapeHtml(id)}" data-node-key="topic:${escapeHtml(node.id)}" title="編輯題目 #${escapeHtml(id)}">🔔</button>`).join("");
     return `<div class="node-content"><span class="node-content-text">${escapeHtml(content.text)}</span><span class="node-content-bells">${bells}</span></div>`;
   }).join("");
+  const contentMarkup = contents.length ? `<button class="node-content-toggle" data-action="toggle-contents" data-id="${escapeHtml(node.id)}" aria-expanded="${contentsExpanded}"><span>${contentsExpanded ? "⌄" : "›"}</span><strong>解析 ${contents.length} 條</strong><span class="node-content-hint">${contentsExpanded ? "收起解析" : "點擊查看"}</span></button>${contentsExpanded ? `<div class="node-content-list">${contentListMarkup}</div>` : ""}` : "";
   return `<div class="tree-node" data-depth="${depth}" data-node-key="topic:${escapeHtml(node.id)}">
     <div class="node-row">
       <button class="node-main" data-action="select-node" data-key="topic:${escapeHtml(node.id)}">
@@ -482,8 +487,8 @@ function renderNodeEditor(context) {
     <div class="form-actions"><button class="button small" data-action="add-child">＋ 新增下級大綱</button><button class="button small danger" data-action="delete-node">⌫ 刪除節點</button><button class="button small primary" data-action="save-node">儲存大綱</button></div>
   </div>
   <div class="editor-section">
-    <div class="form-label">解析內容 · ${contents.length} 條</div>
-    ${contents.length ? `<div class="content-list">${contents.map(content => `<div class="content-list-row"><span>${escapeHtml(content.text)}</span><span class="content-list-bells">${(content.questionIDs || []).map(id => `🔔 #${escapeHtml(id)}`).join(" ")}</span></div>`).join("")}</div>` : `<div class="outline-path">此節點暫無題目解析內容。</div>`}
+    <div class="form-label editor-content-heading"><span>解析內容 · ${contents.length} 條</span>${contents.length ? `<button class="text-button" data-action="toggle-editor-contents">${state.editorContentsExpanded ? "收起解析" : "展開解析"}</button>` : ""}</div>
+    ${contents.length && state.editorContentsExpanded ? `<div class="content-list editor-content-list">${contents.map(content => `<div class="content-list-row"><span>${escapeHtml(content.text)}</span><span class="content-list-bells">${(content.questionIDs || []).map(id => `🔔 #${escapeHtml(id)}`).join(" ")}</span></div>`).join("")}</div>` : contents.length ? `<div class="outline-path">解析內容已收起，點擊「展開解析」查看。</div>` : `<div class="outline-path">此節點暫無題目解析內容。</div>`}
   </div>
   <div class="editor-section">
     <div class="form-label">關聯題目 · ${questions.length} 道</div>
@@ -552,6 +557,7 @@ function renderReferencePicker(chapterNumber) {
 function selectNode(key) {
   state.selectedKey = key;
   state.contextMenuKey = null;
+  state.editorContentsExpanded = false;
   state.editingQuestionId = null;
   state.chapterPickerOpen = false;
   state.chapterPickerQuery = "";
@@ -801,6 +807,10 @@ document.addEventListener("click", event => {
     state.expandedChapters.has(target.dataset.id) ? state.expandedChapters.delete(target.dataset.id) : state.expandedChapters.add(target.dataset.id);
     renderOutline();
   }
+  if (action === "toggle-contents") {
+    state.expandedContents.has(target.dataset.id) ? state.expandedContents.delete(target.dataset.id) : state.expandedContents.add(target.dataset.id);
+    renderOutline();
+  }
   if (action === "select-node") {
     const context = findNode(target.dataset.key);
     selectNode(target.dataset.key);
@@ -812,6 +822,10 @@ document.addEventListener("click", event => {
       }
       renderOutline();
     }
+  }
+  if (action === "toggle-editor-contents") {
+    state.editorContentsExpanded = !state.editorContentsExpanded;
+    renderEditor();
   }
   if (action === "edit-questions") {
     selectNode(target.dataset.key);
@@ -862,7 +876,7 @@ document.querySelector("#addChapterButton").addEventListener("click", () => {
   render();
   showToast("已新增新章節");
 });
-document.querySelector("#collapseAllButton").addEventListener("click", () => { state.expandedChapters.clear(); state.expandedNodes.clear(); renderOutline(); });
+document.querySelector("#collapseAllButton").addEventListener("click", () => { state.expandedChapters.clear(); state.expandedNodes.clear(); state.expandedContents.clear(); renderOutline(); });
 document.querySelector("#outlineSearch").addEventListener("input", event => { state.search = event.target.value; renderOutline(); });
 document.addEventListener("input", event => {
   if (event.target.id === "questionChapterNumber") {

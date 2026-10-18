@@ -90,7 +90,14 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
 .node-copy { min-width: 0; display: grid; gap: 2px; }
 .node-number { color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; font-weight: 750; }
 .node-title { overflow: hidden; color: var(--ink); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.node-content-toggle { display: flex; align-items: center; gap: 6px; width: calc(100% - 25px); margin: 0 0 7px 25px; padding: 6px 8px; border: 0; border-radius: 8px; color: var(--accent); background: var(--accent-soft); font-size: 11px; text-align: left; }
+.node-content-toggle:hover { background: #dcebe5; }
+.node-content-toggle > span:first-child { width: 12px; font-size: 13px; }
+.node-content-toggle strong { font-size: 11px; }
+.node-content-hint { margin-left: auto; color: var(--muted); font-size: 10px; }
+.node-content-list { max-height: 290px; margin: 0 0 8px 25px; padding-right: 4px; overflow-y: auto; overscroll-behavior: contain; }
 .node-content { display: flex; align-items: flex-start; gap: 7px; margin: 0 0 7px 25px; padding: 7px 8px; border-radius: 8px; color: var(--muted); background: #fbfcfa; font-size: 11px; line-height: 1.45; }
+.node-content-list .node-content { margin-left: 0; }
 .node-content-text { min-width: 0; flex: 1; }
 .node-content-bells, .content-list-bells { display: flex; flex: 0 0 auto; gap: 3px; color: var(--accent); white-space: nowrap; }
 .question-link { width: 22px; height: 22px; display: grid; place-items: center; flex: 0 0 auto; border: 0; border-radius: 50%; color: var(--accent); background: var(--accent-soft); font-size: 11px; }
@@ -125,6 +132,8 @@ h1 span { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: 5
 .content-list { display: grid; gap: 7px; }
 .content-list-row { display: flex; align-items: flex-start; gap: 8px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 9px; color: var(--muted); background: var(--paper); font-size: 11px; line-height: 1.45; }
 .content-list-row > span:first-child { min-width: 0; flex: 1; }
+.editor-content-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.editor-content-list { max-height: 360px; padding-right: 4px; overflow-y: auto; overscroll-behavior: contain; }
 .outline-picker { padding: 12px; margin: -5px 0 18px 132px; border: 1px solid var(--line); border-radius: 11px; background: #fbfcfa; }
 .outline-picker-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; color: var(--ink); font-size: 12px; }
 .outline-picker-list { display: grid; gap: 4px; max-height: 230px; margin-top: 8px; overflow: auto; }
