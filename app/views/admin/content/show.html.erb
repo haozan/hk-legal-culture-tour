@@ -1,4 +1,9 @@
 <% content_for :title, '錄題後臺' %>
+<% paper_label = case @paper_name
+                 when ContentSnapshot::PAPER_TWO_NAME then '卷二'
+                 when ContentSnapshot::PAPER_THREE_NAME then '卷三'
+                 else '卷一'
+                 end %>
 <% content_for :head do %>
   <%= stylesheet_link_tag 'content_admin', media: 'all' %>
 <% end %>
@@ -45,7 +50,7 @@
     <main class="main-content">
       <section class="page-head">
         <div>
-          <div class="eyebrow"><%= @paper_name == ContentSnapshot::PAPER_TWO_NAME ? '卷二' : '卷一' %> · 內容維護</div>
+      <div class="eyebrow"><%= paper_label %> · 內容維護</div>
           <h2>大綱與題目</h2>
           <p>先維護章節樹，再把題目掛到對應的參考章節。</p>
         </div>
@@ -56,7 +61,7 @@
         <section class="panel outline-panel">
           <div class="panel-head">
             <div>
-              <h3><%= @paper_name == ContentSnapshot::PAPER_TWO_NAME ? '卷二' : '卷一' %>大綱</h3>
+              <h3><%= paper_label %>大綱</h3>
               <p>點選節點編輯；右鍵節點可新建、關聯試題或刪除大綱。</p>
             </div>
             <div class="panel-actions">
