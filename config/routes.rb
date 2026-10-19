@@ -33,6 +33,10 @@ Rails.application.routes.draw do
 
   resource :invitation, only: [:new, :create]
 
+  # Public links used by the 港險小象 App Store listing.
+  get "/privacy", to: "public#privacy"
+  get "/support", to: "public#support"
+
   # Profile routes
   resource :profile, only: [:show, :edit, :update], controller: 'profiles' do
     member do
